@@ -1,13 +1,13 @@
-import * as recipeService from '../services/recipe.service';
+import * as recipeService from "../services/recipe.service";
 
-import express, { Router } from 'express';
+import express, { Router } from "express";
 
 // TODO: Add authenticate middleware to routes that require authentication
 
 const recipesRouter: Router = Router();
 
 // return all recipes
-recipesRouter.get('/', (_req, res) => {
+recipesRouter.get("/", (_req, res) => {
   recipeService
     .getRecipes()
     .then((recipes) => res.json(recipes))
@@ -15,15 +15,15 @@ recipesRouter.get('/', (_req, res) => {
 });
 
 // return a single recipe
-recipesRouter.get('/:id', (req, res) => {
+recipesRouter.get("/:id", (req, res) => {
   recipeService
-    .getRecipe(req.params.id as unknown as string)
+    .getRecipe(req.params.id)
     .then((recipe) => res.json(recipe))
     .catch((err) => res.status(500).json({ error: err }));
 });
 
 // create a new recipe
-recipesRouter.post('/', (req, res) => {
+recipesRouter.post("/", (req, res) => {
   recipeService
     .createRecipe(req.body)
     .then((recipe) => res.json(recipe))
@@ -31,15 +31,15 @@ recipesRouter.post('/', (req, res) => {
 });
 
 // update a recipe
-recipesRouter.patch('/:id', (req, res) => {
+recipesRouter.patch("/:id", (req, res) => {
   recipeService
-    .updateRecipe(req.params.id as unknown as string, req.body)
+    .updateRecipe(req.params.id, req.body)
     .then((recipe) => res.json(recipe))
     .catch((err) => res.status(500).json({ error: err }));
 });
 
 // delete a recipe
-recipesRouter.delete('/:id', (req, res) => {
+recipesRouter.delete("/:id", (req, res) => {
   recipeService
     .deleteRecipe(req.params.id)
     .then((recipe) => res.json(recipe))

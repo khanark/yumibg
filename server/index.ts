@@ -1,9 +1,9 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express, Request, Response } from "express";
 
-import cors from 'cors';
-import { db } from './config/database';
-import dotenv from 'dotenv';
-import { router } from './config/routes';
+import cors from "cors";
+import { db } from "./config/database";
+import dotenv from "dotenv";
+import { router } from "./config/router";
 
 dotenv.config();
 
@@ -18,8 +18,8 @@ const startServer = () => {
   db();
   router(app);
 
-  app.get('/', (req: Request, res: Response) => {
-    res.send('Hello World!');
+  app.get("/", (req: Request, res: Response) => {
+    res.send("Hello World!");
   });
 
   app.listen(port, (): void =>
