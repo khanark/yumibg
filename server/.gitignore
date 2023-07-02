@@ -4,4 +4,4 @@
 #node_modules
 node_modulesnew file:   server/.gitignore.env
 node_modules/
-dist
+dist/
