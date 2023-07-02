@@ -1,4 +1,4 @@
-# yumibg
+# yummibg
 
 ### Website for bulgarian recipes
 
