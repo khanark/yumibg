@@ -2,4 +2,5 @@
 *.env
 
 #node_modules
-node_modulesnew file:   server/.gitignore
+node_modulesnew file:   server/.gitignore.env
+node_modules/
