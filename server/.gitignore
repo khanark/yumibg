@@ -1,0 +1,5 @@
+#dotenv files
+*.env
+
+#node_modules
+node_modulesnew file:   server/.gitignore
