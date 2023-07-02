@@ -1,5 +1,5 @@
-import { RequestHandler } from "express";
-import jwt from "jsonwebtoken";
+import { RequestHandler } from 'express';
+import jwt from 'jsonwebtoken';
 
 // import { RequestHandler } from './../interfaces/RequestHandler';
 
@@ -12,18 +12,19 @@ import jwt from "jsonwebtoken";
  */
 export const authenticate = (): RequestHandler => {
   return (req, res, next) => {
-    if (req.headers["x-auth-token"]) {
-      const token = req.headers["x-auth-token"] as string;
+    if (req.headers['x-auth-token']) {
+      const token = req.headers['x-auth-token'] as string;
 
       jwt.verify(token, process.env.JWT_SECRET as string, (err, decoded) => {
         if (err) {
-          return res.status(403).json({ message: "Forbidden" });
+          return res.status(403).json({ message: 'Forbidden' });
         }
 
+        // compare the decoded user id to the id in the request params
         next();
       });
     } else {
-      res.status(401).json({ message: "Unauthorized" });
+      res.status(401).json({ message: 'Unauthorized' });
     }
   };
 };

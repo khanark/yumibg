@@ -1,6 +1,7 @@
 import * as userService from '../services/user.service';
 
 import { Router } from 'express';
+import { authenticate } from '../middlewares/authenticate';
 
 const userRouter = Router();
 
@@ -23,7 +24,7 @@ userRouter.post('/login', (req, res) => {
 });
 
 // return single user
-userRouter.get('/:id', (req, res) => {
+userRouter.get('/:id', authenticate(), (req, res) => {
   userService
     .getSingleUser(req.params.id)
     .then((user) => res.json(user))

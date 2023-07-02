@@ -1,20 +1,26 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
+import mongoose, { ConnectOptions } from 'mongoose';
+
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // production / development database
-const dbURI =
+const database =
   process.env.NODE_ENV === 'production'
-    ? process.env.MONGODB_URI
-    : 'mongodb://127.0.0.1:27017/yummibg';
+    ? process.env.MONGO_URL
+    : process.env.MONGO_URL_DEV;
 
 export const db = async (): Promise<void> => {
   // connect to database
   try {
-    await mongoose.connect(dbURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log('💾[database] Connected to database');
+    await mongoose.connect(
+      database as string,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      } as ConnectOptions
+    );
+    console.log(`💾[database] Connected to database at ${database}`);
   } catch (error) {
     console.log(`💾[database] There has been an error: ${error}`);
     process.exit(1);

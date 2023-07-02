@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 
 const login = async (user: IUser) => {
   const { email, password } = user;
-  const existingUser = await User.findOne({ email });
+  const existingUser = await User.findOne({ email }).select('+password');
   if (!existingUser) {
     throw new Error('User does not exist');
   }

@@ -15,6 +15,7 @@ const userSchema: Schema = new Schema({
     required: true,
     lowrcase: true,
     minlength: 6,
+    select: false,
   },
   firstName: {
     type: String,
