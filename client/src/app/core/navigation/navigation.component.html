@@ -1,0 +1,46 @@
+<div class="relative bg-orange-600">
+  <div class="site-navigation | container m-auto">
+    <nav
+      class="container flex items-center justify-between h-20 mx-auto mb-10 font-semibold text-white"
+    >
+      <a routerLink="/home">
+        <h3
+          class="px-2 py-1 text-2xl italic font-bold text-orange-600 uppercase bg-slate-50 md:text-4xl md:py-2 md:px-4 font-rancho"
+        >
+          Yummi.bg
+        </h3>
+      </a>
+      <!-- bigger devices -->
+      <ul class="items-center hidden gap-1 md:flex">
+        <li *ngFor="let link of navLinks">
+          <a
+            class="inline-block px-4 py-2 text-xl transition-colors rounded-md cursor-pointer hover:bg-orange-500"
+            [routerLink]="link.path"
+            >{{ link.name }}</a
+          >
+        </li>
+      </ul>
+
+      <!-- smaller devices -->
+      <div class="md:hidden" clickOutside (clickOutside)="clickedOutside()">
+        <button class="p-2 md:hidden" (click)="toggleNavigation()">
+          <fa-icon icon="bars" class="inline-block text-2xl text-slate-50" />
+        </button>
+
+        <ul
+          *ngIf="dropdownNavigation"
+          #dropdownNav
+          class="flex flex-col items-center justify-center gap-1 absolute top-[100%] left-0 text-[#333] w-full bg-orange-100"
+        >
+          <li *ngFor="let link of navLinks" class="w-full">
+            <a
+              class="block w-full px-2 py-1 text-center transition-colors border-b border-[#ccc] rounded-md cursor-pointer hover:bg-gray-400"
+              [routerLink]="link.path"
+              >{{ link.name }}</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+<!-- HERO -->
+<section class="grid section-hero place-content-center">
+  <div class="container flex flex-col items-center text-white text-shadow">
+    <h1 class="mb-4 text-3xl font-bold text-center md:mb-12 md:text-6xl">
+      Welcome to
+      <span class="text-4xl italic text-orange-100 font-rancho md:text-8xl"
+        >Yummi.</span
+      ><span class="text-4xl italic text-orange-100 font-rancho md:text-8xl"
+        >bg</span
+      >
+      <br />
+      Discover the Flavors of Our Nation!
+    </h1>
+    <h3
+      class="mb-2 text-xl font-semibold text-center text-gray-50 md:mb-8 md:text-3xl"
+    >
+      {{ homeContent.subtitle }}
+    </h3>
+    <p
+      class="max-w-3xl text-center md:text-xl font-[500] text-gray-50 mb-6 md:mb-14"
+    >
+      {{ homeContent.text }}
+    </p>
+    <a
+      class="px-8 py-4 text-lg font-semibold transition-colors bg-orange-600 md:text-xl md:px-12 md:py-6 hover:bg-orange-500 rounded-xl"
+      routerLink="/register"
+      >{{ homeContent.cta }}</a
+    >
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section-features">
+  <div class="container p-16">
+    <div
+      class="feature | grid grid-cols-1 md:grid-cols-2 gap-12 justify-items-center"
+    >
+      <div class="md:feature-image | w-full h-full rounded-lg overflow-hidden">
+        <img
+          class="object-cover w-full h-full"
+          src="../assets/what-we-offer-2.jpg"
+          alt="food table"
+        />
+      </div>
+      <ul class="grid content-center gap-6 md:gap-12 flex-col-1 lg:grid-cols-2">
+        <li *ngFor="let feature of homeContent.features">
+          <div class="flex items-center gap-2 mb-2 md:mb-4">
+            <fa-icon
+              [icon]="feature.icon"
+              class="text-2xl text-orange-400"
+            ></fa-icon>
+            <h5 class="text-[#333] text-lg md:text-xl font-semibold">
+              {{ feature.title }}
+            </h5>
+          </div>
+          <p class="text-[#555] md:text-lg">
+            {{ feature.text }}
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND SHOWCASE -->
+<section class="section-branding">
+  <div
+    class="flex flex-col items-center justify-center bg-linear h-[150px] md:h-[300px]"
+  >
+    <div class="container">
+      <h3 class="w-[50%] text-xl md:text-4xl font-semibold text-[#333]">
+        Why choose Yummi.bg
+      </h3>
+    </div>
+  </div>
+  <div class="container">
+    <ul class="grid content-center gap-6 md:gap-16 flex-col-1 lg:grid-cols-2">
+      <li
+        *ngFor="let quality of homeContent.qualities"
+        class="flex flex-col gap-2 md:items-center md:flex-row md:gap-12"
+      >
+        <span class="block text-6xl font-bold text-orange-400 md:text-9xl">{{
+          quality.number
+        }}</span>
+        <div>
+          <h5 class="text-[#333] text-lg md:text-xl font-semibold mb-2 md:mb-4">
+            {{ quality.title }}
+          </h5>
+          <p class="text-[#555] md:text-lg">
+            {{ quality.text }}
+          </p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="flex flex-col items-center justify-center section-cta">
+  <div
+    class="container flex flex-col items-center justify-center gap-8 md:gap-16 text-shadow"
+  >
+    <h3 class="text-2xl font-semibold text-center text-white md:text-6xl">
+      Join Yummi.bg Today and Unleash Your Inner Chef!
+    </h3>
+    <a
+      routerLink="/register"
+      class="px-8 py-4 text-lg font-semibold text-white transition-colors bg-orange-600 md:text-xl md:px-12 md:py-6 hover:bg-orange-500 rounded-xl"
+      >Open Account</a
+    >
+  </div>
+</section>

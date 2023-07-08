@@ -11,18 +11,34 @@ body {
   background-color: #f9fafb;
 }
 
+section {
+  padding: 2rem 0;
+}
+
+@media (min-width: 640px) {
+  section {
+    padding: 6rem 0;
+  }
+}
+
 .container {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 0 0.5rem;
+  padding: 0 1rem;
 }
 
 .section-hero {
-  background-image: linear-gradient(
-      rgba(64, 64, 64, 0.6),
-      rgba(64, 64, 64, 0.6)
-    ),
+  background-image: linear-gradient(hsl(34, 100%, 10%, 0.6), hsl(34, 100%, 92%)),
     url("./assets/yummibg-hero.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+}
+.section-cta {
+  background-image: linear-gradient(hsl(34, 100%, 92%), hsl(34, 100%, 10%, 0.6)),
+    url("./assets/join-section-image.jpg");
 
   background-size: cover;
   background-position: center;
@@ -45,5 +61,39 @@ body {
 }
 
 .text-shadow {
-  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.feature {
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-image {
+  position: relative;
+  transform: rotate(-10deg);
+}
+
+.feature-image:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+
+.bg-linear {
+  background-image: linear-gradient(
+      to bottom,
+      hsl(34, 100%, 92%),
+      hsl(34, 100%, 10%, 0),
+      hsl(34, 100%, 92%)
+    ),
+    url(./assets/section-heading-image.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.btn-shadow {
+  box-shadow: inset 0px 0px 0px 2px #ffffff;
 }
