@@ -7,14 +7,22 @@ import {
   faBars,
   faCircleCheck,
   faList12,
+  faMailForward,
   faMapLocation,
   faMapPin,
+  faMobile,
   faPeopleCarry,
 } from '@fortawesome/free-solid-svg-icons';
+import {
+  faDiscord,
+  faFacebook,
+  faGithub,
+  faInstagram,
+  faLinkedin,
+} from '@fortawesome/free-brands-svg-icons';
 
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 const icons: IconDefinition[] = [
   faMapLocation,
@@ -24,6 +32,12 @@ const icons: IconDefinition[] = [
   faPeopleCarry,
   faBars,
   faFacebook,
+  faInstagram,
+  faGithub,
+  faLinkedin,
+  faMobile,
+  faMailForward,
+  faDiscord,
 ];
 
 @NgModule({

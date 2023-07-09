@@ -5,7 +5,11 @@ module.exports = {
     fontFamily: {
       rancho: ["Rancho", "cursive"],
     },
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        mediaIcons: "repeat(3, 35px)",
+      },
+    },
   },
   plugins: [],
 };
