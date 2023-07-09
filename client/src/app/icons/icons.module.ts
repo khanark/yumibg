@@ -14,6 +14,7 @@ import {
 
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 const icons: IconDefinition[] = [
   faMapLocation,
@@ -22,6 +23,7 @@ const icons: IconDefinition[] = [
   faMapPin,
   faPeopleCarry,
   faBars,
+  faFacebook,
 ];
 
 @NgModule({
