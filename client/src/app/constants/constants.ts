@@ -1,9 +1,18 @@
 import {
   faCircleCheck,
+  faMailForward,
   faMapLocation,
   faMapPin,
+  faMobile,
   faPeopleCarry,
 } from '@fortawesome/free-solid-svg-icons';
+import {
+  faDiscord,
+  faFacebook,
+  faGithub,
+  faInstagram,
+  faLinkedin,
+} from '@fortawesome/free-brands-svg-icons';
 
 export const navLinks = [
   { name: 'Home', path: 'home' },
@@ -62,5 +71,45 @@ export const pageContent = {
         text: 'We regularly update our recipe collection with new and exciting dishes, keeping you inspired and encouraging you to try something new each time you visit Yummibg',
       },
     ],
+  },
+  footer: {
+    contacts: {
+      title: 'Contacts',
+      items: [
+        {
+          icon: faMobile,
+          text: '(+34) 642 767 970',
+        },
+        {
+          icon: faMailForward,
+          text: 'borislav.godumov@outlook.com',
+        },
+        {
+          icon: faMapPin,
+          text: '09400 Aranda De Duero, Burgos, Spain',
+        },
+      ],
+    },
+    mediaLinks: {
+      slogan: 'Yummibg - Dish Recipes from Every Corner of the Country.',
+      rights: '© 2023 - Yummibg - All Rights Reserved.',
+      links: [
+        { icon: faFacebook, externalLink: 'https://www.facebook.com/BeeAyJee' },
+        {
+          icon: faInstagram,
+          externalLink: 'https://www.instagram.com/alqahol1c/',
+        },
+        {
+          icon: faLinkedin,
+          externalLink:
+            'https://www.linkedin.com/in/borislav-godumov-7245b61a2/',
+        },
+        { icon: faGithub, externalLink: 'https://github.com/khanark' },
+        {
+          icon: faDiscord,
+          externalLink: 'https://discordapp.com/users/288682246733299712',
+        },
+      ],
+    },
   },
 };

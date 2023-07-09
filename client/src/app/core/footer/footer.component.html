@@ -19,62 +19,31 @@
       </ul>
     </nav>
     <div class="flex flex-col gap-2">
-      <h3 class="text-xl font-semibold text-white md:text-2xl">Contacts</h3>
-      <span class="flex items-center gap-2 md:text-lg">
-        <fa-icon icon="mobile" />
-        <p>(+34) 642 767 970</p>
-      </span>
-      <span class="flex items-center gap-2 md:text-lg">
-        <fa-icon icon="mail-forward" />
-        <p>borislav.godumov@outlook.com</p>
-      </span>
-      <span class="flex items-center gap-2 md:text-lg">
-        <fa-icon icon="map-pin" />
-        <p>09400 Aranda De Duero, Burgos, Spain</p>
+      <h3 class="text-xl font-semibold text-white md:text-2xl">
+        {{ footer.contacts.title }}
+      </h3>
+      <span
+        class="flex items-center gap-2 md:text-lg"
+        *ngFor="let item of footer.contacts.items"
+      >
+        <fa-icon [icon]="item.icon" />
+        <p>{{ item.text }}</p>
       </span>
     </div>
     <div class="flex flex-col gap-4">
       <div class="grid gap-2 grid-cols-mediaIcons">
-        <a href="https://www.facebook.com/BeeAyJee" target="_blank">
-          <fa-icon
-            [icon]="['fab', 'facebook']"
-            class="text-2xl transition-colors hover:text-white"
-          />
-        </a>
-        <a href="https://www.instagram.com/alqahol1c/" target="_blank">
-          <fa-icon
-            [icon]="['fab', 'instagram']"
-            class="text-2xl transition-colors hover:text-white"
-          />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/borislav-godumov-7245b61a2/"
-          target="_blank"
-        >
-          <fa-icon
-            [icon]="['fab', 'linkedin']"
-            class="text-2xl transition-colors hover:text-white"
-          />
-        </a>
-        <a href="https://github.com/khanark" target="_blank">
-          <fa-icon
-            [icon]="['fab', 'github']"
-            class="text-2xl transition-colors hover:text-white"
-          />
-        </a>
-        <a
-          href="https://discordapp.com/users/288682246733299712"
-          target="_blank"
-        >
-          <fa-icon
-            [icon]="['fab', 'discord']"
-            class="text-2xl transition-colors hover:text-white"
-          />
-        </a>
+        <li *ngFor="let link of footer.mediaLinks.links" class="list-none">
+          <a href="{{ link.externalLink }}" target="_blank">
+            <fa-icon
+              [icon]="link.icon"
+              class="text-2xl transition-colors hover:text-white"
+            />
+          </a>
+        </li>
       </div>
       <p class="md:text-lg">
-        Yummibg - Dish Recipes from Every Corner of the Country.<br />
-        © 2023 - Yummibg - All Rights Reserved.
+        {{ footer.mediaLinks.slogan }}<br />
+        {{ footer.mediaLinks.rights }}
       </p>
     </div>
   </div>

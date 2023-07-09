@@ -1,5 +1,6 @@
+import { navLinks, pageContent } from 'src/app/constants/constants';
+
 import { Component } from '@angular/core';
-import { navLinks } from 'src/app/constants/constants';
 
 @Component({
   selector: 'app-footer',
@@ -8,4 +9,5 @@ import { navLinks } from 'src/app/constants/constants';
 })
 export class FooterComponent {
   navLinks = navLinks;
+  footer = pageContent.footer;
 }
