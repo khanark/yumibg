@@ -7,11 +7,13 @@ import {
   faBars,
   faCircleCheck,
   faList12,
+  faLock,
   faMailForward,
   faMapLocation,
   faMapPin,
   faMobile,
   faPeopleCarry,
+  faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faDiscord,
@@ -38,6 +40,8 @@ const icons: IconDefinition[] = [
   faMobile,
   faMailForward,
   faDiscord,
+  faUser,
+  faLock,
 ];
 
 @NgModule({

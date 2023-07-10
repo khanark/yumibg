@@ -1,1 +1,51 @@
-<p>login works!</p>
+<section class="login-section | grid place-content-center text-[#555]">
+  <div class="flex flex-col gap-8 p-12 bg-white w-[428px] rounded-xl shadow-lg">
+    <div>
+      <h3 class="mb-2 text-2xl text-[#333] font-semibold text-center">Login</h3>
+    </div>
+    <div class="h-[2px] w-full bg-orange-300"></div>
+    <form class="flex flex-col w-full gap-6">
+      <div>
+        <label for="email" class="mb-1">Email</label>
+        <div
+          class="flex items-center w-full gap-2 p-2 border-2 border-orange-300 rounded-lg"
+        >
+          <fa-icon class="inline-block ml-1" icon="user" />
+          <input
+            class="flex-1 p-1 outline-none"
+            type="email"
+            placeholder="Type your email"
+            ngModel
+          />
+        </div>
+      </div>
+      <div>
+        <label for="password" class="mb-1">Password</label>
+        <div
+          class="flex items-center w-full gap-2 p-2 border-2 border-orange-300 rounded-lg"
+        >
+          <fa-icon icon="lock" class="inline-block ml-1" />
+          <input
+            class="flex-1 p-1 outline-none"
+            type="password"
+            placeholder="Type your password"
+            ngModel
+          />
+        </div>
+      </div>
+      <button
+        class="px-6 py-3 mt-4 text-xl font-semibold text-white transition-colors bg-orange-600 rounded-md hover:bg-orange-500"
+      >
+        Login
+      </button>
+    </form>
+    <div class="text-center">
+      <p>Not a member ?</p>
+      <a
+        routerLink="/register"
+        class="text-orange-600 cursor-pointer hover:underline underline-offset-2"
+        >Register</a
+      >
+    </div>
+  </div>
+</section>
