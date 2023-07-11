@@ -9,57 +9,66 @@
     </div>
     <div class="h-[2px] bg-orange-300"></div>
     <form class="flex flex-col gap-6 mx-1">
-      <div class="flex items-center gap-6">
-        <div>
-          <label for="firstName" class="mb-1">First name</label>
+      <div>
+        <label for="username" class="mb-1">Username</label>
+        <div
+          class="flex items-center gap-2 p-1 border-2 border-orange-300 rounded-lg md:p-2"
+        >
+          <fa-icon class="inline-block ml-1" icon="user" />
           <input
-            class="w-full gap-2 p-2 border-2 border-orange-300 rounded-lg outline-none md:p-3"
+            class="w-full p-1 outline-none"
             type="text"
-            placeholder="Type your first name"
-            name="firstName"
-            ngModel
-          />
-        </div>
-        <div>
-          <label for="lastName" class="mb-1">Last name</label>
-          <input
-            class="w-full gap-2 p-2 border-2 border-orange-300 rounded-lg outline-none md:p-3"
-            type="text"
-            placeholder="Type your last name"
-            name="lastName"
+            name="username"
+            placeholder="Type your username"
             ngModel
           />
         </div>
       </div>
+
       <div>
         <label for="email" class="mb-1">Email</label>
-        <input
-          class="w-full gap-2 p-2 border-2 border-orange-300 rounded-lg outline-none md:p-3"
-          type="email"
-          placeholder="Type your email"
-          name="email"
-          ngModel
-        />
+        <div
+          class="flex items-center gap-2 p-1 border-2 border-orange-300 rounded-lg md:p-2"
+        >
+          <fa-icon class="inline-block ml-1" icon="at" />
+          <input
+            class="w-full p-1 outline-none"
+            type="email"
+            name="email"
+            placeholder="Type your email"
+            ngModel
+          />
+        </div>
       </div>
       <div>
         <label for="password" class="mb-1">Password</label>
-        <input
-          class="w-full gap-2 p-2 border-2 border-orange-300 rounded-lg outline-none md:p-3"
-          type="password"
-          placeholder="Type your password"
-          name="password"
-          ngModel
-        />
+        <div
+          class="flex items-center gap-2 p-1 border-2 border-orange-300 rounded-lg md:p-2"
+        >
+          <fa-icon icon="lock" class="inline-block ml-1" />
+          <input
+            class="w-full p-1 outline-none"
+            type="password"
+            name="password"
+            placeholder="Type your password"
+            ngModel
+          />
+        </div>
       </div>
       <div>
-        <label for="repass" class="mb-1">Password repeat</label>
-        <input
-          class="w-full gap-2 p-2 border-2 border-orange-300 rounded-lg outline-none md:p-3"
-          type="password"
-          placeholder="Repeat your password"
-          name="repass"
-          ngModel
-        />
+        <label for="repass" class="mb-1">Repeat password</label>
+        <div
+          class="flex items-center gap-2 p-1 border-2 border-orange-300 rounded-lg md:p-2"
+        >
+          <fa-icon icon="lock" class="inline-block ml-1" />
+          <input
+            class="w-full p-1 outline-none"
+            type="password"
+            name="repass"
+            placeholder="Type your password"
+            ngModel
+          />
+        </div>
       </div>
       <button
         class="px-6 py-3 mt-4 text-xl font-semibold text-white transition-colors bg-orange-600 rounded-md hover:bg-orange-500"
