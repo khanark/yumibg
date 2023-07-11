@@ -5,6 +5,7 @@ import { IconsModule } from 'src/app/icons/icons.module';
 import { LoginComponent } from './login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -14,6 +15,7 @@ import { RouterModule } from '@angular/router';
     FontAwesomeModule,
     IconsModule,
     RouterModule,
+    SharedModule,
   ],
   exports: [LoginComponent],
 })

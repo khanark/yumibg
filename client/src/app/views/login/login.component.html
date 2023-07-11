@@ -6,16 +6,23 @@
       <h3 class="mb-2 text-2xl text-[#333] font-semibold text-center">Login</h3>
     </div>
     <div class="h-[2px] bg-orange-300"></div>
-    <form class="flex flex-col gap-6 mx-1">
+    <form
+      #loginForm="ngForm"
+      class="flex flex-col gap-6 mx-1"
+      (ngSubmit)="onSubmit(loginForm)"
+    >
       <div>
         <label for="email" class="mb-1">Email</label>
         <div
-          class="flex items-center gap-2 p-1 border-2 border-orange-300 rounded-lg md:p-2"
+          class="form-group | flex items-center gap-2 p-1 border-2 border-orange-300 rounded-lg md:p-2"
         >
           <fa-icon class="inline-block ml-1" icon="at" />
           <input
             class="w-full p-1 outline-none"
             type="email"
+            name="email"
+            appOnInputFocus
+            autocomplete="email"
             placeholder="Type your email"
             ngModel
           />
@@ -24,12 +31,14 @@
       <div>
         <label for="password" class="mb-1">Password</label>
         <div
-          class="flex items-center gap-2 p-1 border-2 border-orange-300 rounded-lg md:p-2"
+          class="form-group | flex items-center gap-2 p-1 border-2 border-orange-300 rounded-lg md:p-2"
         >
           <fa-icon icon="lock" class="inline-block ml-1" />
           <input
             class="w-full p-1 outline-none"
             type="password"
+            name="password"
+            autocomplete="current-password"
             placeholder="Type your password"
             ngModel
           />
