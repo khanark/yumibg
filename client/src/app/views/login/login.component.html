@@ -1,18 +1,20 @@
-<section class="login-section | grid place-content-center text-[#555]">
-  <div class="flex flex-col gap-8 p-12 bg-white w-[428px] rounded-xl shadow-lg">
+<section class="login-section | mx-4">
+  <div
+    class="flex flex-1 flex-col max-w-sm gap-8 p-12 mx-auto bg-white shadow-lg rounded-xl text-[#555]"
+  >
     <div>
       <h3 class="mb-2 text-2xl text-[#333] font-semibold text-center">Login</h3>
     </div>
-    <div class="h-[2px] w-full bg-orange-300"></div>
-    <form class="flex flex-col w-full gap-6">
+    <div class="h-[2px] bg-orange-300"></div>
+    <form class="flex flex-col gap-6 mx-1">
       <div>
         <label for="email" class="mb-1">Email</label>
         <div
-          class="flex items-center w-full gap-2 p-2 border-2 border-orange-300 rounded-lg"
+          class="flex items-center gap-2 p-2 border-2 border-orange-300 rounded-lg"
         >
           <fa-icon class="inline-block ml-1" icon="user" />
           <input
-            class="flex-1 p-1 outline-none"
+            class="w-full p-1 outline-none"
             type="email"
             placeholder="Type your email"
             ngModel
@@ -22,11 +24,11 @@
       <div>
         <label for="password" class="mb-1">Password</label>
         <div
-          class="flex items-center w-full gap-2 p-2 border-2 border-orange-300 rounded-lg"
+          class="flex items-center gap-2 p-2 border-2 border-orange-300 rounded-lg"
         >
           <fa-icon icon="lock" class="inline-block ml-1" />
           <input
-            class="flex-1 p-1 outline-none"
+            class="w-full p-1 outline-none"
             type="password"
             placeholder="Type your password"
             ngModel
