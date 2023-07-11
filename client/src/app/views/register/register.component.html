@@ -1,1 +1,79 @@
-<p>register works!</p>
+<section class="login-section | mx-4">
+  <div
+    class="flex flex-1 flex-col max-w-lg gap-8 px-6 py-10 md:p-12 mx-auto bg-white shadow-lg rounded-xl text-[#555]"
+  >
+    <div>
+      <h3 class="mb-2 text-2xl text-[#333] font-semibold text-center">
+        Register
+      </h3>
+    </div>
+    <div class="h-[2px] bg-orange-300"></div>
+    <form class="flex flex-col gap-6 mx-1">
+      <div class="flex items-center gap-6">
+        <div>
+          <label for="firstName" class="mb-1">First name</label>
+          <input
+            class="w-full gap-2 p-2 border-2 border-orange-300 rounded-lg outline-none md:p-3"
+            type="text"
+            placeholder="Type your first name"
+            name="firstName"
+            ngModel
+          />
+        </div>
+        <div>
+          <label for="lastName" class="mb-1">Last name</label>
+          <input
+            class="w-full gap-2 p-2 border-2 border-orange-300 rounded-lg outline-none md:p-3"
+            type="text"
+            placeholder="Type your last name"
+            name="lastName"
+            ngModel
+          />
+        </div>
+      </div>
+      <div>
+        <label for="email" class="mb-1">Email</label>
+        <input
+          class="w-full gap-2 p-2 border-2 border-orange-300 rounded-lg outline-none md:p-3"
+          type="email"
+          placeholder="Type your email"
+          name="email"
+          ngModel
+        />
+      </div>
+      <div>
+        <label for="password" class="mb-1">Password</label>
+        <input
+          class="w-full gap-2 p-2 border-2 border-orange-300 rounded-lg outline-none md:p-3"
+          type="password"
+          placeholder="Type your password"
+          name="password"
+          ngModel
+        />
+      </div>
+      <div>
+        <label for="repass" class="mb-1">Password repeat</label>
+        <input
+          class="w-full gap-2 p-2 border-2 border-orange-300 rounded-lg outline-none md:p-3"
+          type="password"
+          placeholder="Repeat your password"
+          name="repass"
+          ngModel
+        />
+      </div>
+      <button
+        class="px-6 py-3 mt-4 text-xl font-semibold text-white transition-colors bg-orange-600 rounded-md hover:bg-orange-500"
+      >
+        Register
+      </button>
+    </form>
+    <div class="text-center">
+      <p>Already registered ?</p>
+      <a
+        routerLink="/login"
+        class="text-orange-600 cursor-pointer hover:underline underline-offset-2"
+        >Login</a
+      >
+    </div>
+  </div>
+</section>
