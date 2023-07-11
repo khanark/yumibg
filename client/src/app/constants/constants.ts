@@ -15,7 +15,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 
 export const navLinks = [
-  { name: 'Home', path: 'home' },
+  { name: 'Home', path: '' },
   { name: 'Recipes', path: 'recipes' },
   { name: 'Login', path: 'login' },
   { name: 'Register', path: 'register' },

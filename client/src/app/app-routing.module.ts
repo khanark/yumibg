@@ -8,8 +8,8 @@ import { RegisterComponent } from './views/register/register.component';
 // If we have a more complex component with own routes
 // we make use of lazy-loading the entire module.
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: '', pathMatch: 'full', component: HomeComponent },
+  // { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   {
