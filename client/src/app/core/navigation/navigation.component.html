@@ -3,7 +3,7 @@
     <nav
       class="container flex items-center justify-between h-20 mx-auto mb-10 font-semibold text-white"
     >
-      <a routerLink="/home">
+      <a routerLink="">
         <h3
           class="px-2 py-1 text-2xl italic font-bold text-orange-600 uppercase bg-slate-50 md:text-4xl md:py-2 md:px-4 font-rancho"
         >
@@ -30,13 +30,16 @@
         <ul
           *ngIf="dropdownNavigation"
           #dropdownNav
-          class="flex flex-col items-center justify-center gap-1 absolute top-[100%] left-0 text-[#333] w-full bg-orange-100"
+          class="flex flex-col items-center justify-center gap-1 absolute top-[100%] left-0 text-white w-full bg-orange-600"
         >
-          <li *ngFor="let link of navLinks" class="w-full">
+          <li
+            *ngFor="let link of navLinks"
+            class="w-full border-b border-orange-500"
+          >
             <a
-              class="block w-full px-2 py-1 text-center transition-colors border-b border-[#ccc] rounded-md cursor-pointer hover:bg-gray-400"
+              class="block px-2 py-1 transition-colors rounded-md cursor-pointer -full"
               [routerLink]="link.path"
-              >{{ link.name }}</a
+              ><p class="ml-6">{{ link.name }}</p></a
             >
           </li>
         </ul>
