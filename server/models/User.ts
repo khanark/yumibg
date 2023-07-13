@@ -14,22 +14,15 @@ const userSchema: Schema = new Schema({
     type: String,
     required: true,
     lowrcase: true,
-    minlength: 6,
+    minLength: 6,
     select: false,
   },
-  firstName: {
+  username: {
     type: String,
     required: true,
     trim: true,
     lowercase: true,
-    minlength: 2,
-  },
-  lastName: {
-    type: String,
-    required: true,
-    trim: true,
-    lowercase: true,
-    minlength: 2,
+    minLength: 2,
   },
 });
 

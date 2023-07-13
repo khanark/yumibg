@@ -24,7 +24,7 @@ userRouter.post('/login', (req, res) => {
 });
 
 // return single user
-userRouter.get('/:id', authenticate(), (req, res) => {
+userRouter.get('/:id', (req, res) => {
   userService
     .getSingleUser(req.params.id)
     .then((user) => res.json(user))

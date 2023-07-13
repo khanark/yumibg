@@ -14,6 +14,7 @@ import {
   faMapPin,
   faMobile,
   faPeopleCarry,
+  faSearch,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -44,6 +45,7 @@ const icons: IconDefinition[] = [
   faUser,
   faLock,
   faAt,
+  faSearch
 ];
 
 @NgModule({

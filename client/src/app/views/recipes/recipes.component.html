@@ -1,1 +1,69 @@
-<p>recipes works!</p>
+<div class="container">
+  <!-- LAYOUT -->
+  <div class="grid items-start h-screen grid-cols-5 gap-4 py-4 text-[#333]">
+    <!-- ASIDE -->
+    <aside
+      class="h-auto col-span-5 p-4 rounded-lg shadow-md md:h-full bg-orange-50 md:col-span-2 lg:col-span-1"
+    >
+      <div>
+        <div class="p-2 bg-orange-100 rounded-2xl">
+          <h3 class="text-lg font-semibold md:text-xl">Recipes region</h3>
+        </div>
+        <ul class="p-4 md:text-lg text-[#555] flex flex-col gap-2">
+          <li class="">
+            <label for="" class="flex items-center gap-2">
+              <input type="radio" class="" />
+              <span>Rodopi</span>
+            </label>
+          </li>
+          <li class="">
+            <label for="" class="flex items-center gap-2">
+              <input type="radio" class="" />
+              <span>Rila</span>
+            </label>
+          </li>
+          <li class="">
+            <label for="" class="flex items-center gap-2">
+              <input type="radio" class="" />
+              <span>Pirin</span>
+            </label>
+          </li>
+          <li class="">
+            <label for="" class="flex items-center gap-2">
+              <input type="radio" class="" />
+              <span>Stara Planina</span>
+            </label>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- HEADER -->
+    <header
+      class="flex flex-wrap items-center h-auto col-span-5 gap-8 p-4 rounded-lg shadow-md md:col-span-3 lg:col-span-4 bg-orange-50"
+    >
+      <form
+        class="flex-1 flex items-center gap-2 px-5 py-3 border-2 border-orange-200 rounded-full bottom-2 rouded-full leading-[1px]"
+      >
+        <fa-icon icon="search" />
+        <input type="text" class="w-full text-lg bg-transparent outline-none" />
+      </form>
+      <div class="flex items-center gap-2">
+        <fa-icon icon="user" class="text-lg" />
+        <p class="text-lg">Boris941</p>
+      </div>
+      <button
+        class="px-4 py-2 text-lg font-semibold text-white transition-colors bg-orange-600 rounded-lg hover:bg-orange-500"
+      >
+        Logout
+      </button>
+    </header>
+
+    <!-- MAIN -->
+    <main
+      class="col-span-5 bg-orange-300 rounded-lg md:col-span-3 lg:col-span-4"
+    >
+      Main
+    </main>
+  </div>
+</div>

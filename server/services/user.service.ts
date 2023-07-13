@@ -27,6 +27,11 @@ const login = async (user: IUser) => {
     }
   );
 
+  // const userWithoutPassword = {
+  //   ...existingUser.toJSON(),
+  //   password: undefined,
+  // };
+
   return {
     ...existingUser.toJSON(),
     token,
@@ -34,7 +39,7 @@ const login = async (user: IUser) => {
 };
 
 const register = async (user: IUser) => {
-  const { email, password, firstName, lastName } = user;
+  const { email, password, username } = user;
   const existingUser = await User.findOne({ email });
   if (existingUser) {
     throw new Error('User already exists');
@@ -49,8 +54,7 @@ const register = async (user: IUser) => {
   const newUser = new User({
     email,
     password: hashedPassword,
-    firstName,
-    lastName,
+    username,
   });
 
   const result = await newUser.save();

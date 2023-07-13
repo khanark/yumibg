@@ -22,7 +22,7 @@ input {
 
 @media (min-width: 640px) {
   section {
-    padding: 6rem 0;
+    padding: 8rem 0;
   }
 }
 
@@ -33,7 +33,7 @@ input {
 }
 
 .section-hero {
-  background-image: linear-gradient(hsl(34, 100%, 10%, 0.6), hsl(34, 100%, 92%)),
+  background-image: linear-gradient(hsl(34, 100%, 10%, 0.3), hsl(34, 100%, 92%)),
     url("./assets/yummibg-hero.jpg");
 
   background-size: cover;
@@ -42,7 +42,7 @@ input {
   height: 80vh;
 }
 .section-cta {
-  background-image: linear-gradient(hsl(34, 100%, 92%), hsl(34, 100%, 10%, 0.6)),
+  background-image: linear-gradient(hsl(34, 100%, 92%), hsl(34, 100%, 10%, 0.3)),
     url("./assets/join-section-image.jpg");
 
   background-size: cover;
