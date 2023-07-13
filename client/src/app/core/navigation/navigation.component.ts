@@ -1,6 +1,6 @@
-import { Component, Injectable } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 
-import { Router } from '@angular/router';
+import { AuthService } from './../../services/auth/auth.service';
 import { navLinks } from 'src/app/constants/constants';
 
 @Injectable({
@@ -11,11 +11,21 @@ import { navLinks } from 'src/app/constants/constants';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css'],
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit {
   navLinks = navLinks;
   dropdownNavigation: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(public authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.authService.loggedUser$.subscribe((user) => {
+      if (user) {
+        this.navLinks = this.navLinks.filter(
+          (link) => link.path !== 'login' && link.path !== 'register'
+        );
+      }
+    });
+  }
 
   toggleNavigation(): void {
     this.dropdownNavigation = !this.dropdownNavigation;
