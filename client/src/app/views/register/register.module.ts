@@ -5,7 +5,6 @@ import { IconsModule } from 'src/app/icons/icons.module';
 import { NgModule } from '@angular/core';
 import { RegisterComponent } from './register.component';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [RegisterComponent],
@@ -14,7 +13,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     RouterModule,
     FontAwesomeModule,
     IconsModule,
-    SharedModule,
     FormsModule,
   ],
   exports: [RegisterComponent],

@@ -26,7 +26,6 @@
             type="email"
             name="email"
             #inputEmail="ngModel"
-            appOnInputFocus
             autocomplete="email"
             placeholder="Type your email"
             ngModel
@@ -35,10 +34,7 @@
           />
         </div>
         <!-- email validation -->
-        <div
-          *ngIf="inputEmail.invalid && (inputEmail.dirty || inputEmail.touched)"
-          class="alert"
-        >
+        <div *ngIf="inputEmail.touched">
           <div
             *ngIf="inputEmail.errors?.['required']"
             class="ml-4 text-red-500"
@@ -49,6 +45,7 @@
             Invalid email adress.
           </div>
         </div>
+        <!--  -->
       </div>
       <div>
         <label for="password" class="mb-1">Password</label>
@@ -73,7 +70,6 @@
             inputPassword.invalid &&
             (inputPassword.dirty || inputPassword.touched)
           "
-          class="alert"
         >
           <div
             *ngIf="inputPassword.errors?.['minlength']"
@@ -82,6 +78,7 @@
             Minimum 6 characters.
           </div>
         </div>
+        <!--  -->
       </div>
       <button
         class="px-6 py-3 mt-4 text-xl font-semibold text-white transition-colors bg-orange-600 rounded-md hover:bg-orange-500"
