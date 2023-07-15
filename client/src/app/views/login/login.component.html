@@ -11,6 +11,10 @@
       class="flex flex-col gap-6 mx-1"
       (ngSubmit)="onSubmit(loginForm)"
     >
+      <div class="text-center bg-red-500 rounded-md" *ngIf="httpErrorMessage">
+        <fa-icon icon="circle-exclamation" class="mr-2 text-white" />
+        <span class="inline-block text-white">{{ httpErrorMessage }}</span>
+      </div>
       <div>
         <label for="email" class="mb-1">Email</label>
         <div

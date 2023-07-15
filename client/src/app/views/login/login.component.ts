@@ -12,6 +12,7 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   isLoading: boolean = false;
+  httpErrorMessage: string = '';
 
   onSubmit(form: NgForm) {
     if (form.invalid) {
@@ -22,11 +23,17 @@ export class LoginComponent {
 
     const formValues: { email: string; password: string } = form.value;
 
-    this.authService
-      .login(formValues.email, formValues.password)
-      .subscribe(() => {
-        this.isLoading = false;
+    this.authService.login(formValues.email, formValues.password).subscribe({
+      next: () => {
         this.router.navigate(['/recipes']);
-      });
+      },
+      error: () => {
+        this.httpErrorMessage = 'Wrong email or password';
+      },
+      complete: () => {
+        this.isLoading = false;
+        form.reset();
+      },
+    });
   }
 }

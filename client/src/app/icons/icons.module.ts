@@ -7,6 +7,7 @@ import {
   faAt,
   faBars,
   faCircleCheck,
+  faCircleExclamation,
   faList12,
   faLock,
   faMailForward,
@@ -48,6 +49,7 @@ const icons: IconDefinition[] = [
   faAt,
   faSearch,
   faPlus,
+  faCircleExclamation,
 ];
 
 @NgModule({
