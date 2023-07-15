@@ -37,8 +37,12 @@ export class AuthService {
     this.userService.logout();
   }
 
-  setLocalUser(user: IUser) {
+  setLocalUser(user: IUser): void {
     this._loggedUser$.next(user);
     localStorage.setItem('[user]', JSON.stringify(user));
+  }
+
+  getLocalUser(): IUser {
+    return JSON.parse(localStorage.getItem('[user]') as string);
   }
 }

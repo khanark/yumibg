@@ -46,6 +46,7 @@
     >
       <button
         class="px-3 border-[1px] border-orange-600 text-lg font-medium text-orange-600 transition-colors bg-transparent rounded-lg hover:bg-orange-600 hover:text-white flex items-center gap-2 leading-[1px] py-2"
+        *ngIf="authService.loggedUser$ | async"
       >
         <fa-icon icon="plus" />
         <span>Add Recipe</span>
@@ -54,17 +55,27 @@
         class="flex-1 flex items-center gap-2 px-2 py-1 border-[1px] border-orange-600 rounded-full bottom-2 rouded-full leading-[1px]"
       >
         <fa-icon icon="search" class="mx-2 text-orange-600" />
-        <input type="text" class="w-full text-lg bg-transparent outline-none" />
+        <input
+          type="text"
+          class="w-full text-lg bg-transparent outline-none"
+          placeholder="Search recipe by name"
+        />
       </form>
-      <div class="flex items-center gap-2">
-        <fa-icon icon="user" class="ml-2 text-lg text-orange-600" />
-        <p class="text-lg">Boris941</p>
-      </div>
-      <button
-        class="px-3 py-1 text-lg font-medium text-white transition-colors bg-orange-600 rounded-lg hover:bg-orange-500"
+      <div
+        *ngIf="authService.loggedUser$ | async"
+        class="flex items-center gap-4"
       >
-        Logout
-      </button>
+        <div class="flex items-center gap-2">
+          <fa-icon icon="user" class="ml-2 text-lg text-orange-600" />
+          <p class="text-lg">{{ authService.getLocalUser().username }}</p>
+        </div>
+        <button
+          class="px-3 py-1 text-lg font-medium text-white transition-colors bg-orange-600 rounded-lg hover:bg-orange-500"
+          (click)="authService.logout()"
+        >
+          Logout
+        </button>
+      </div>
     </header>
 
     <!-- MAIN -->

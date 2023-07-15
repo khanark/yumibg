@@ -23,6 +23,8 @@ export class NavigationComponent implements OnInit {
         this.navLinks = this.navLinks.filter(
           (link) => link.path !== 'login' && link.path !== 'register'
         );
+      } else {
+        this.navLinks = navLinks;
       }
     });
   }
