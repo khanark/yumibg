@@ -1,15 +1,17 @@
 <div class="container">
   <!-- LAYOUT -->
-  <div class="grid items-start h-screen grid-cols-5 gap-4 py-4 text-[#333]">
+  <div
+    class="grid h-screen grid-cols-5 grid-rows-2 auto-rows-fr gap-4 py-4 text-[#333]"
+  >
     <!-- ASIDE -->
     <aside
-      class="h-auto col-span-5 p-4 rounded-lg shadow-md md:h-full bg-orange-50 md:col-span-2 lg:col-span-1"
+      class="h-full col-span-5 p-4 rounded-lg shadow-md md:row-span-3 bg-orange-50 md:col-span-2 lg:col-span-1"
     >
       <div>
         <div class="p-2 bg-orange-100 rounded-2xl">
-          <h3 class="text-lg font-semibold md:text-xl">Recipes region</h3>
+          <h3 class="text-lg font-semibold">Choose region</h3>
         </div>
-        <ul class="p-4 md:text-lg text-[#555] flex flex-col gap-2">
+        <ul class="p-4 text-[#555] flex flex-col gap-2">
           <li class="">
             <label for="" class="flex items-center gap-2">
               <input type="radio" class="" />
@@ -40,20 +42,26 @@
 
     <!-- HEADER -->
     <header
-      class="flex flex-wrap items-center h-auto col-span-5 gap-8 p-4 rounded-lg shadow-md md:col-span-3 lg:col-span-4 bg-orange-50"
+      class="flex items-center col-span-5 gap-8 p-4 rounded-lg shadow-md md:col-span-3 lg:col-span-4 bg-orange-50"
     >
-      <form
-        class="flex-1 flex items-center gap-2 px-5 py-3 border-2 border-orange-200 rounded-full bottom-2 rouded-full leading-[1px]"
+      <button
+        class="px-3 border-[1px] border-orange-600 text-lg font-medium text-orange-600 transition-colors bg-transparent rounded-lg hover:bg-orange-600 hover:text-white flex items-center gap-2 leading-[1px] py-2"
       >
-        <fa-icon icon="search" />
+        <fa-icon icon="plus" />
+        <span>Add Recipe</span>
+      </button>
+      <form
+        class="flex-1 flex items-center gap-2 px-2 py-1 border-[1px] border-orange-600 rounded-full bottom-2 rouded-full leading-[1px]"
+      >
+        <fa-icon icon="search" class="mx-2 text-orange-600" />
         <input type="text" class="w-full text-lg bg-transparent outline-none" />
       </form>
       <div class="flex items-center gap-2">
-        <fa-icon icon="user" class="text-lg" />
+        <fa-icon icon="user" class="ml-2 text-lg text-orange-600" />
         <p class="text-lg">Boris941</p>
       </div>
       <button
-        class="px-4 py-2 text-lg font-semibold text-white transition-colors bg-orange-600 rounded-lg hover:bg-orange-500"
+        class="px-3 py-1 text-lg font-medium text-white transition-colors bg-orange-600 rounded-lg hover:bg-orange-500"
       >
         Logout
       </button>
@@ -61,7 +69,7 @@
 
     <!-- MAIN -->
     <main
-      class="col-span-5 bg-orange-300 rounded-lg md:col-span-3 lg:col-span-4"
+      class="col-span-5 rounded-lg shadow-lg row-span bg-orange-50 md:col-span-3 lg:col-span-4"
     >
       Main
     </main>

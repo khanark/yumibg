@@ -26,7 +26,7 @@ export class LoginComponent {
       .login(formValues.email, formValues.password)
       .subscribe(() => {
         this.isLoading = false;
-        this.router.navigate(['/']);
+        this.router.navigate(['/recipes']);
       });
   }
 }

@@ -21,11 +21,29 @@
             class="w-full p-1 outline-none"
             type="email"
             name="email"
+            #inputEmail="ngModel"
             appOnInputFocus
             autocomplete="email"
             placeholder="Type your email"
             ngModel
+            email
+            required
           />
+        </div>
+        <!-- email validation -->
+        <div
+          *ngIf="inputEmail.invalid && (inputEmail.dirty || inputEmail.touched)"
+          class="alert"
+        >
+          <div
+            *ngIf="inputEmail.errors?.['required']"
+            class="ml-4 text-red-500"
+          >
+            Email is required.
+          </div>
+          <div *ngIf="inputEmail.errors?.['email']" class="ml-4 text-red-500">
+            Invalid email adress.
+          </div>
         </div>
       </div>
       <div>
@@ -38,10 +56,27 @@
             class="w-full p-1 outline-none"
             type="password"
             name="password"
+            #inputPassword="ngModel"
             autocomplete="current-password"
             placeholder="Type your password"
             ngModel
+            minlength="6"
           />
+        </div>
+        <!-- password validation -->
+        <div
+          *ngIf="
+            inputPassword.invalid &&
+            (inputPassword.dirty || inputPassword.touched)
+          "
+          class="alert"
+        >
+          <div
+            *ngIf="inputPassword.errors?.['minlength']"
+            class="ml-4 text-red-500"
+          >
+            Minimum 6 characters.
+          </div>
         </div>
       </div>
       <button
