@@ -22,7 +22,7 @@ const userSchema: Schema = new Schema({
     required: true,
     trim: true,
     lowercase: true,
-    minLength: 2,
+    minLength: 4,
   },
 });
 

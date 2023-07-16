@@ -23,13 +23,25 @@
             class="w-full p-1 outline-none"
             type="text"
             name="username"
+            #userName="ngModel"
             autocomplete="username"
             placeholder="Type your username"
             ngModel
+            minlength="4"
+            required
           />
         </div>
+        <!-- username validation -->
+        <div *ngIf="userName.touched">
+          <div *ngIf="userName.errors?.['required']" class="ml-4 text-red-500">
+            Username is required.
+          </div>
+          <div *ngIf="userName.errors?.['minlength']" class="ml-4 text-red-500">
+            Minimum 4 characters.
+          </div>
+        </div>
+        <!--  -->
       </div>
-
       <div>
         <label for="email" class="mb-1">Email</label>
         <div
@@ -40,11 +52,27 @@
             class="w-full p-1 outline-none"
             type="email"
             name="email"
+            #inputEmail="ngModel"
             autocomplete="email"
             placeholder="Type your email"
             ngModel
+            email
+            required
           />
         </div>
+        <!-- email validation -->
+        <div *ngIf="inputEmail.touched">
+          <div
+            *ngIf="inputEmail.errors?.['required']"
+            class="ml-4 text-red-500"
+          >
+            Email is required.
+          </div>
+          <div *ngIf="inputEmail.errors?.['email']" class="ml-4 text-red-500">
+            Invalid email adress.
+          </div>
+        </div>
+        <!--  -->
       </div>
       <div>
         <label for="password" class="mb-1">Password</label>
@@ -56,11 +84,28 @@
             class="w-full p-1 outline-none"
             type="password"
             name="password"
+            #inputPassword="ngModel"
             autocomplete="new-password"
             placeholder="Type your password"
             ngModel
+            minlength="6"
           />
         </div>
+        <!-- password validation -->
+        <div
+          *ngIf="
+            inputPassword.invalid &&
+            (inputPassword.dirty || inputPassword.touched)
+          "
+        >
+          <div
+            *ngIf="inputPassword.errors?.['minlength']"
+            class="ml-4 text-red-500"
+          >
+            Minimum 6 characters.
+          </div>
+        </div>
+        <!--  -->
       </div>
       <div>
         <label for="repass" class="mb-1">Repeat password</label>
@@ -72,11 +117,22 @@
             class="w-full p-1 outline-none"
             type="password"
             name="repass"
+            #rePass="ngModel"
             autocomplete="new-password"
             placeholder="Type your password"
             ngModel
           />
         </div>
+        <!-- Repass validation -->
+        <div *ngIf="rePass.dirty || rePass.touched">
+          <div
+            *ngIf="inputPassword.value != rePass.value"
+            class="ml-4 text-red-500"
+          >
+            Passwords are not matching.
+          </div>
+        </div>
+        <!--  -->
       </div>
       <button
         class="px-6 py-3 mt-4 text-xl font-semibold text-white transition-colors bg-orange-600 rounded-md hover:bg-orange-500"

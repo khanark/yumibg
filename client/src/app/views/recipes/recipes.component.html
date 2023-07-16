@@ -1,11 +1,11 @@
 <div class="container">
   <!-- LAYOUT -->
   <div
-    class="grid h-screen grid-cols-5 grid-rows-2 auto-rows-fr gap-4 py-4 text-[#333]"
+    class="grid h-screen grid-cols-5 grid-rows-[auto,auto,1fr] md:grid-rows-[auto,1fr,] gap-4 py-4 text-[#333]"
   >
     <!-- ASIDE -->
     <aside
-      class="h-full col-span-5 p-4 rounded-lg shadow-md md:row-span-3 bg-orange-50 md:col-span-2 lg:col-span-1"
+      class="h-full col-span-5 p-4 rounded-lg shadow-md bg-orange-50 md:col-span-2 lg:col-span-1 md:row-span-full"
     >
       <div>
         <div class="p-2 bg-orange-100 rounded-2xl">
@@ -42,7 +42,7 @@
 
     <!-- HEADER -->
     <header
-      class="flex items-center col-span-5 gap-8 p-4 rounded-lg shadow-md md:col-span-3 lg:col-span-4 bg-orange-50"
+      class="flex items-center col-span-5 row-span-1 gap-8 p-4 rounded-lg shadow-md md:col-span-3 lg:col-span-4 bg-orange-50"
     >
       <button
         class="px-3 border-[1px] border-orange-600 text-lg font-medium text-orange-600 transition-colors bg-transparent rounded-lg hover:bg-orange-600 hover:text-white flex items-center gap-2 leading-[1px] py-2"
