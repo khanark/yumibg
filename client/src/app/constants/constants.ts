@@ -72,6 +72,21 @@ export const pageContent = {
       },
     ],
   },
+  recipes: {
+    regions: [
+      { name: 'north-western', text: 'North-Western' },
+      { name: 'north-central', text: 'North Central' },
+      { name: 'north-eastern', text: 'North-Eastern' },
+      { name: 'south-western', text: 'South-Western' },
+      { name: 'south-central', text: 'South Central' },
+      { name: 'south-eastern', text: 'South-Eastern' },
+    ],
+    order: [
+      { name: 'popular', text: 'Popular' },
+      { name: 'newest', text: 'Newest' },
+      { name: 'oldest', text: 'Oldest' },
+    ],
+  },
   footer: {
     contacts: {
       title: 'Contacts',

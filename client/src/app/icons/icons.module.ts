@@ -17,6 +17,8 @@ import {
   faPeopleCarry,
   faPlus,
   faSearch,
+  faSortDown,
+  faSortUp,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -50,6 +52,8 @@ const icons: IconDefinition[] = [
   faSearch,
   faPlus,
   faCircleExclamation,
+  faSortDown,
+  faSortUp,
 ];
 
 @NgModule({
