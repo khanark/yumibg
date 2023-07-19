@@ -8,6 +8,8 @@ import {
   faBars,
   faCircleCheck,
   faCircleExclamation,
+  faEye,
+  faEyeSlash,
   faList12,
   faLock,
   faMailForward,
@@ -17,9 +19,11 @@ import {
   faPeopleCarry,
   faPlus,
   faSearch,
+  faSignIn,
   faSortDown,
   faSortUp,
   faUser,
+  faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faDiscord,
@@ -54,6 +58,10 @@ const icons: IconDefinition[] = [
   faCircleExclamation,
   faSortDown,
   faSortUp,
+  faSignIn,
+  faUserPlus,
+  faEye,
+  faEyeSlash,
 ];
 
 @NgModule({

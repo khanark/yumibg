@@ -1,0 +1,58 @@
+<div>
+  <div
+    class="flex items-center px-3 py-1 bg-orange-200 text-lg font-medium text-[#333] rounded-2xl justify-between"
+  >
+    <h3>Filter recipes</h3>
+    <button class="px-2 md:hidden" (click)="toggleForm()">
+      <fa-icon icon="sort-down" *ngIf="!toggleForm" />
+      <fa-icon icon="sort-up" *ngIf="toggleForm" />
+    </button>
+  </div>
+  <form
+    #filterForm="ngForm"
+    (ngSubmit)="onFilterSubmit(filterForm)"
+    class="flex flex-col mt-6 gap-y-6"
+    *ngIf="toggleForm"
+  >
+    <div>
+      <legend class="font-medium text-[#333] mb-4 pl-4">
+        Filter by regions:
+      </legend>
+      <div
+        class="py-4 px-6 bg-orange-100 text-[#555] flex flex-col space-y-2 accent-orange-600 rounded-2xl"
+      >
+        <label
+          class="flex items-center cursor-pointer gap-x-3"
+          *ngFor="let region of recipes.regions"
+        >
+          <input
+            type="checkbox"
+            name="region"
+            value="{{ region.name }}"
+            ngModel
+          />
+          {{ region.text }}
+        </label>
+      </div>
+    </div>
+    <div>
+      <legend class="font-medium text-[#333] mb-4 pl-4">Order by:</legend>
+      <div
+        class="py-4 px-6 bg-orange-100 text-[#555] flex flex-col space-y-2 accent-orange-600 rounded-2xl"
+      >
+        <label
+          class="flex items-center gap-x-3"
+          *ngFor="let order of recipes.order"
+        >
+          <input type="radio" name="order" value="{{ order.value }}" ngModel />
+          {{ order.text }}
+        </label>
+      </div>
+    </div>
+    <button
+      class="w-full px-4 py-2 text-white transition-colors bg-orange-600 rounded-md text-medium hover:bg-orange-500"
+    >
+      Filter Recipes
+    </button>
+  </form>
+</div>

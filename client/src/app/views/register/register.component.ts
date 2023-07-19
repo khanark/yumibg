@@ -1,7 +1,9 @@
+import { FormBuilder, Validators } from '@angular/forms';
+
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { matchPasswordValidator } from 'src/app/shared/validators/match-password-validator';
 
 @Component({
   selector: 'app-register',
@@ -9,25 +11,44 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  // register form group
+  registerForm = this.fb.group({
+    username: ['', [Validators.minLength(4), Validators.required]],
+    email: ['', [Validators.email, Validators.required]],
+    password: ['', [Validators.minLength(6), Validators.required]],
+    repeatPassword: [
+      '',
+      [
+        Validators.required,
+        matchPasswordValidator('password', 'repeatPassword'),
+      ],
+    ],
+  });
 
   isLoading: boolean = false;
 
-  onSubmit(form: NgForm) {
-    if (form.invalid) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
+
+  onSubmit(): void {
+    if (this.registerForm.invalid) {
       return;
     }
 
     this.isLoading = true;
 
-    const formValues: { username: string; email: string; password: string } =
-      form.value;
+    const { username, email, password } = this.registerForm.value as {
+      username: string;
+      email: string;
+      password: string;
+    };
 
-    this.authService
-      .register(formValues.username, formValues.email, formValues.password)
-      .subscribe(() => {
-        this.isLoading = false;
-        this.router.navigate(['/recipes']);
-      });
+    this.authService.register(username, email, password).subscribe(() => {
+      this.isLoading = false;
+      this.router.navigate(['/recipes']);
+    });
   }
 }

@@ -2,104 +2,106 @@
   <div
     class="flex flex-1 flex-col max-w-lg gap-8 px-6 py-10 md:p-12 mx-auto bg-white shadow-lg rounded-xl text-[#555]"
   >
-    <div>
-      <h3 class="mb-2 text-2xl text-[#333] font-semibold text-center">
-        Register
-      </h3>
+    <div class="flex items-center justify-center gap-4">
+      <fa-icon icon="user-plus" class="text-xl text-orange-400" />
+      <h3 class="text-2xl font-medium text-center text-orange-400">Sign up</h3>
     </div>
     <div class="h-[2px] bg-orange-300"></div>
     <form
       class="flex flex-col gap-6 mx-1"
-      #registerForm="ngForm"
-      (ngSubmit)="onSubmit(registerForm)"
+      [formGroup]="registerForm"
+      (ngSubmit)="onSubmit()"
     >
       <div>
-        <label for="username" class="mb-1">Username</label>
+        <label for="username" class="mb-1 text-[#888] text-sm">Username</label>
         <div
           class="flex items-center gap-2 p-1 border-2 border-orange-300 rounded-lg md:p-2"
         >
-          <fa-icon class="inline-block ml-1" icon="user" />
+          <fa-icon class="inline-block ml-1 text-orange-300" icon="user" />
           <input
             class="w-full p-1 outline-none"
             type="text"
             name="username"
-            #userName="ngModel"
+            formControlName="username"
             autocomplete="username"
             placeholder="Type your username"
-            ngModel
-            minlength="4"
-            required
           />
         </div>
         <!-- username validation -->
-        <div *ngIf="userName.touched">
-          <div *ngIf="userName.errors?.['required']" class="ml-4 text-red-500">
+        <div *ngIf="registerForm.get('username')?.touched">
+          <div
+            *ngIf="registerForm.get('username')?.errors?.['required']"
+            class="ml-4 text-red-500"
+          >
             Username is required.
           </div>
-          <div *ngIf="userName.errors?.['minlength']" class="ml-4 text-red-500">
+          <div
+            *ngIf="registerForm.get('username')?.errors?.['minlength']"
+            class="ml-4 text-red-500"
+          >
             Minimum 4 characters.
           </div>
         </div>
         <!--  -->
       </div>
       <div>
-        <label for="email" class="mb-1">Email</label>
+        <label for="email" class="mb-1 text-[#888] text-sm">Email</label>
         <div
           class="flex items-center gap-2 p-1 border-2 border-orange-300 rounded-lg md:p-2"
         >
-          <fa-icon class="inline-block ml-1" icon="at" />
+          <fa-icon class="inline-block ml-1 text-orange-300" icon="at" />
           <input
             class="w-full p-1 outline-none"
             type="email"
             name="email"
-            #inputEmail="ngModel"
+            formControlName="email"
             autocomplete="email"
             placeholder="Type your email"
-            ngModel
-            email
-            required
           />
         </div>
         <!-- email validation -->
-        <div *ngIf="inputEmail.touched">
+        <div *ngIf="registerForm.get('email')?.touched">
           <div
-            *ngIf="inputEmail.errors?.['required']"
+            *ngIf="registerForm.get('email')?.errors?.['required']"
             class="ml-4 text-red-500"
           >
             Email is required.
           </div>
-          <div *ngIf="inputEmail.errors?.['email']" class="ml-4 text-red-500">
+          <div
+            *ngIf="registerForm.get('email')?.errors?.['email']"
+            class="ml-4 text-red-500"
+          >
             Invalid email adress.
           </div>
         </div>
         <!--  -->
       </div>
+
       <div>
-        <label for="password" class="mb-1">Password</label>
+        <label for="password" class="mb-1 text-[#888] text-sm">Password</label>
         <div
           class="flex items-center gap-2 p-1 border-2 border-orange-300 rounded-lg md:p-2"
         >
-          <fa-icon icon="lock" class="inline-block ml-1" />
+          <fa-icon icon="lock" class="inline-block ml-1 text-orange-300" />
           <input
             class="w-full p-1 outline-none"
             type="password"
             name="password"
-            #inputPassword="ngModel"
+            formControlName="password"
             autocomplete="new-password"
             placeholder="Type your password"
-            ngModel
-            minlength="6"
           />
         </div>
         <!-- password validation -->
-        <div
-          *ngIf="
-            inputPassword.invalid &&
-            (inputPassword.dirty || inputPassword.touched)
-          "
-        >
+        <div *ngIf="registerForm.get('password')?.touched">
           <div
-            *ngIf="inputPassword.errors?.['minlength']"
+            *ngIf="registerForm.get('password')?.errors?.['required']"
+            class="ml-4 text-red-500"
+          >
+            Password is required.
+          </div>
+          <div
+            *ngIf="registerForm.get('password')?.errors?.['minlength']"
             class="ml-4 text-red-500"
           >
             Minimum 6 characters.
@@ -108,36 +110,40 @@
         <!--  -->
       </div>
       <div>
-        <label for="repass" class="mb-1">Repeat password</label>
+        <label for="repeatPassword" class="mb-1 text-[#888] text-sm"
+          >Repeat password</label
+        >
         <div
           class="flex items-center gap-2 p-1 border-2 border-orange-300 rounded-lg md:p-2"
         >
-          <fa-icon icon="lock" class="inline-block ml-1" />
+          <fa-icon icon="lock" class="inline-block ml-1 text-orange-300" />
           <input
             class="w-full p-1 outline-none"
             type="password"
-            name="repass"
-            #rePass="ngModel"
+            name="repeatPassword"
+            formControlName="repeatPassword"
+            #repeatedPassword=""
             autocomplete="new-password"
             placeholder="Repeat your password"
-            ngModel
           />
         </div>
-        <!-- Repass validation -->
-        <div *ngIf="rePass.dirty || rePass.touched">
+        <!-- repeat password validation -->
+        <div *ngIf="registerForm.get('repeatPassword')?.touched">
           <div
-            *ngIf="inputPassword.value != rePass.value"
             class="ml-4 text-red-500"
+            *ngIf="
+              registerForm.get('repeatPassword')?.errors?.['matchPassword']
+            "
           >
-            Passwords are not matching.
+            Passwords do not match.
           </div>
         </div>
         <!--  -->
       </div>
       <button
-        class="px-6 py-3 mt-4 text-xl font-semibold text-white transition-colors bg-orange-600 rounded-md hover:bg-orange-500"
+        class="px-6 py-3 mt-4 text-xl font-medium tracking-wide text-white transition-colors bg-orange-600 rounded-md hover:bg-orange-500"
       >
-        Register
+        Confirm!
       </button>
     </form>
     <div class="text-center">

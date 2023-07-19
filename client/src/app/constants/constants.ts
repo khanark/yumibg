@@ -18,7 +18,7 @@ export const navLinks = [
   { name: 'Home', path: '' },
   { name: 'Recipes', path: 'recipes' },
   { name: 'Login', path: 'login' },
-  { name: 'Register', path: 'register' },
+  { name: 'Sign Up', path: 'register' },
 ];
 
 export const pageContent = {
@@ -82,9 +82,9 @@ export const pageContent = {
       { name: 'south-eastern', text: 'South-Eastern' },
     ],
     order: [
-      { name: 'popular', text: 'Popular' },
-      { name: 'newest', text: 'Newest' },
-      { name: 'oldest', text: 'Oldest' },
+      { value: 'popular', text: 'Popular' },
+      { value: 'newest', text: 'Newest' },
+      { value: 'oldest', text: 'Oldest' },
     ],
   },
   footer: {

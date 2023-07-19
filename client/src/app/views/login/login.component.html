@@ -2,8 +2,9 @@
   <div
     class="flex flex-1 flex-col max-w-lg gap-8 px-6 py-10 md:p-12 mx-auto bg-white shadow-lg rounded-xl text-[#555]"
   >
-    <div>
-      <h3 class="mb-2 text-2xl text-[#333] font-semibold text-center">Login</h3>
+    <div class="flex items-center justify-center gap-4">
+      <fa-icon icon="sign-in" class="text-xl text-orange-400" />
+      <h3 class="text-2xl font-medium text-center text-orange-400">Log in</h3>
     </div>
     <div class="h-[2px] bg-orange-300"></div>
     <form
@@ -16,11 +17,11 @@
         <span class="inline-block text-white">{{ httpErrorMessage }}</span>
       </div>
       <div>
-        <label for="email" class="mb-1">Email</label>
+        <label for="email" class="mb-1 text-[#888] text-sm">Email</label>
         <div
           class="form-group | flex items-center gap-2 p-1 border-2 border-orange-300 rounded-lg md:p-2"
         >
-          <fa-icon class="inline-block ml-1" icon="at" />
+          <fa-icon class="inline-block ml-1 text-orange-300" icon="at" />
           <input
             class="w-full p-1 outline-none"
             type="email"
@@ -48,14 +49,14 @@
         <!--  -->
       </div>
       <div>
-        <label for="password" class="mb-1">Password</label>
+        <label for="password" class="mb-1 text-[#888] text-sm">Password</label>
         <div
           class="form-group | flex items-center gap-2 p-1 border-2 border-orange-300 rounded-lg md:p-2"
         >
-          <fa-icon icon="lock" class="inline-block ml-1" />
+          <fa-icon icon="lock" class="inline-block ml-1 text-orange-300" />
           <input
             class="w-full p-1 outline-none"
-            type="password"
+            type="{{ !passwordEye ? 'password' : 'text' }}"
             name="password"
             #inputPassword="ngModel"
             autocomplete="current-password"
@@ -63,6 +64,14 @@
             ngModel
             minlength="6"
           />
+          <button
+            type="button"
+            (click)="togglePasswordEye()"
+            class="inline-block w-[40px] ml-1 text-orange-300"
+          >
+            <fa-icon icon="eye" *ngIf="passwordEye" />
+            <fa-icon icon="eye-slash" *ngIf="!passwordEye" />
+          </button>
         </div>
         <!-- password validation -->
         <div
@@ -81,9 +90,9 @@
         <!--  -->
       </div>
       <button
-        class="px-6 py-3 mt-4 text-xl font-semibold text-white transition-colors bg-orange-600 rounded-md hover:bg-orange-500"
+        class="px-6 py-3 mt-4 text-xl font-medium tracking-wide text-white transition-colors bg-orange-600 rounded-md justify-items-start hover:bg-orange-500"
       >
-        Login
+        Let's go!
       </button>
     </form>
     <div class="text-center">
@@ -91,7 +100,7 @@
       <a
         routerLink="/register"
         class="text-orange-600 cursor-pointer hover:underline underline-offset-2"
-        >Register</a
+        >Sign up</a
       >
     </div>
   </div>

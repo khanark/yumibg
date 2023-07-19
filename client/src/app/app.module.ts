@@ -10,6 +10,7 @@ import { LoginModule } from './views/login/login.module';
 import { NavigationModule } from './core/navigation/navigation.module';
 import { NgModule } from '@angular/core';
 import { RegisterModule } from './views/register/register.module';
+import { validationInterceptorProvider } from './shared/interceptors/validation.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,7 @@ import { RegisterModule } from './views/register/register.module';
     HomeModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [validationInterceptorProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

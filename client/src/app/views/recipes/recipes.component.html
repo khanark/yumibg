@@ -1,113 +1,23 @@
 <div class="container">
   <!-- LAYOUT -->
   <div
-    class="grid md:h-screen grid-cols-5 grid-rows-[auto,auto,1fr] md:grid-rows-[auto,1fr,] gap-4 py-4 text-[#333]"
+    class="grid h-auto grid-cols-6 grid-rows-[auto,auto,1fr] md:grid-rows-[auto,1fr] gap-4 py-4 text-[#333]"
   >
     <!-- ASIDE -->
-    <aside
-      class="h-full col-span-5 p-4 rounded-lg shadow-md bg-orange-50 md:col-span-2 lg:col-span-1 md:row-span-full"
-    >
-      <div>
-        <div
-          class="flex items-center px-3 py-1 bg-orange-200 text-lg font-medium text-[#333] rounded-2xl justify-between"
-        >
-          <h3>Filter recipes</h3>
-          <button class="px-2 md:hidden" (click)="toggleForm()">
-            <fa-icon icon="sort-down" *ngIf="!toggleForm" />
-            <fa-icon icon="sort-up" *ngIf="toggleForm" />
-          </button>
-        </div>
-        <form
-          #filterForm="ngForm"
-          (ngSubmit)="onFilterSubmit(filterForm)"
-          class="flex flex-col mt-6 gap-y-6"
-          *ngIf="toggleForm"
-        >
-          <fieldset class="form-group">
-            <legend class="font-medium text-[#333] mb-4 pl-4">
-              Filter by regions:
-            </legend>
-            <div
-              class="py-4 px-6 bg-orange-100 text-[#555] flex flex-col space-y-2 accent-orange-600 rounded-2xl"
-            >
-              <label
-                class="flex items-center cursor-pointer gap-x-3"
-                *ngFor="let region of recipes.regions"
-              >
-                <input type="checkbox" name="{{ region.name }}" ngModel />
-                {{ region.text }}
-              </label>
-            </div>
-          </fieldset>
-          <fieldset class="form-gorup">
-            <legend class="font-medium text-[#333] mb-4 pl-4">Order by:</legend>
-            <div
-              class="py-4 px-6 bg-orange-100 text-[#555] flex flex-col space-y-2 accent-orange-600 rounded-2xl"
-            >
-              <label
-                class="flex items-center gap-x-3"
-                *ngFor="let order of recipes.order"
-              >
-                <input type="checkbox" name="{{ order.name }}" ngModel />
-                {{ order.text }}
-              </label>
-            </div>
-          </fieldset>
-          <button
-            class="w-full px-4 py-2 text-white transition-colors bg-orange-600 rounded-md text-medium hover:bg-orange-500"
-          >
-            Filter Recipes
-          </button>
-        </form>
-      </div>
-    </aside>
+    <app-recipes-aside
+      class="h-full p-4 rounded-lg shadow-md col-span-full bg-orange-50 md:col-span-3 lg:col-span-2 2xl:col-span-1 md:row-span-full"
+    />
 
     <!-- HEADER -->
-    <header
-      class="flex items-center col-span-5 row-span-1 gap-8 p-4 rounded-lg shadow-md md:col-span-3 lg:col-span-4 bg-orange-50"
-    >
-      <button
-        class="px-4 py-2 border-[1px] border-orange-600 text-md font-medium text-orange-600 transition-colors bg-transparent rounded-md hover:bg-orange-600 hover:text-white flex items-center gap-2 leading-[1px]"
-        *ngIf="authService.loggedUser$ | async"
-      >
-        <fa-icon icon="plus" />
-        <span>Add Recipe</span>
-      </button>
-      <form
-        class="flex-1 flex items-center gap-2 px-2 py-1 border-[1px] border-orange-600 rounded-full bottom-2 rouded-full leading-[1px]"
-      >
-        <fa-icon icon="search" class="mx-2 text-orange-600" />
-        <input
-          type="text"
-          class="w-full px-2 py-1 bg-transparent outline-none"
-          placeholder="Search recipe by name"
-        />
-      </form>
-      <div
-        *ngIf="authService.loggedUser$ | async"
-        class="flex items-center gap-4"
-      >
-        <a
-          routerLink="/recipes/user/{{ authService.getLocalUser()._id }}"
-          class="flex items-center gap-2 hover:underline underline-offset-4"
-        >
-          <fa-icon icon="user" class="inline-block ml-2 text-orange-600" />
-          {{ authService.getLocalUser().username }}
-        </a>
-        <button
-          class="px-4 py-2 font-medium text-white transition-colors bg-orange-600 rounded-md hover:bg-orange-500"
-          (click)="authService.logout()"
-        >
-          Logout
-        </button>
-      </div>
-    </header>
+    <app-recipes-header
+      class="flex flex-col items-center row-span-1 gap-4 p-4 rounded-lg shadow-md col-span-full lg:gap-8 lg:flex-row md:col-span-3 lg:col-span-4 2xl:col-span-5 bg-orange-50"
+    />
 
     <!-- MAIN -->
     <main
-      class="col-span-5 rounded-lg shadow-lg row-span bg-orange-50 md:col-span-3 lg:col-span-4"
+      class="rounded-lg shadow-lg col-span- row-span bg-orange-50 md:col-span-3 lg:col-span-4 2xl:col-span-5"
     >
-      Main
+      <router-outlet></router-outlet>
     </main>
   </div>
 </div>
