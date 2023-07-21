@@ -1,22 +1,16 @@
 <div class="container">
   <!-- LAYOUT -->
-  <div
-    class="grid h-auto grid-cols-6 grid-rows-[auto,auto,1fr] md:grid-rows-[auto,1fr] gap-4 py-4 text-[#333]"
-  >
+  <div class="grid h-auto grid-cols-6 grid-rows-[auto,auto,1fr] md:grid-rows-[auto,1fr] gap-4 py-4 text-[#333]">
     <!-- ASIDE -->
     <app-recipes-aside
-      class="h-full p-4 rounded-lg shadow-md col-span-full bg-orange-50 md:col-span-3 lg:col-span-2 2xl:col-span-1 md:row-span-full"
-    />
+      class="h-full p-4 rounded-lg shadow-md col-span-full bg-orange-50 md:col-span-3 lg:col-span-2 2xl:col-span-1 md:row-span-full" />
 
     <!-- HEADER -->
     <app-recipes-header
-      class="flex flex-col items-center row-span-1 gap-4 p-4 rounded-lg shadow-md col-span-full lg:gap-8 lg:flex-row md:col-span-3 lg:col-span-4 2xl:col-span-5 bg-orange-50"
-    />
+      class="flex flex-col items-center row-span-1 gap-4 p-4 rounded-lg shadow-md col-span-full lg:gap-8 lg:flex-row md:col-span-3 lg:col-span-4 2xl:col-span-5 bg-orange-50" />
 
     <!-- MAIN -->
-    <main
-      class="rounded-lg shadow-lg col-span- row-span bg-orange-50 md:col-span-3 lg:col-span-4 2xl:col-span-5"
-    >
+    <main class="rounded-lg shadow-lg col-span- row-span bg-orange-50 md:col-span-3 lg:col-span-4 2xl:col-span-5">
       <router-outlet></router-outlet>
     </main>
   </div>

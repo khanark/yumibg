@@ -27,13 +27,8 @@ const login = async (user: IUser) => {
     }
   );
 
-  // const userWithoutPassword = {
-  //   ...existingUser.toJSON(),
-  //   password: undefined,
-  // };
-
   return {
-    ...existingUser.toJSON(),
+    ...returnUserWithoutPassword(existingUser),
     token,
   };
 };
@@ -63,12 +58,12 @@ const register = async (user: IUser) => {
     { email: result.email },
     process.env.JWT_SECRET as string,
     {
-      expiresIn: '1h',
+      expiresIn: '1min',
     }
   );
 
   return {
-    ...result.toJSON(),
+    ...returnUserWithoutPassword(result),
     token,
   };
 };
@@ -81,5 +76,12 @@ const updateUser = async (id: string, user: IUser) => {
   await User.findByIdAndUpdate(id, user), { runValidators: true };
   return getSingleUser(id);
 };
+
+function returnUserWithoutPassword(user: any) {
+  return {
+    ...user.toJSON(),
+    password: undefined,
+  };
+}
 
 export { login, register, getSingleUser, updateUser };

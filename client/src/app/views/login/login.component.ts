@@ -34,12 +34,8 @@ export class LoginComponent {
         })
       )
       .subscribe({
-        next: () => {
-          this.router.navigate(['/recipes']);
-        },
-        error: () => {
-          this.httpErrorMessage = 'Wrong email or password';
-        },
+        next: () => this.router.navigate(['/recipes']),
+        error: () => (this.httpErrorMessage = 'Wrong email or password'),
       });
   }
 

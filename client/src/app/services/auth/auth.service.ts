@@ -42,7 +42,7 @@ export class AuthService {
     localStorage.setItem('[user]', JSON.stringify(user));
   }
 
-  getLocalUser(): IUser {
-    return JSON.parse(localStorage.getItem('[user]') as string);
+  get loggedUser() {
+    return this._loggedUser$.getValue();
   }
 }

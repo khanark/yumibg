@@ -1,26 +1,26 @@
 import {
+  HTTP_INTERCEPTORS,
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
+import { Injectable, Provider } from '@angular/core';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ValidationInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = this.authService.getLocalUser().token;
+    const token = this.authService.loggedUser?.token;
 
     if (token) {
       const authReq = req.clone({
@@ -37,8 +37,8 @@ export class ValidationInterceptor implements HttpInterceptor {
   }
 }
 
-export const validationInterceptorProvider = {
-  provide: 'HTTP_INTERCEPTORS',
+export const validationInterceptorProvider: Provider = {
+  provide: HTTP_INTERCEPTORS,
   useClass: ValidationInterceptor,
   multi: true,
 };

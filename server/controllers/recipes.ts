@@ -9,7 +9,7 @@ const recipesRouter: Router = Router();
 // return all recipes
 recipesRouter.get('/', (_req, res) => {
   recipeService
-    .getRecipes()
+    .getRecipes(_req.query)
     .then((recipes) => res.json(recipes))
     .catch((err) => res.status(500).json({ error: err }));
 });
@@ -24,6 +24,7 @@ recipesRouter.get('/:id', (req, res) => {
 
 // create a new recipe
 recipesRouter.post('/', (req, res) => {
+  const owner = req.body.owner;
   recipeService
     .createRecipe(req.body)
     .then((recipe) => res.json(recipe))

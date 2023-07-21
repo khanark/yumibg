@@ -18,6 +18,18 @@ const RecipeSchema = new Schema({
     lowercase: true,
     minLength: 10,
   },
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Review',
+    },
+  ],
+  savedForLater: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
   ingredients: [
     {
       name: {
@@ -63,6 +75,7 @@ const RecipeSchema = new Schema({
     lowercase: true,
   },
   owner: {
+    reqired: true,
     type: Schema.Types.ObjectId,
     ref: 'User',
   },

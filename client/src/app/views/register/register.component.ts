@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs';
 import { matchPasswordValidator } from 'src/app/shared/validators/match-password-validator';
 
 @Component({
@@ -26,6 +27,7 @@ export class RegisterComponent {
   });
 
   isLoading: boolean = false;
+  httpErrorMessage: string = '';
 
   constructor(
     private authService: AuthService,
@@ -46,9 +48,17 @@ export class RegisterComponent {
       password: string;
     };
 
-    this.authService.register(username, email, password).subscribe(() => {
-      this.isLoading = false;
-      this.router.navigate(['/recipes']);
-    });
+    this.authService
+      .register(username, email, password)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+          this.registerForm.reset();
+        })
+      )
+      .subscribe({
+        next: () => this.router.navigate(['/recipes']),
+        error: () => (this.httpErrorMessage = 'Wrong email or password'),
+      });
   }
 }

@@ -5,15 +5,10 @@ import { RecipesComponent } from './recipes.component';
 import { UserDetailsComponent } from './recipes-main/user-details/user-details.component';
 
 const routes: Routes = [
+  { path: '', component: RecipesComponent, pathMatch: 'full' },
   {
-    path: '',
-    component: RecipesComponent,
-    children: [
-      {
-        path: 'users/:id',
-        component: UserDetailsComponent,
-      },
-    ],
+    path: 'users/:id',
+    component: UserDetailsComponent,
   },
 ];
 
