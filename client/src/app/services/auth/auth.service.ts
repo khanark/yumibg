@@ -3,6 +3,7 @@ import { BehaviorSubject, catchError, finalize, tap, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IUser } from 'src/app/interfaces/User';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from '../user/user.service';
 
 @Injectable({
@@ -15,7 +16,7 @@ export class AuthService {
   isLoading: boolean = false;
   httpError: string = '';
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
     const loggedUser = JSON.parse(localStorage.getItem('[user]') as string);
     this._loggedUser$.next(loggedUser as IUser);
   }
@@ -50,17 +51,22 @@ export class AuthService {
     );
   }
 
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('[user]');
+  }
+
   setHttpError(error: HttpErrorResponse) {
     this.httpError = error.error.message;
   }
 
-  resetHttpError() {
+  resetHttpError(): void {
     this.httpError = '';
   }
 
-  logout() {
+  logout(): void {
     this._loggedUser$.next(null);
     this.userService.logout();
+    this.router.navigate(['/recipes']);
   }
 
   setLocalUser(user: IUser): void {
@@ -68,7 +74,7 @@ export class AuthService {
     localStorage.setItem('[user]', JSON.stringify(user));
   }
 
-  get loggedUser() {
+  get loggedUser(): IUser | null {
     return this._loggedUser$.getValue();
   }
 }

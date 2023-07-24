@@ -1,6 +1,7 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, Injectable, OnDestroy, OnInit } from '@angular/core';
 
 import { AuthService } from './../../services/auth/auth.service';
+import { Subscription } from 'rxjs';
 import { navLinks } from 'src/app/constants/constants';
 
 @Injectable({
@@ -11,14 +12,20 @@ import { navLinks } from 'src/app/constants/constants';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css'],
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent implements OnInit, OnDestroy {
   navLinks = navLinks;
   dropdownNavigation: boolean = false;
 
+  subscription: Subscription | undefined;
+
   constructor(public authService: AuthService) {}
 
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+  }
+
   ngOnInit(): void {
-    this.authService.loggedUser$.subscribe((user) => {
+    this.subscription = this.authService.loggedUser$.subscribe((user) => {
       if (user) {
         this.navLinks = this.navLinks.filter(
           (link) => link.path !== 'login' && link.path !== 'register'
