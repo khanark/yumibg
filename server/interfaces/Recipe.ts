@@ -1,19 +1,8 @@
-interface Ingredients {
-  name: string;
-  quantity: number;
-  unit: string;
-}
-
-interface Steps {
-  description: string;
-  duration: number;
-}
-
 export interface IRecipe {
   name: string;
   description: string;
-  ingredients: Ingredients[];
-  steps: Steps[];
+  ingredients: string[];
+  steps: string[];
   image: string;
   owner: string;
 }

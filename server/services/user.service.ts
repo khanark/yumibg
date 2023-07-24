@@ -16,7 +16,7 @@ const login = async (user: IUser) => {
   );
 
   if (!isPasswordCorrect) {
-    throw new Error('Invalid credentials');
+    throw new Error('Wrong username or password.');
   }
 
   const token = createToken(existingUser);
