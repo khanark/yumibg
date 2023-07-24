@@ -36,9 +36,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.registerForm.invalid) {
-      return;
-    }
+    if (this.registerForm.invalid) {return;}
 
     const { username, email, password } = this.registerForm.value as {
       username: string;

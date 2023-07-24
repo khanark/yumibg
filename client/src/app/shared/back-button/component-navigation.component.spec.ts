@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BackButtonComponent } from './back-button.component';
+import { ComponentNavigationComponent } from './component-navigation.component';
 
 describe('BackButtonComponent', () => {
-  let component: BackButtonComponent;
-  let fixture: ComponentFixture<BackButtonComponent>;
+  let component: ComponentNavigationComponent;
+  let fixture: ComponentFixture<ComponentNavigationComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [BackButtonComponent]
+      declarations: [ComponentNavigationComponent]
     });
-    fixture = TestBed.createComponent(BackButtonComponent);
+    fixture = TestBed.createComponent(ComponentNavigationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

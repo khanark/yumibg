@@ -1,9 +1,8 @@
-<app-back-button />
 <div class="w-full md:max-w-lg">
   <h3 class="mb-4 text-xl font-medium text-orange-400">Create Recipe</h3>
   <form
     #createRecipeForm="ngForm"
-    class="flex flex-col gap-4 mx-1"
+    class="flex flex-col gap-4 mx-1 overflow-scroll"
     (ngSubmit)="onSubmit(createRecipeForm)"
   >
     <div class="flex flex-col justify-between gap-6 lg:flex-row">
@@ -56,11 +55,10 @@
               name="timeUnits"
               id="timeUnits"
               #timeUnitsInput="ngModel"
-              class="text-[#888] inline-block"
               ngModel
               required
             >
-              <option value="minutes">Minutes</option>
+              <option value="minutes" selected>Minutes</option>
               <option value="hours">Hours</option>
             </select>
           </div>
@@ -77,6 +75,30 @@
         </div>
         <!--  -->
       </div>
+    </div>
+    <div>
+      <div class="form-group">
+        <label for="region" class="mb-1 text-[#888] text-sm">Region</label>
+        <select
+          class="w-full px-2 py-1 outline-none border-[2px] border-orange-300 rounded-lg"
+          name="region"
+          #regionInput="ngModel"
+          ngModel
+          required
+        >
+          <option selected>Select region.</option>
+          <option *ngFor="let region of regions" [value]="region.name">
+            {{ region.text }}
+          </option>
+        </select>
+      </div>
+      <!-- Region validation -->
+      <div *ngIf="regionInput.touched">
+        <div class="ml-4 text-red-500" *ngIf="regionInput.errors?.['required']">
+          Region is required.
+        </div>
+      </div>
+      <!--  -->
     </div>
     <div>
       <div class="form-group">

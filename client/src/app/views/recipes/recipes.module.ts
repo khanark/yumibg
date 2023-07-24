@@ -9,6 +9,9 @@ import { RecipesComponent } from './recipes.component';
 import { RecipesHeaderModule } from './recipes-header/recipes-header.module';
 import { RecipesRoutingModule } from './recipes-routing.module';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from 'src/app/store/reducers';
 
 @NgModule({
   declarations: [RecipesComponent],
@@ -22,6 +25,8 @@ import { RouterModule } from '@angular/router';
     RecipesHeaderModule,
     RecipesAsideModule,
     CreateRecipeModule,
+    SharedModule,
+    StoreModule.forFeature("recipes", reducers)
   ],
   exports: [RecipesComponent],
 })

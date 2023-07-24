@@ -20,9 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(form: NgForm): void {
-    if (form.invalid) {
-      return;
-    }
+   if(form.invalid) {return;}
 
     const formValues: { email: string; password: string } = form.value;
 
