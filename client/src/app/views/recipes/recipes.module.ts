@@ -1,6 +1,5 @@
-import { RouterModule, RouterOutlet } from '@angular/router';
-
 import { CommonModule } from '@angular/common';
+import { CreateRecipeModule } from './recipes-main/create-recipe/create-recipe.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { IconsModule } from 'src/app/icons/icons.module';
@@ -9,10 +8,10 @@ import { RecipesAsideModule } from './recipes-aside/recipes-aside.module';
 import { RecipesComponent } from './recipes.component';
 import { RecipesHeaderModule } from './recipes-header/recipes-header.module';
 import { RecipesRoutingModule } from './recipes-routing.module';
-import { CreateRecipeComponent } from './recipes-main/create-recipe/create-recipe.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [RecipesComponent, CreateRecipeComponent],
+  declarations: [RecipesComponent],
   imports: [
     CommonModule,
     RecipesRoutingModule,
@@ -22,6 +21,7 @@ import { CreateRecipeComponent } from './recipes-main/create-recipe/create-recip
     FormsModule,
     RecipesHeaderModule,
     RecipesAsideModule,
+    CreateRecipeModule,
   ],
   exports: [RecipesComponent],
 })

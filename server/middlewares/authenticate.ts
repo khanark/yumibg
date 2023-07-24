@@ -11,20 +11,28 @@ import jwt from 'jsonwebtoken';
  * @returns {Function} Express middleware function
  */
 export const authenticate = (): RequestHandler => {
-  return (req, res, next) => {
-    if (req.headers['x-auth-token']) {
-      const token = req.headers['x-auth-token'] as string;
+    return (req, res, next) => {
+        if (req.headers['x-auth-token']) {
+            const token = req.headers['x-auth-token'] as string;
+            console.log(process.env.JWT_SECRET);
 
-      jwt.verify(token, process.env.JWT_SECRET as string, (err, decoded) => {
-        if (err) {
-          return res.status(403).json({ message: 'Forbidden' });
+            jwt.verify(
+                token,
+                process.env.JWT_SECRET as string,
+                (err, decoded) => {
+                    if (err) {
+                        console.log(err);
+                        return res.status(403).json({ message: 'Forbidden' });
+                    }
+
+                    console.log(decoded);
+                    // compare token
+
+                    next();
+                }
+            );
+        } else {
+            res.status(401).json({ message: 'Unauthorized' });
         }
-
-        // compare the decoded user id to the id in the request params
-        next();
-      });
-    } else {
-      res.status(401).json({ message: 'Unauthorized' });
-    }
-  };
+    };
 };

@@ -7,75 +7,38 @@ const RecipeSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    trim: true,
     lowercase: true,
     minLength: 3,
   },
   description: {
     type: String,
     required: true,
-    trim: true,
-    lowercase: true,
     minLength: 10,
   },
-  reviews: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Review',
-    },
-  ],
-  savedForLater: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-    },
-  ],
-  ingredients: [
-    {
-      name: {
-        type: String,
-        required: true,
-        trim: true,
-        lowercase: true,
-      },
-      quantity: {
-        type: Number,
-        required: true,
-        trim: true,
-        lowercase: true,
-      },
-      unit: {
-        type: String,
-        required: true,
-        trim: true,
-        lowercase: true,
-      },
-    },
-  ],
-  steps: [
-    {
-      description: {
-        type: String,
-        required: true,
-        trim: true,
-        lowercase: true,
-      },
-      duration: {
-        type: Number,
-        required: true,
-        trim: true,
-        lowercase: true,
-      },
-    },
-  ],
+  timeNumber: {
+    type: Number,
+    required: true,
+  },
+  timeUnits: {
+    type: String,
+    required: true,
+  },
+  ingredients: {
+    type: [String],
+    required: true,
+    default: [],
+  },
+  steps: {
+    type: [String],
+    required: true,
+    default: [],
+  },
   image: {
     type: String,
     required: true,
-    trim: true,
-    lowercase: true,
   },
   owner: {
-    reqired: true,
+    required: true,
     type: Schema.Types.ObjectId,
     ref: 'User',
   },

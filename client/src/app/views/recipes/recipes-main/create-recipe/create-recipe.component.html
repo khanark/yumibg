@@ -1,1 +1,189 @@
-<p>create-recipe works!</p>
+<app-back-button />
+<div class="w-full md:max-w-lg">
+  <h3 class="mb-4 text-xl font-medium text-orange-400">Create Recipe</h3>
+  <form
+    #createRecipeForm="ngForm"
+    class="flex flex-col gap-4 mx-1"
+    (ngSubmit)="onSubmit(createRecipeForm)"
+  >
+    <div class="flex flex-col justify-between gap-6 lg:flex-row">
+      <div>
+        <div class="flex-1">
+          <label for="name" class="mb-1 text-[#888] text-sm">Name</label>
+          <input
+            class="w-full px-2 py-1 outline-none border-[2px] border-orange-300 rounded-lg"
+            type="text"
+            name="name"
+            #nameInput="ngModel"
+            placeholder="Type recipe name."
+            ngModel
+            minlength="3"
+            required
+          />
+        </div>
+        <!-- Recipe name validation -->
+        <div *ngIf="nameInput.touched">
+          <div
+            class="ml-4 text-red-500"
+            *ngIf="nameInput.errors?.['minlength']"
+          >
+            Minimum 3 characters.
+          </div>
+          <div class="ml-4 text-red-500" *ngIf="nameInput.errors?.['required']">
+            Name is required.
+          </div>
+        </div>
+        <!--  -->
+      </div>
+      <div>
+        <div class="flex-1">
+          <label for="preparationTime" class="mb-1 text-[#888] text-sm"
+            >Preparation time</label
+          >
+          <div
+            class="flex items-center border-[2px] border-orange-300 rounded-lg overflow-hidden"
+          >
+            <input
+              class="flex-1 px-2 py-1 outline-none"
+              type="number"
+              name="timeNumber"
+              #timeNumberInput="ngModel"
+              placeholder="ie. 15 minutes."
+              ngModel
+              required
+            />
+            <select
+              name="timeUnits"
+              id="timeUnits"
+              #timeUnitsInput="ngModel"
+              class="text-[#888] inline-block"
+              ngModel
+              required
+            >
+              <option value="minutes">Minutes</option>
+              <option value="hours">Hours</option>
+            </select>
+          </div>
+        </div>
+        <!-- Preparation time validation -->
+        <div *ngIf="timeNumberInput.touched || timeUnitsInput.touched">
+          <div class="ml-4 text-red-500">
+            <div
+              *ngIf="timeNumberInput.errors?.['required'] || timeUnitsInput.errors?.['required']"
+            >
+              Preparation time is required.
+            </div>
+          </div>
+        </div>
+        <!--  -->
+      </div>
+    </div>
+    <div>
+      <div class="form-group">
+        <label for="image" class="mb-1 text-[#888] text-sm">Image</label>
+        <input
+          class="w-full px-2 py-1 outline-none border-[2px] border-orange-300 rounded-lg"
+          name="image"
+          #imageInput="ngModel"
+          placeholder="Link to your image."
+          ngModel
+          required
+          pattern="^(https?:\/\/).*\.(png|jpe?g)$"
+        />
+      </div>
+      <!-- Image validation -->
+      <div *ngIf="imageInput.touched">
+        <div class="ml-4 text-red-500" *ngIf="imageInput.errors?.['required']">
+          Image is required.
+        </div>
+        <div class="ml-4 text-red-500" *ngIf="imageInput.errors?.['pattern']">
+          Invalid format.
+        </div>
+      </div>
+      <!--  -->
+    </div>
+    <div>
+      <div class="form-group">
+        <label for="description" class="mb-1 text-[#888] text-sm"
+          >Description</label
+        >
+        <textarea
+          class="w-full px-2 py-1 outline-none border-[2px] border-orange-300 rounded-lg"
+          name="description"
+          #descriptionInput="ngModel"
+          placeholder="Write your recipe description."
+          rows="3"
+          ngModel
+          minlength="10"
+          required
+        ></textarea>
+      </div>
+      <!-- Description validation -->
+      <div *ngIf="descriptionInput.touched" class="mt-[-7px]">
+        <div
+          class="ml-4 text-red-500"
+          *ngIf="descriptionInput.errors?.['required']"
+        >
+          Description is required.
+        </div>
+        <div
+          class="ml-4 text-red-500"
+          *ngIf="descriptionInput.errors?.['minlength']"
+        >
+          Minimum 10 characters.
+        </div>
+      </div>
+      <!--  -->
+    </div>
+    <div>
+      <div class="form-group">
+        <label for="ingidients" class="mb-1 text-[#888] text-sm"
+          >Ingredients</label
+        >
+        <textarea
+          class="w-full px-2 py-1 outline-none border-[2px] border-orange-300 rounded-lg"
+          name="ingredients"
+          #ingredientsInput="ngModel"
+          placeholder="Each ingredient on a new line *"
+          rows="3"
+          ngModel
+          required
+        ></textarea>
+      </div>
+      <!-- Ingredients validation -->
+      <div *ngIf="ingredientsInput.touched" class="mt-[-7px]">
+        <div
+          class="ml-4 text-red-500"
+          *ngIf="ingredientsInput.errors?.['required']"
+        >
+          Ingredients are required.
+        </div>
+      </div>
+      <!--  -->
+    </div>
+    <div>
+      <div class="m-0 form-group">
+        <label for="steps" class="mb-1 text-[#888] text-sm">Steps</label>
+        <textarea
+          class="w-full px-2 py-1 outline-none border-[2px] border-orange-300 rounded-lg"
+          name="steps"
+          #stepsInput="ngModel"
+          placeholder="Each step on a new line *"
+          rows="3"
+          ngModel
+          required
+        ></textarea>
+      </div>
+      <div *ngIf="stepsInput.touched" class="mt-[-7px]">
+        <div class="ml-4 text-red-500" *ngIf="stepsInput.errors?.['required']">
+          Steps are required.
+        </div>
+      </div>
+    </div>
+    <button
+      class="px-6 py-2 text-lg font-medium text-white transition-colors bg-orange-600 rounded-md w-min justify-self-start hover:bg-orange-500"
+    >
+      Save
+    </button>
+  </form>
+</div>

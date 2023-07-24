@@ -1,0 +1,7 @@
+<div
+  class="py-1 text-center bg-red-500 rounded-md"
+  *ngIf="authService.httpError && !authService.isLoading"
+>
+  <fa-icon icon="circle-exclamation" class="mr-2 text-white" />
+  <span class="inline-block text-white">{{ authService.httpError }}</span>
+</div>

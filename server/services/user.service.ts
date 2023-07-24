@@ -7,7 +7,7 @@ const login = async (user: IUser) => {
   const { email, password } = user;
   const existingUser = await User.findOne({ email }).select('+password');
   if (!existingUser) {
-    throw new Error('User does not exist');
+    throw new Error('Wrong username or password.');
   }
 
   const isPasswordCorrect = await bcrypt.compare(
@@ -19,13 +19,7 @@ const login = async (user: IUser) => {
     throw new Error('Invalid credentials');
   }
 
-  const token = jwt.sign(
-    { email: existingUser.email },
-    process.env.JWT_SECRET as string,
-    {
-      expiresIn: '1h',
-    }
-  );
+  const token = createToken(existingUser);
 
   return {
     ...returnUserWithoutPassword(existingUser),
@@ -37,7 +31,7 @@ const register = async (user: IUser) => {
   const { email, password, username } = user;
   const existingUser = await User.findOne({ email });
   if (existingUser) {
-    throw new Error('User already exists');
+    throw new Error('Email is already taken.');
   }
 
   if (password.length < 6) {
@@ -54,13 +48,7 @@ const register = async (user: IUser) => {
 
   const result = await newUser.save();
 
-  const token = jwt.sign(
-    { email: result.email },
-    process.env.JWT_SECRET as string,
-    {
-      expiresIn: '1min',
-    }
-  );
+  const token = createToken(result);
 
   return {
     ...returnUserWithoutPassword(result),
@@ -82,6 +70,18 @@ function returnUserWithoutPassword(user: any) {
     ...user.toJSON(),
     password: undefined,
   };
+}
+
+function createToken(user: IUser) {
+  const payload = {
+    id: user._id,
+    email: user.email,
+    username: user.username,
+  };
+
+  return jwt.sign(payload, process.env.JWT_SECRET as string, {
+    expiresIn: '365d',
+  });
 }
 
 export { login, register, getSingleUser, updateUser };

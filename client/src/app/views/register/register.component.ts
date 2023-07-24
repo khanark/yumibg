@@ -1,9 +1,8 @@
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { finalize } from 'rxjs';
 import { matchPasswordValidator } from 'src/app/shared/validators/match-password-validator';
 
 @Component({
@@ -11,7 +10,7 @@ import { matchPasswordValidator } from 'src/app/shared/validators/match-password
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   // register form group
   registerForm = this.fb.group({
     username: ['', [Validators.minLength(4), Validators.required]],
@@ -26,21 +25,20 @@ export class RegisterComponent {
     ],
   });
 
-  isLoading: boolean = false;
-  httpErrorMessage: string = '';
-
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router,
     private fb: FormBuilder
   ) {}
+
+  ngOnInit(): void {
+    this.authService.resetHttpError();
+  }
 
   onSubmit(): void {
     if (this.registerForm.invalid) {
       return;
     }
-
-    this.isLoading = true;
 
     const { username, email, password } = this.registerForm.value as {
       username: string;
@@ -50,15 +48,8 @@ export class RegisterComponent {
 
     this.authService
       .register(username, email, password)
-      .pipe(
-        finalize(() => {
-          this.isLoading = false;
-          this.registerForm.reset();
-        })
-      )
-      .subscribe({
-        next: () => this.router.navigate(['/recipes']),
-        error: () => (this.httpErrorMessage = 'Wrong email or password'),
-      });
+      .subscribe(() => this.router.navigate(['/recipes']));
+
+    this.registerForm.reset();
   }
 }

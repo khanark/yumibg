@@ -1,5 +1,6 @@
+import { Component, OnInit } from '@angular/core';
+
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
@@ -9,34 +10,26 @@ import { finalize } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
-  isLoading: boolean = false;
-  httpErrorMessage: string = '';
+export class LoginComponent implements OnInit {
   passwordEye: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(public authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.authService.resetHttpError();
+  }
 
   onSubmit(form: NgForm): void {
     if (form.invalid) {
       return;
     }
 
-    this.isLoading = true;
-
     const formValues: { email: string; password: string } = form.value;
 
     this.authService
       .login(formValues.email, formValues.password)
-      .pipe(
-        finalize(() => {
-          this.isLoading = false;
-          form.reset();
-        })
-      )
-      .subscribe({
-        next: () => this.router.navigate(['/recipes']),
-        error: () => (this.httpErrorMessage = 'Wrong email or password'),
-      });
+      .pipe(finalize(() => form.reset()))
+      .subscribe(() => this.router.navigate(['/recipes']));
   }
 
   togglePasswordEye(): void {

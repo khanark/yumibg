@@ -3,10 +3,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconsModule } from 'src/app/icons/icons.module';
-import { LoaderModule } from 'src/app/shared/loader/loader.module';
 import { NgModule } from '@angular/core';
 import { RegisterComponent } from './register.component';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [RegisterComponent],
@@ -17,7 +17,7 @@ import { RouterModule } from '@angular/router';
     IconsModule,
     FormsModule,
     ReactiveFormsModule,
-    LoaderModule,
+    SharedModule,
   ],
   exports: [RegisterComponent],
 })
