@@ -6,7 +6,7 @@
 
 This is a website for bulgarian recipes. It is a project for the course "Angular - Front- End" in Sofia University.
 The whole project is using TypeScript .
-The back end is written in Node.js and Express.js. The database is MongoDB and the ORM is Mongoose.
+The back end is written in Node.js and the database is MongoDB.
 The front end is written in Angular.
 
 ## Stack
