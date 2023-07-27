@@ -1,0 +1,30 @@
+.fixed {
+  position: fixed;
+  width: 100%;
+  animation: navbar-dropdown 0.5s ease-out;
+  background-color: rgb(234, 88, 12, 0.9);
+  z-index: 1000;
+  overflow: hidden; /* Ensure content doesn't overflow during animation */
+}
+
+@keyframes navbar-dropdown {
+  0% {
+    opacity: 0;
+    max-height: 0;
+  }
+  100% {
+    opacity: 1;
+    max-height: 200px; /* Adjust this value to the maximum height you want the dropdown to have */
+  }
+}
+
+@keyframes navbar-hide-in {
+  100% {
+    opacity: 1;
+    max-height: 200px; /* Adjust this value to the maximum height you want the dropdown to have */
+  }
+  0% {
+    opacity: 0;
+    max-height: 0;
+  }
+}

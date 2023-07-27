@@ -5,36 +5,40 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RecipeService {
   baseUrl: string = 'http://localhost:8000/api/recipes';
 
   endpoints = {
-    get: this.baseUrl + "/",
-    create: this.baseUrl + "/",
-    single: (id:string) => this.baseUrl + "/" + id,
-  }
+    get: this.baseUrl + '/',
+    create: this.baseUrl + '/',
+    single: (id: string) => this.baseUrl + '/' + id,
+  };
 
-  constructor(private http: HttpClient, private authService: AuthService)  { }
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   getAllRecipes(): Observable<IRecipe[]> {
-    return this.http.get<IRecipe[]>(this.endpoints.get)
+    return this.http.get<IRecipe[]>(this.endpoints.get);
   }
 
-  gRecipe(id: string): Observable<IRecipe> {
-    return this.http.get<IRecipe>(this.endpoints.single(id))
+  getSingleRecipe(id: string): Observable<IRecipe> {
+    return this.http.get<IRecipe>(this.endpoints.single(id));
   }
 
   createRecipe(recipe: IRecipe): Observable<IRecipe> {
     const recipePayload = {
       ...recipe,
-      owner: this.authService.loggedUser?._id
-    }
-    return this.http.post<IRecipe>(this.endpoints.create, recipePayload)
+      owner: this.authService.loggedUser?._id,
+    };
+    return this.http.post<IRecipe>(this.endpoints.create, recipePayload);
   }
 
-  updateRecipe(id:string, recipe:IRecipe): Observable<IRecipe> {
-    return this.http.patch<IRecipe>(this.endpoints.single(id), recipe)
+  updateRecipe(id: string, recipe: IRecipe): Observable<IRecipe> {
+    return this.http.patch<IRecipe>(this.endpoints.single(id), recipe);
+  }
+
+  deleteRecipe(id: string): void {
+    this.http.delete(this.endpoints.single(id));
   }
 }

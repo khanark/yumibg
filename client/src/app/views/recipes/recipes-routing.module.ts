@@ -15,9 +15,9 @@ const routes: Routes = [
     title: 'Recipes',
     children: [
       {
-        path: "",
-        redirectTo: "catalog",
-        pathMatch: "full"
+        path: '',
+        redirectTo: 'catalog',
+        pathMatch: 'full',
       },
       {
         path: 'users/:id',
@@ -35,10 +35,10 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: "catalog",
-        title: "Recipes Catalog",
+        path: 'catalog',
+        title: 'Recipes Catalog',
         component: RecipesCatalogComponent,
-      }
+      },
     ],
   },
 ];

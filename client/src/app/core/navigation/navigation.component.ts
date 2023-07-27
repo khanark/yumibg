@@ -1,8 +1,16 @@
-import { Component, Injectable, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  HostListener,
+  Injectable,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 
 import { AuthService } from './../../services/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { navLinks } from 'src/app/constants/constants';
+import { stickyAnimation } from 'src/app/animations/sticky';
 
 @Injectable({
   providedIn: 'root',
@@ -11,10 +19,20 @@ import { navLinks } from 'src/app/constants/constants';
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css'],
+  animations: [stickyAnimation],
 })
 export class NavigationComponent implements OnInit, OnDestroy {
   navLinks = navLinks;
   dropdownNavigation: boolean = false;
+  navbarFixed: boolean = false;
+
+  @HostListener('window:scroll', ['$event']) onscroll() {
+    if (window.scrollY > 500) {
+      this.navbarFixed = true;
+    } else {
+      this.navbarFixed = false;
+    }
+  }
 
   subscription: Subscription | undefined;
 

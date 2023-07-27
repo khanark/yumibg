@@ -6,7 +6,6 @@
   "description": "This is a website for bulgarian recipes. It is a project for the course \"Angular - Front- End\" in Sofia University.\r The whole project is using TypeScript .\r The back end is written in Node.js and Express.js. The database is MongoDB and the ORM is Mongoose.\r The front end is written in Angular.",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -8,4 +8,14 @@ import { pageContent } from 'src/app/constants/constants';
 })
 export class HomeComponent {
   homeContent = pageContent.home;
+  navState: 'normal' | 'sticky' = 'sticky';
+
+  onIntersectionChange(isIntersecting: boolean) {
+    if (isIntersecting) {
+      this.navState = 'normal';
+    } else {
+      this.navState = 'sticky';
+    }
+    console.log(this.navState);
+  }
 }

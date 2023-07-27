@@ -1,3 +1,4 @@
+import { RecipesCatalogModule } from './recipes-main/recipes-catalog/recipes-catalog.module';
 import { CommonModule } from '@angular/common';
 import { CreateRecipeModule } from './recipes-main/create-recipe/create-recipe.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -10,8 +11,6 @@ import { RecipesHeaderModule } from './recipes-header/recipes-header.module';
 import { RecipesRoutingModule } from './recipes-routing.module';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { StoreModule } from '@ngrx/store';
-import { reducers } from 'src/app/store/reducers';
 
 @NgModule({
   declarations: [RecipesComponent],
@@ -25,8 +24,8 @@ import { reducers } from 'src/app/store/reducers';
     RecipesHeaderModule,
     RecipesAsideModule,
     CreateRecipeModule,
+    RecipesCatalogModule,
     SharedModule,
-    StoreModule.forFeature("recipes", reducers)
   ],
   exports: [RecipesComponent],
 })

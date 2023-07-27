@@ -1,4 +1,8 @@
-<div class="relative bg-orange-600 shadow-md">
+<div
+  class="relative bg-orange-600 shadow-md"
+  (scroll)="onscroll()"
+  [ngClass]="navbarFixed ? 'fixed' : 'normal'"
+>
   <div class="site-navigation | m-auto">
     <nav
       class="container flex items-center justify-between h-20 mx-auto mb-10 font-semibold text-white"

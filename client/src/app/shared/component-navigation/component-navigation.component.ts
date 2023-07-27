@@ -10,24 +10,24 @@ import { Location } from '@angular/common';
   styleUrls: ['./component-navigation.component.css'],
 })
 export class ComponentNavigationComponent implements OnInit, OnDestroy {
-  private _currentLocation$ = new BehaviorSubject<string>("")
+  private _currentLocation$ = new BehaviorSubject<string>('');
   currentLocation$ = this._currentLocation$.asObservable();
-  isCatalogPage: boolean = false
+  isCatalogPage: boolean = false;
 
-  routeSubscription: Subscription | undefined
+  routeSubscription: Subscription | undefined;
 
   constructor(private location: Location, private router: Router) {
-    this._currentLocation$.next(this.router.url)
-    this.isCatalogPage = this.router.url.includes("/catalog")
+    this._currentLocation$.next(this.router.url);
+    this.isCatalogPage = this.router.url.includes('/catalog');
   }
-  
+
   ngOnInit(): void {
-    this.routeSubscription = this.router.events.subscribe(event => {
+    this.routeSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
-        this._currentLocation$.next(event.url)
-        this.isCatalogPage = event.url.includes("/catalog")
+        this._currentLocation$.next(event.url);
+        this.isCatalogPage = event.url.includes('/catalog');
       }
-    })
+    });
   }
 
   ngOnDestroy(): void {
@@ -39,6 +39,6 @@ export class ComponentNavigationComponent implements OnInit, OnDestroy {
   }
 
   onGoToCatalog() {
-    this.router.navigate(["/recipes/catalog"])
+    this.router.navigate(['/recipes/catalog']);
   }
 }
