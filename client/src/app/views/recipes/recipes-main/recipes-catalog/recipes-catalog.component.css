@@ -1,0 +1,30 @@
+.responsive-grid {
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  /* Add any other card styles you have */
+}
+
+.card::after {
+  opacity: 0;
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: #ea580c;
+  top: 5px;
+  left: 5px;
+  z-index: -1;
+  transition: opacity 0.2s;
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+.card:not(:hover)::after {
+  transition: none; /* Remove the transition when not hovering */
+}

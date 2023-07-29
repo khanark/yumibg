@@ -24,7 +24,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
   navLinks = navLinks;
   dropdownNavigation: boolean = false;
   subscription: Subscription | undefined;
-  dashboardSubscription: Subscription | undefined;
 
   constructor(public authService: AuthService, private router: Router) {}
 
@@ -42,7 +41,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
-    this.dashboardSubscription?.unsubscribe();
   }
 
   toggleNavigation(): void {

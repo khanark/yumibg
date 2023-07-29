@@ -13,7 +13,7 @@ const userSchema: Schema = new Schema({
   password: {
     type: String,
     required: true,
-    lowrcase: true,
+    lowercase: true,
     minLength: 6,
     select: false,
   },
@@ -24,6 +24,7 @@ const userSchema: Schema = new Schema({
     lowercase: true,
     minLength: 4,
   },
+  createdRecipes: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
 });
 
-export const User = model<IUser>('User', userSchema);
+export default model<IUser>('User', userSchema);

@@ -11,6 +11,7 @@ import {
   faChevronUp,
   faCircleCheck,
   faCircleExclamation,
+  faClockRotateLeft,
   faEye,
   faEyeSlash,
   faHome,
@@ -68,6 +69,7 @@ const icons: IconDefinition[] = [
   faEyeSlash,
   faHome,
   faListUl,
+  faClockRotateLeft,
 ];
 
 @NgModule({

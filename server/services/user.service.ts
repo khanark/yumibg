@@ -1,5 +1,5 @@
 import { IUser } from '../interfaces/User';
-import { User } from '../models/User';
+import User from '../models/User';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
