@@ -13,7 +13,9 @@ import {
   faCircleExclamation,
   faEye,
   faEyeSlash,
+  faHome,
   faList12,
+  faListUl,
   faLock,
   faMailForward,
   faMapLocation,
@@ -64,6 +66,8 @@ const icons: IconDefinition[] = [
   faUserPlus,
   faEye,
   faEyeSlash,
+  faHome,
+  faListUl,
 ];
 
 @NgModule({

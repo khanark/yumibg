@@ -1,25 +1,27 @@
-<div>
-  <div
-    class="hidden md:flex items-center px-3 py-1 bg-orange-200 text-lg font-medium text-[#333] rounded-lg justify-between"
+<div class="flex flex-col gap-2">
+  <a
+    routerLink="/"
+    class="flex items-center gap-2 px-4 py-2 bg-orange-200 text-[#222] rounded-sm hover:gap-4 transition-all"
   >
-    <h3>Filter recipes</h3>
-  </div>
-  <div
-    class="flex md:hidden items-center px-3 py-1 bg-orange-200 text-lg font-medium text-[#333] rounded-lg justify-between"
+    <fa-icon icon="home" class="text-sm" />
+    <span class="inline-block text-sm font-medium uppercase">home</span>
+  </a>
+  <button
+    class="flex items-center px-4 py-2 bg-orange-200 text-sm uppercase font-medium text-[#222] rounded-sm justify-between cursor-pointer"
     (click)="toggleForm()"
   >
-    <h3>Filter recipes</h3>
+    <span>Filter recipes</span>
     <fa-icon icon="chevron-down" *ngIf="!formToggle" />
     <fa-icon icon="chevron-up" *ngIf="formToggle" />
-  </div>
+  </button>
   <form
     #filterForm="ngForm"
     (ngSubmit)="onFilterSubmit(filterForm)"
     class="flex flex-col mt-6 gap-y-6"
-    *ngIf="!formToggle"
+    *ngIf="formToggle"
   >
     <div>
-      <legend class="font-medium text-[#333] mb-4 pl-4">
+      <legend class="font-medium text-[#333] mb-2 pl-4 text-base">
         Filter by regions:
       </legend>
       <div
@@ -40,9 +42,11 @@
       </div>
     </div>
     <div>
-      <legend class="font-medium text-[#333] mb-4 pl-4">Order by:</legend>
+      <legend class="font-medium text-[#333] mb-2 pl-4 text-base">
+        Order by:
+      </legend>
       <div
-        class="py-4 px-6 bg-orange-100 text-[#555] flex flex-col space-y-2 accent-orange-600 rounded-lg"
+        class="py-4 px-6 bg-orange-100 text-[#555] flex flex-col space-y-2 accent-orange-600 rounded-sm"
       >
         <label
           class="flex items-center gap-x-3"
@@ -54,28 +58,67 @@
       </div>
     </div>
     <button
-      class="w-full px-4 py-2 font-medium text-white transition-colors bg-orange-600 rounded-md hover:bg-orange-500"
+      class="w-full px-4 py-2 text-sm font-medium tracking-wide text-white uppercase transition-colors bg-orange-600 rounded-sm hover:bg-orange-500"
     >
       Filter Recipes
     </button>
   </form>
-  <div *ngIf="authService.loggedUser" class="flex flex-col gap-4 mt-8">
-    <a
-      [routerLink]="['/recipes/users', authService.loggedUser._id]"
-      class="flex flex-col items-center gap-2 hover:underline underline-offset-4"
-    >
-      <div
-        class="rounded-full flex items-center justify-center w-[60px] h-[60px] bg-orange-200 hover:bg-orange-300 transition-colors"
-      >
-        <fa-icon icon="user" class="inline-block text-xl text-orange-600" />
-      </div>
-      {{ authService.loggedUser.username | titlecase }}
-    </a>
-    <button
-      class="px-4 py-2 font-medium text-orange-600 transition-colors bg-orange-200 rounded-md hover:bg-orange-300"
-      (click)="authService.logout()"
-    >
-      Logout
-    </button>
-  </div>
+  <button
+    class="flex items-center px-4 py-2 bg-orange-200 text-sm uppercase font-medium text-[#222] rounded-sm justify-between cursor-pointer"
+    (click)="toggleProfileMenu()"
+  >
+    <div class="flex items-center gap-2">
+      <fa-icon icon="user" />
+      <span class="inline-block text-sm font-medium uppercase">profile</span>
+    </div>
+    <div>
+      <fa-icon icon="chevron-down" *ngIf="!profileMenuToggle" />
+      <fa-icon icon="chevron-up" *ngIf="profileMenuToggle" />
+    </div>
+  </button>
+  <ul
+    class="flex flex-col"
+    *ngIf="profileMenuToggle"
+    (click)="toggleProfileMenu()"
+  >
+    <div *ngIf="authService.loggedUser">
+      <li class="border-b-orange-300">
+        <a
+          [routerLink]="['/recipes/users', authService.loggedUser._id]"
+          class="text-sm uppercase text-[#222] block py-1 px-4"
+          >my profile</a
+        >
+      </li>
+      <li class="border-b-orange-300">
+        <a routerLink="" class="text-sm uppercase text-[#222] block py-1 px-4"
+          >edit</a
+        >
+      </li>
+      <li>
+        <button
+          type="button"
+          (click)="authService.logout()"
+          class="text-sm uppercase text-[#222] block py-1 px-4"
+        >
+          logout
+        </button>
+      </li>
+    </div>
+    <div *ngIf="!authService.loggedUser">
+      <li class="border-b-orange-300">
+        <a
+          routerLink="/login"
+          class="text-sm uppercase text-[#222] block py-1 px-4"
+          >login</a
+        >
+      </li>
+      <li class="border-b-orange-300">
+        <a
+          routerLink="/register"
+          class="text-sm uppercase text-[#222] block py-1 px-4"
+          >sign up</a
+        >
+      </li>
+    </div>
+  </ul>
 </div>

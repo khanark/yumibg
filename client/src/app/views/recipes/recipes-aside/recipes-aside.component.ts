@@ -11,6 +11,7 @@ import { pageContent } from 'src/app/constants/constants';
 export class RecipesAsideComponent {
   recipes = pageContent.recipes;
   formToggle: boolean = false;
+  profileMenuToggle: boolean = false;
 
   constructor(public authService: AuthService) {}
 
@@ -24,5 +25,9 @@ export class RecipesAsideComponent {
 
   toggleForm(): void {
     this.formToggle = !this.formToggle;
+  }
+
+  toggleProfileMenu(): void {
+    this.profileMenuToggle = !this.profileMenuToggle;
   }
 }

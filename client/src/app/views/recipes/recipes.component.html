@@ -1,24 +1,22 @@
-<div class="container">
-  <!-- LAYOUT -->
-  <div
-    class="grid h-auto grid-cols-6 grid-rows-[auto,auto,1fr] md:grid-rows-[auto,1fr] gap-4 py-4 text-[#333]"
-  >
-    <!-- ASIDE -->
-    <app-recipes-aside
-      class="h-full p-4 rounded-lg shadow-md md:h-screen col-span-full bg-orange-50 md:col-span-3 lg:col-span-2 2xl:col-span-1 md:row-span-full"
-    />
-    <!-- HEADER -->
-    <app-recipes-header
-      class="flex flex-col items-center row-span-1 gap-4 p-4 rounded-lg shadow-md col-span-full lg:gap-8 lg:flex-row md:col-span-3 lg:col-span-4 2xl:col-span-5 bg-orange-50"
-    />
+<!-- LAYOUT -->
+<div
+  class="grid md:h-screen grid-cols-6 grid-rows-[auto,auto,1fr] md:grid-rows-[auto,1fr] gap-3 text-[#333] p-4"
+>
+  <!-- ASIDE -->
+  <app-recipes-aside
+    class="h-full p-4 rounded-lg shadow-md col-span-full bg-orange-50 md:col-span-3 lg:col-span-2 2xl:col-span-1 md:row-span-full"
+  />
+  <!-- HEADER -->
+  <app-recipes-header
+    class="flex flex-col items-center row-span-1 gap-4 p-4 rounded-lg shadow-md col-span-full lg:gap-8 lg:flex-row md:col-span-3 lg:col-span-4 2xl:col-span-5 bg-orange-50"
+  />
 
-    <!-- MAIN -->
-    <main
-      class="p-4 overflow-scroll rounded-lg shadow-lg row-span bg-orange-50 md:col-span-3 lg:col-span-4 2xl:col-span-5 col-span-full"
-    >
+  <!-- MAIN -->
+  <main
+    class="p-4 rounded-lg shadow-md md:overflow-scroll row-span bg-orange-50 md:col-span-3 lg:col-span-4 2xl:col-span-5 col-span-full"
+  >
     <app-component-navigation />
-      <!-- OUTLET -->
-      <router-outlet />
-    </main>
-  </div>
+    <!-- OUTLET -->
+    <router-outlet />
+  </main>
 </div>

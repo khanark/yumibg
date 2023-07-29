@@ -1,8 +1,8 @@
-<div class="w-full md:max-w-lg">
-  <h3 class="mb-4 text-xl font-medium text-orange-400">Create Recipe</h3>
+<div class="w-full overflow-scroll md:max-w-lg">
+  <h3 class="mb-4 text-3xl tracking-wide text-orange-600">Add New Recipe</h3>
   <form
     #createRecipeForm="ngForm"
-    class="flex flex-col gap-4 mx-1 overflow-scroll"
+    class="flex flex-col gap-4 mx-1"
     (ngSubmit)="onSubmit(createRecipeForm)"
   >
     <div class="flex flex-col justify-between gap-6 lg:flex-row">
@@ -10,7 +10,7 @@
         <div class="flex-1">
           <label for="name" class="mb-1 text-[#888] text-sm">Name</label>
           <input
-            class="w-full px-2 py-1 outline-none border-[2px] border-orange-300 rounded-lg"
+            class="w-full px-2 py-1 outline-none border-[1px] border-orange-300 rounded-md"
             type="text"
             name="name"
             #nameInput="ngModel"
@@ -40,7 +40,7 @@
             >Preparation time</label
           >
           <div
-            class="flex items-center border-[2px] border-orange-300 rounded-lg overflow-hidden"
+            class="flex items-center border-[1px] border-orange-300 rounded-md overflow-hidden"
           >
             <input
               class="flex-1 px-2 py-1 outline-none"
@@ -80,7 +80,7 @@
       <div class="form-group">
         <label for="region" class="mb-1 text-[#888] text-sm">Region</label>
         <select
-          class="w-full px-2 py-1 outline-none border-[2px] border-orange-300 rounded-lg"
+          class="w-full px-2 py-1 outline-none border-[1px] border-orange-300 rounded-md"
           name="region"
           #regionInput="ngModel"
           ngModel
@@ -104,7 +104,7 @@
       <div class="form-group">
         <label for="image" class="mb-1 text-[#888] text-sm">Image</label>
         <input
-          class="w-full px-2 py-1 outline-none border-[2px] border-orange-300 rounded-lg"
+          class="w-full px-2 py-1 outline-none border-[1px] border-orange-300 rounded-md"
           name="image"
           #imageInput="ngModel"
           placeholder="Link to your image."
@@ -130,7 +130,7 @@
           >Description</label
         >
         <textarea
-          class="w-full px-2 py-1 outline-none border-[2px] border-orange-300 rounded-lg"
+          class="w-full px-2 py-1 outline-none border-[1px] border-orange-300 rounded-md"
           name="description"
           #descriptionInput="ngModel"
           placeholder="Write your recipe description."
@@ -163,7 +163,7 @@
           >Ingredients</label
         >
         <textarea
-          class="w-full px-2 py-1 outline-none border-[2px] border-orange-300 rounded-lg"
+          class="w-full px-2 py-1 outline-none border-[1px] border-orange-300 rounded-md"
           name="ingredients"
           #ingredientsInput="ngModel"
           placeholder="Each ingredient on a new line *"
@@ -187,7 +187,7 @@
       <div class="m-0 form-group">
         <label for="steps" class="mb-1 text-[#888] text-sm">Steps</label>
         <textarea
-          class="w-full px-2 py-1 outline-none border-[2px] border-orange-300 rounded-lg"
+          class="w-full px-2 py-1 outline-none border-[1px] border-orange-300 rounded-md"
           name="steps"
           #stepsInput="ngModel"
           placeholder="Each step on a new line *"
@@ -203,7 +203,7 @@
       </div>
     </div>
     <button
-      class="px-6 py-2 text-lg font-medium text-white transition-colors bg-orange-600 rounded-md w-min justify-self-start hover:bg-orange-500"
+      class="px-6 py-2 text-sm font-medium text-white uppercase transition-colors bg-orange-600 rounded-md w-min justify-self-start hover:bg-orange-500"
     >
       Save
     </button>

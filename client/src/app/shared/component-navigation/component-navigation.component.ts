@@ -25,7 +25,8 @@ export class ComponentNavigationComponent implements OnInit, OnDestroy {
     this.routeSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         this._currentLocation$.next(event.url);
-        this.isCatalogPage = event.url.includes('/catalog');
+        this.isCatalogPage =
+          event.url.includes('/catalog') || event.url.endsWith('/recipes');
       }
     });
   }
@@ -40,5 +41,9 @@ export class ComponentNavigationComponent implements OnInit, OnDestroy {
 
   onGoToCatalog() {
     this.router.navigate(['/recipes/catalog']);
+  }
+
+  onGoToHome() {
+    this.router.navigate(['']);
   }
 }

@@ -1,19 +1,31 @@
-<div class="border-b-[2px] border-orange-300 mb-6">
-  <span class="inline-block text-sm text-[#888] mb-1">...{{currentLocation$ | async}}</span>
-<div class="flex gap-4 ">
-  <button
-    class="flex items-center gap-2 px-4 py-2 mb-4 transition-all bg-orange-200 hover:gap-4"
-    (click)="onGoBack()"
+<div class="border-b-[1px] border-orange-200 mb-4">
+  <span class="inline-block text-sm text-[#888] mb-1"
+    >...{{ currentLocation$ | async }}</span
   >
-    <fa-icon icon="chevron-left" class="text-sm text-orange-600" />
-    <span class="text-sm font-medium text-orange-600 uppercase">back</span>
-  </button>
-  <button
-    *ngIf="!isCatalogPage"
-    class="flex items-center gap-2 px-4 py-2 mb-4 transition-all bg-orange-200 hover:gap-4"
-    (click)="onGoToCatalog()"
-  >
-    <span class="text-sm font-medium text-orange-600 uppercase">catalog</span>
-  </button>
-</div>
+  <div class="flex gap-4">
+    <button
+      class="flex items-center gap-2 px-4 py-2 mb-4 transition-all bg-orange-200 hover:bg-orange-300"
+      (click)="onGoBack()"
+    >
+      <fa-icon icon="chevron-left" class="text-sm text-orange-600" />
+      <span class="text-sm font-medium text-orange-600 uppercase">back</span>
+    </button>
+    <button
+      *ngIf="!isCatalogPage"
+      class="flex items-center gap-2 px-4 py-2 mb-4 transition-all bg-orange-200 hover:bg-orange-300"
+      (click)="onGoToCatalog()"
+    >
+      <fa-icon icon="list-ul" class="text-sm text-orange-600" />
+
+      <span class="text-sm font-medium text-orange-600 uppercase">catalog</span>
+    </button>
+    <!-- <button
+      class="flex items-center gap-2 px-4 py-2 mb-4 transition-all bg-orange-200 hover:bg-orange-300"
+      (click)="onGoToHome()"
+    >
+      <fa-icon icon="home" class="text-sm text-orange-600" />
+
+      <span class="text-sm font-medium text-orange-600 uppercase">home</span>
+    </button> -->
+  </div>
 </div>

@@ -6,11 +6,11 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 
 import { AuthService } from './../../services/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { navLinks } from 'src/app/constants/constants';
-import { stickyAnimation } from 'src/app/animations/sticky';
 
 @Injectable({
   providedIn: 'root',
@@ -19,28 +19,14 @@ import { stickyAnimation } from 'src/app/animations/sticky';
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css'],
-  animations: [stickyAnimation],
 })
 export class NavigationComponent implements OnInit, OnDestroy {
   navLinks = navLinks;
   dropdownNavigation: boolean = false;
-  navbarFixed: boolean = false;
-
-  @HostListener('window:scroll', ['$event']) onscroll() {
-    if (window.scrollY > 500) {
-      this.navbarFixed = true;
-    } else {
-      this.navbarFixed = false;
-    }
-  }
-
   subscription: Subscription | undefined;
+  dashboardSubscription: Subscription | undefined;
 
-  constructor(public authService: AuthService) {}
-
-  ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
-  }
+  constructor(public authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.subscription = this.authService.loggedUser$.subscribe((user) => {
@@ -52,6 +38,11 @@ export class NavigationComponent implements OnInit, OnDestroy {
         this.navLinks = navLinks;
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+    this.dashboardSubscription?.unsubscribe();
   }
 
   toggleNavigation(): void {

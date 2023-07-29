@@ -1,10 +1,10 @@
 <div class="flex flex-col h-screen">
   <!-- NAVIGATION -->
-  <app-navigation />
+  <app-navigation *ngIf="!isDashboardPage" />
   <!-- OUTLET -->
   <main class="flex-1 bg-orange-100">
     <router-outlet />
   </main>
   <!-- FOOTER -->
-  <app-footer class="mt-auto" />
+  <app-footer class="mt-auto" *ngIf="!isDashboardPage" />
 </div>
