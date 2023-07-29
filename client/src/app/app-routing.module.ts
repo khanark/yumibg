@@ -8,9 +8,9 @@ import { RegisterComponent } from './views/register/register.component';
 // If we have a more complex component with own routes
 // we make use of lazy-loading the entire module.
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: '', pathMatch: 'full', component: HomeComponent, title: 'Home' },
+  { path: 'login', component: LoginComponent, title: 'Login' },
+  { path: 'register', component: RegisterComponent, title: 'Register' },
   {
     path: 'recipes',
     loadChildren: () =>

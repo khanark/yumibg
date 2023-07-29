@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
   dashboardSubscription: Subscription | undefined;
   isDashboardPage: boolean = false;
-  title = 'Home';
 
   constructor(private router: Router) {}
 

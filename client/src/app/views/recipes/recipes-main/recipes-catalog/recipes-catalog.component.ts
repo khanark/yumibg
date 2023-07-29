@@ -9,7 +9,6 @@ import { RecipeService } from 'src/app/services/recipe/recipe.service';
   styleUrls: ['./recipes-catalog.component.css'],
 })
 export class RecipesCatalogComponent implements OnInit {
-  title = 'Recipes Catalog';
   page: number = 1;
   count: number = 0;
 
