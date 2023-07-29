@@ -9,7 +9,6 @@ import { IconsModule } from './icons/icons.module';
 import { LoginModule } from './views/login/login.module';
 import { NavigationModule } from './core/navigation/navigation.module';
 import { NgModule } from '@angular/core';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { RegisterModule } from './views/register/register.module';
 import { validationInterceptorProvider } from './shared/interceptors/validation.interceptor';
 
@@ -26,7 +25,6 @@ import { validationInterceptorProvider } from './shared/interceptors/validation.
     RegisterModule,
     HomeModule,
     HttpClientModule,
-    NgxPaginationModule,
   ],
   providers: [validationInterceptorProvider],
   bootstrap: [AppComponent],
