@@ -1,14 +1,21 @@
 import { IRecipe } from '../interfaces/Recipe';
-import { ObjectId } from 'mongoose';
 import Recipe from '../models/Recipe';
+import { SortOrder } from 'mongoose';
 import User from '../models/User';
 
 const getRecipes = async (query: any) => {
-  const { name, userId } = query;
-  const queryObj: any = {};
-  if (name) queryObj.name = name;
-  if (userId) queryObj.owner = userId;
-  return Recipe.find(queryObj);
+  let res = Recipe.find().sort({ createdAt: '-1' } as any);
+
+  if (query.dishType) {
+    res = res.where({ dishType: query.dishType });
+  }
+
+  if (query.order) {
+    const order: string = query.order === 'newest' ? 'desc' : 'asc';
+    res = res.sort({ createdAt: order as SortOrder });
+  }
+
+  return res;
 };
 
 const getRecipesByUserId = async (userId: string) =>
@@ -34,7 +41,8 @@ const createRecipe = async (recipe: IRecipe) => {
 const updateRecipe = async (id: string, recipe: IRecipe) =>
   Recipe.findByIdAndUpdate(id, recipe, { new: true, runValidators: true });
 
-const deleteRecipe = async (id: string) => Recipe.findByIdAndDelete(id);
+const deleteRecipe = async (id: string) =>
+  Recipe.findByIdAndDelete(id, { new: true });
 
 const saveUserRecipe = async (recipeId: string, userId: string) =>
   Recipe.findByIdAndUpdate(

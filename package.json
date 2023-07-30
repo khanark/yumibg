@@ -1,7 +1,6 @@
 {
   "dependencies": {
-    "dotenv": "^16.3.1",
-    "ngx-pagination": "^6.0.3"
+    "dotenv": "^16.3.1"
   },
   "name": "yumibg",
   "description": "This is a website for bulgarian recipes. It is a project for the course \"Angular - Front- End\" in Sofia University.\r The whole project is using TypeScript .\r The back end is written in Node.js and Express.js. The database is MongoDB and the ORM is Mongoose.\r The front end is written in Angular.",
