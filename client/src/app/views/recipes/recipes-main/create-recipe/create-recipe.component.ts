@@ -11,7 +11,7 @@ import { pageContent } from 'src/app/constants/constants';
   styleUrls: ['./create-recipe.component.css'],
 })
 export class CreateRecipeComponent {
-  regions = pageContent.recipes.regions;
+  dishes = pageContent.recipes.dishes;
   isLoading: boolean = false;
 
   constructor(private recipeService: RecipeService, private router: Router) {}

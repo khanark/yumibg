@@ -19,6 +19,7 @@ export class RecipesCatalogComponent implements OnInit {
   ngOnInit(): void {
     this.recipesService.getAllRecipes().subscribe((recipes) => {
       this.recipes = recipes;
+      console.log(recipes);
     });
   }
 }

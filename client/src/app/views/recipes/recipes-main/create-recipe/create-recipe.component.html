@@ -5,8 +5,8 @@
     class="flex flex-col gap-4 mx-1"
     (ngSubmit)="onSubmit(createRecipeForm)"
   >
-    <div class="flex flex-col justify-between gap-6 lg:flex-row">
-      <div>
+    <div class="flex flex-col justify-between gap-4 lg:flex-row">
+      <div class="flex-1">
         <div class="flex-1">
           <label for="name" class="mb-1 text-[#888] text-sm">Name</label>
           <input
@@ -36,7 +36,7 @@
       </div>
       <div>
         <div class="flex-1">
-          <label for="preparationTime" class="mb-1 text-[#888] text-sm"
+          <label for="cookTime" class="mb-1 text-[#888] text-sm"
             >Preparation time</label
           >
           <div
@@ -45,29 +45,19 @@
             <input
               class="flex-1 px-2 py-1 outline-none"
               type="number"
-              name="timeNumber"
-              #timeNumberInput="ngModel"
-              placeholder="ie. 15 minutes."
+              name="cookTime"
+              #cookTime="ngModel"
+              placeholder="Cook time in minutes."
               ngModel
               required
             />
-            <select
-              name="timeUnits"
-              id="timeUnits"
-              #timeUnitsInput="ngModel"
-              ngModel
-              required
-            >
-              <option value="minutes" selected>Minutes</option>
-              <option value="hours">Hours</option>
-            </select>
           </div>
         </div>
         <!-- Preparation time validation -->
-        <div *ngIf="timeNumberInput.touched || timeUnitsInput.touched">
+        <div *ngIf="cookTime.touched || cookTime.touched">
           <div class="ml-4 text-red-500">
             <div
-              *ngIf="timeNumberInput.errors?.['required'] || timeUnitsInput.errors?.['required']"
+              *ngIf="cookTime.errors?.['required'] || cookTime.errors?.['required']"
             >
               Preparation time is required.
             </div>
@@ -78,24 +68,23 @@
     </div>
     <div>
       <div class="form-group">
-        <label for="region" class="mb-1 text-[#888] text-sm">Region</label>
+        <label for="dishType" class="mb-1 text-[#888] text-sm">Dish type</label>
         <select
           class="w-full px-2 py-1 outline-none border-[1px] border-orange-300 rounded-md"
-          name="region"
-          #regionInput="ngModel"
+          name="dishType"
+          #dishInput="ngModel"
           ngModel
           required
         >
-          <option selected>Select region.</option>
-          <option *ngFor="let region of regions" [value]="region.name">
-            {{ region.text }}
+          <option *ngFor="let dish of dishes" [value]="dish.name">
+            {{ dish.text }}
           </option>
         </select>
       </div>
       <!-- Region validation -->
-      <div *ngIf="regionInput.touched">
-        <div class="ml-4 text-red-500" *ngIf="regionInput.errors?.['required']">
-          Region is required.
+      <div *ngIf="dishInput.touched">
+        <div class="ml-4 text-red-500" *ngIf="dishInput.errors?.['required']">
+          Dish type is required.
         </div>
       </div>
       <!--  -->

@@ -22,29 +22,22 @@
   >
     <div>
       <legend class="font-medium text-[#333] mb-2 pl-4 text-base">
-        Filter by regions:
+        Dishes
       </legend>
       <div
-        class="py-4 px-6 bg-orange-100 text-[#555] flex flex-col space-y-2 accent-orange-600 rounded-lg"
+        class="h-52 overflow-scroll pt-4 px-6 bg-orange-100 text-[#555] flex flex-col space-y-2 accent-orange-600 rounded-sm"
       >
         <label
           class="flex items-center cursor-pointer gap-x-3"
-          *ngFor="let region of recipes.regions"
+          *ngFor="let dish of recipes.dishes"
         >
-          <input
-            type="checkbox"
-            name="region"
-            value="{{ region.name }}"
-            ngModel
-          />
-          {{ region.text }}
+          <input type="checkbox" name="dish" value="{{ dish.name }}" ngModel />
+          {{ dish.text }}
         </label>
       </div>
     </div>
     <div>
-      <legend class="font-medium text-[#333] mb-2 pl-4 text-base">
-        Order by:
-      </legend>
+      <legend class="font-medium text-[#333] mb-2 pl-4 text-base">Order</legend>
       <div
         class="py-4 px-6 bg-orange-100 text-[#555] flex flex-col space-y-2 accent-orange-600 rounded-sm"
       >

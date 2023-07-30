@@ -1,0 +1,17 @@
+<div class="w-full h-[180px]">
+  <img src="{{ recipe?.image }}" class="object-cover w-full h-full" alt="" />
+</div>
+<div class="px-4 pt-2 pb-4 bg-white">
+  <span class="pb-2 text-xs font-bold text-orange-500 uppercase">
+    {{ recipe?.dishType }}
+  </span>
+  <div class="flex flex-col justify-between gap-4 md:h-[120px]">
+    <h3 class="text-3xl text-[#222] line-clamp-2">
+      {{ recipe?.name | titlecase }}
+    </h3>
+    <div class="flex items-center gap-2">
+      <fa-icon icon="clock-rotate-left" class="text-orange-600" />
+      <span class="text-sm">{{ recipe?.cookTime }} mins</span>
+    </div>
+  </div>
+</div>
