@@ -6,9 +6,9 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
 
 import { AuthService } from './../../services/auth/auth.service';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { navLinks } from 'src/app/constants/constants';
 

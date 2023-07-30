@@ -26,19 +26,6 @@ export class CreateRecipeComponent {
 
     this.isLoading = true;
 
-    this.recipeService
-      .createRecipe(formData)
-      .pipe(
-        finalize(() => {
-          this.isLoading = false;
-          createRecipeForm.reset();
-        })
-      )
-      .subscribe({
-        next: (recipe) => {
-          // todo
-          this.router.navigate(['/recipes/catalog']);
-        },
-      });
+    this.recipeService.createRecipe(formData);
   }
 }

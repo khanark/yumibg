@@ -1,6 +1,7 @@
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { RecipeService } from 'src/app/services/recipe/recipe.service';
 import { pageContent } from 'src/app/constants/constants';
 
 @Component({
@@ -9,18 +10,29 @@ import { pageContent } from 'src/app/constants/constants';
   styleUrls: ['./recipes-aside.component.css'],
 })
 export class RecipesAsideComponent {
-  recipes = pageContent.recipes;
+  recipes = pageContent.recipes; // dishTypes are stored here
   formToggle: boolean = false;
   profileMenuToggle: boolean = false;
+  outsideFormClick: boolean = false;
 
-  constructor(public authService: AuthService) {}
+  constructor(
+    public authService: AuthService,
+    private recipeService: RecipeService
+  ) {}
 
   onFilterSubmit(form: NgForm) {
-    // TODO Change the order of the checkboxes, you need the keys as values in order to filter later
-    // TODO you have to finis the logic fort this component
-    const filteredForm = Object.fromEntries(
-      Object.entries(form.value).filter(([key, value]) => !!value === true)
+    const selectedDishes: string[] = Object.keys(form.value).filter(
+      (key) => form.value[key]
     );
+    // TODO: Fix the order being passed in the selectedDishes when filtering
+    const selectedOrder = form.value.order;
+
+    this.recipeService.recipesInit(selectedDishes, selectedOrder);
+  }
+
+  onFilterReset(form: NgForm) {
+    form.reset();
+    this.recipeService.recipesInit();
   }
 
   toggleForm(): void {
@@ -29,5 +41,10 @@ export class RecipesAsideComponent {
 
   toggleProfileMenu(): void {
     this.profileMenuToggle = !this.profileMenuToggle;
+  }
+
+  clickedOutside(): void {
+    this.formToggle = false;
+    console.log('hello');
   }
 }

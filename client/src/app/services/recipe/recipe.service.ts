@@ -1,8 +1,9 @@
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+
 import { AuthService } from '../auth/auth.service';
-import { HttpClient } from '@angular/common/http';
 import { IRecipe } from 'src/app/interfaces/Recipe';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -16,29 +17,74 @@ export class RecipeService {
     single: (id: string) => this.baseUrl + '/' + id,
   };
 
+  private _recipes$ = new BehaviorSubject<IRecipe[]>([]);
+  private recipes$ = this._recipes$.asObservable();
+
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getAllRecipes(): Observable<IRecipe[]> {
-    return this.http.get<IRecipe[]>(this.endpoints.get);
+    return this.recipes$;
+  }
+
+  recipesInit(filterOptions?: any, order?: string): void {
+    let params = new HttpParams();
+
+    if (filterOptions && filterOptions.length > 0) {
+      filterOptions.forEach((dish: string) => {
+        params = params.append('dishType', dish);
+      });
+    }
+
+    if (order) {
+      params = params.append('order', order);
+    }
+
+    this.http
+      .get<IRecipe[]>(this.endpoints.get, { params: params })
+      .subscribe((recipes) => {
+        this._recipes$.next(recipes);
+      });
   }
 
   getSingleRecipe(id: string): Observable<IRecipe> {
     return this.http.get<IRecipe>(this.endpoints.single(id));
   }
 
-  createRecipe(recipe: IRecipe): Observable<IRecipe> {
+  createRecipe(recipe: IRecipe): void {
     const recipePayload = {
       ...recipe,
       owner: this.authService.loggedUser?._id,
     };
-    return this.http.post<IRecipe>(this.endpoints.create, recipePayload);
+    this.http
+      .post<IRecipe>(this.endpoints.create, recipePayload)
+      .subscribe((newRecipe) => {
+        this._recipes$.next([...this._recipes$.getValue(), newRecipe]);
+      });
   }
 
-  updateRecipe(id: string, recipe: IRecipe): Observable<IRecipe> {
-    return this.http.patch<IRecipe>(this.endpoints.single(id), recipe);
+  updateRecipe(id: string, recipe: IRecipe): void {
+    this.http
+      .patch<IRecipe>(this.endpoints.single(id), recipe)
+      .subscribe((updatedRecipe) => {
+        this._recipes$.next(
+          this._recipes$
+            .getValue()
+            .map((curr) =>
+              curr._id === updatedRecipe._id ? updatedRecipe : curr
+            )
+        );
+      });
   }
 
   deleteRecipe(id: string): void {
-    this.http.delete(this.endpoints.single(id));
+    this.http
+      .delete<IRecipe>(this.endpoints.single(id))
+      .subscribe((deletedRecipe) => {
+        this._recipes$.next(
+          this._recipes$
+            .getValue()
+            .filter((curr) => curr._id !== deletedRecipe._id)
+        );
+      });
   }
 }

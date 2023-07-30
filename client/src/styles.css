@@ -43,6 +43,10 @@ section {
   padding: 2rem 0;
 }
 
+.responsive-grid {
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+}
+
 label,
 input {
   display: block;

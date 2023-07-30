@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { IRecipe } from 'src/app/interfaces/Recipe';
+import { Observable } from 'rxjs';
 import { RecipeService } from 'src/app/services/recipe/recipe.service';
 
 @Component({
@@ -9,17 +10,12 @@ import { RecipeService } from 'src/app/services/recipe/recipe.service';
   styleUrls: ['./recipes-catalog.component.css'],
 })
 export class RecipesCatalogComponent implements OnInit {
-  page: number = 1;
-  count: number = 0;
-
-  recipes: IRecipe[] = [];
+  recipes: Observable<IRecipe[]> | undefined;
 
   constructor(private recipesService: RecipeService) {}
 
   ngOnInit(): void {
-    this.recipesService.getAllRecipes().subscribe((recipes) => {
-      this.recipes = recipes;
-      console.log(recipes);
-    });
+    this.recipesService.recipesInit();
+    this.recipes = this.recipesService.getAllRecipes();
   }
 }

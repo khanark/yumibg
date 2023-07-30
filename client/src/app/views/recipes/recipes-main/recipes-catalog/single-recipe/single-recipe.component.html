@@ -1,12 +1,16 @@
-<div class="w-full h-[180px]">
-  <img src="{{ recipe?.image }}" class="object-cover w-full h-full" alt="" />
+<div class="w-full h-[200px]">
+  <img
+    src="{{ recipe?.image }}"
+    class="object-cover w-full h-full"
+    alt="recipe image"
+  />
 </div>
-<div class="px-4 pt-2 pb-4 bg-white">
-  <span class="pb-2 text-xs font-bold text-orange-500 uppercase">
+<div class="px-6 pt-1 pb-6 bg-white">
+  <span class="pb-1 text-xs font-bold tracking-wider text-orange-700 uppercase">
     {{ recipe?.dishType }}
   </span>
   <div class="flex flex-col justify-between gap-4 md:h-[120px]">
-    <h3 class="text-3xl text-[#222] line-clamp-2">
+    <h3 class="text-[28px] leading-7 text-[#222] line-clamp-3">
       {{ recipe?.name | titlecase }}
     </h3>
     <div class="flex items-center gap-2">

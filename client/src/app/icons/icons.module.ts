@@ -14,6 +14,7 @@ import {
   faClockRotateLeft,
   faEye,
   faEyeSlash,
+  faFilter,
   faHome,
   faList12,
   faListUl,
@@ -70,6 +71,7 @@ const icons: IconDefinition[] = [
   faHome,
   faListUl,
   faClockRotateLeft,
+  faFilter,
 ];
 
 @NgModule({

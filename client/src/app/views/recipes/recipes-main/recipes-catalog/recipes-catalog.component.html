@@ -1,10 +1,17 @@
 <div class="fade-in">
-  <ul class="grid gap-8 responsive-grid">
-    <li
-      class="card | bg-white rounded-sm cursor-pointer hover:translate-x-[-3px] hover:translate-y-[-3px] drop-shadow-sm"
-      *ngFor="let recipe of recipes"
-    >
-      <app-single-recipe [recipe]="recipe" />
-    </li>
-  </ul>
+  <ng-container *ngIf="recipes | async as recipeList">
+    <ul class="grid gap-8 responsive-grid">
+      <li
+        class="card | bg-white rounded-sm cursor-pointer hover:translate-x-[-3px] hover:translate-y-[-3px]"
+        *ngFor="let recipe of recipeList"
+      >
+        <app-single-recipe [recipe]="recipe" />
+      </li>
+    </ul>
+    <div *ngIf="recipeList.length === 0" class="col-span-full">
+      <h3 class="mb-4 text-3xl text-red-500">Opps...</h3>
+      <p>Seems like there are no recipes meeting your criteria.</p>
+      <p>Try again with different criteria.</p>
+    </div>
+  </ng-container>
 </div>
