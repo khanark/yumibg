@@ -1,8 +1,7 @@
+import { authenticate } from './../middlewares/authenticate';
 import * as recipeService from '../services/recipe.service';
 
 import express, { Router } from 'express';
-
-// TODO: Add authenticate middleware to routes that require authentication
 
 const recipesRouter: Router = Router();
 
@@ -23,7 +22,7 @@ recipesRouter.get('/:id', (req, res) => {
 });
 
 // create a new recipe
-recipesRouter.post('/', (req, res) => {
+recipesRouter.post('/', authenticate(), (req, res) => {
   recipeService
     .createRecipe(req.body)
     .then(recipe => res.json(recipe))
@@ -31,7 +30,7 @@ recipesRouter.post('/', (req, res) => {
 });
 
 // update a recipe
-recipesRouter.patch('/:id', (req, res) => {
+recipesRouter.patch('/:id', authenticate(), (req, res) => {
   recipeService
     .updateRecipe(req.params.id, req.body)
     .then(recipe => res.json(recipe))
@@ -39,7 +38,7 @@ recipesRouter.patch('/:id', (req, res) => {
 });
 
 // delete a recipe
-recipesRouter.delete('/:id', (req, res) => {
+recipesRouter.delete('/:id', authenticate(), (req, res) => {
   recipeService
     .deleteRecipe(req.params.id)
     .then(recipe => res.json(recipe))

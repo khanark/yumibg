@@ -5,8 +5,6 @@ import { authenticate } from '../middlewares/authenticate';
 
 const userRouter = Router();
 
-// TODO: Add authenticate middleware to routes that require authentication
-
 // register a new user
 userRouter.post('/register', (req, res) => {
     userService
@@ -32,7 +30,7 @@ userRouter.get('/:id', authenticate(), (req, res) => {
 });
 
 // update a user
-userRouter.patch('/:id', (req, res) => {
+userRouter.patch('/:id', authenticate(), (req, res) => {
     userService
         .updateUser(req.params.id, req.body)
         .then((user) => res.json(user))
