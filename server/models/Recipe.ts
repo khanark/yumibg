@@ -7,7 +7,6 @@ const RecipeSchema = new Schema(
     name: {
       type: String,
       required: true,
-      unique: true,
       lowercase: true,
       minLength: 3,
     },

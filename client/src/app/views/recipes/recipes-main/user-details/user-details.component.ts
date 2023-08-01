@@ -7,6 +7,7 @@ import { IUser } from 'src/app/interfaces/User';
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.css'],
+  
 })
 export class UserDetailsComponent implements OnInit {
   user: IUser | undefined;
@@ -14,9 +15,8 @@ export class UserDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.data.subscribe((data) => {
-      this.user = data['user'];
+    this.route.data.subscribe(({user}) => {
+      this.user = user
     });
-    console.log(this.user);
   }
 }

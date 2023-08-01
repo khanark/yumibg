@@ -1,15 +1,16 @@
-import { BehaviorSubject, Observable, map, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, map, tap } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable, OnDestroy } from '@angular/core';
 
 import { AuthService } from '../auth/auth.service';
 import { IRecipe } from 'src/app/interfaces/Recipe';
-import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
-export class RecipeService {
+export class RecipeService implements OnDestroy {
   baseUrl: string = 'http://localhost:8000/api/recipes';
+  subscription: Subscription | undefined;
 
   endpoints = {
     get: this.baseUrl + '/',
@@ -21,6 +22,10 @@ export class RecipeService {
   private recipes$ = this._recipes$.asObservable();
 
   constructor(private http: HttpClient, private authService: AuthService) {}
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+  }
 
   getAllRecipes(): Observable<IRecipe[]> {
     return this.recipes$;
@@ -39,7 +44,7 @@ export class RecipeService {
       params = params.append('order', order);
     }
 
-    this.http
+    this.subscription = this.http
       .get<IRecipe[]>(this.endpoints.get, { params: params })
       .subscribe((recipes) => {
         this._recipes$.next(recipes);
@@ -55,7 +60,7 @@ export class RecipeService {
       ...recipe,
       owner: this.authService.loggedUser?._id,
     };
-    this.http
+    this.subscription = this.http
       .post<IRecipe>(this.endpoints.create, recipePayload)
       .subscribe((newRecipe) => {
         this._recipes$.next([...this._recipes$.getValue(), newRecipe]);
@@ -63,7 +68,7 @@ export class RecipeService {
   }
 
   updateRecipe(id: string, recipe: IRecipe): void {
-    this.http
+    this.subscription = this.http
       .patch<IRecipe>(this.endpoints.single(id), recipe)
       .subscribe((updatedRecipe) => {
         this._recipes$.next(
@@ -77,7 +82,7 @@ export class RecipeService {
   }
 
   deleteRecipe(id: string): void {
-    this.http
+    this.subscription = this.http
       .delete<IRecipe>(this.endpoints.single(id))
       .subscribe((deletedRecipe) => {
         this._recipes$.next(

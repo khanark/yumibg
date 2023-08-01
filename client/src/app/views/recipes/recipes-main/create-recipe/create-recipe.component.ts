@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { RecipeService } from 'src/app/services/recipe/recipe.service';
 import { Router } from '@angular/router';
-import { finalize } from 'rxjs';
 import { pageContent } from 'src/app/constants/constants';
 
 @Component({
@@ -27,5 +26,6 @@ export class CreateRecipeComponent {
     this.isLoading = true;
 
     this.recipeService.createRecipe(formData);
+    this.router.navigate(["/recipes/catalog"])
   }
 }

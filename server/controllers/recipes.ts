@@ -1,7 +1,8 @@
-import { authenticate } from './../middlewares/authenticate';
 import * as recipeService from '../services/recipe.service';
 
 import express, { Router } from 'express';
+
+import { authenticate } from './../middlewares/authenticate';
 
 const recipesRouter: Router = Router();
 
@@ -9,7 +10,7 @@ const recipesRouter: Router = Router();
 recipesRouter.get('/', (_req, res) => {
   recipeService
     .getRecipes(_req.query)
-    .then(recipes => res.json(recipes))
+    .then(recipes => res.status(200).json(recipes))
     .catch(err => res.status(500).json({ error: err }));
 });
 
@@ -17,15 +18,16 @@ recipesRouter.get('/', (_req, res) => {
 recipesRouter.get('/:id', (req, res) => {
   recipeService
     .getRecipe(req.params.id)
-    .then(recipe => res.json(recipe))
+    .then(recipe => res.status(200).json(recipe))
     .catch(err => res.status(500).json({ error: err }));
 });
 
 // create a new recipe
 recipesRouter.post('/', authenticate(), (req, res) => {
+
   recipeService
     .createRecipe(req.body)
-    .then(recipe => res.json(recipe))
+    .then(recipe => res.status(200).json(recipe))
     .catch(err => res.status(500).json({ error: err }));
 });
 
@@ -33,7 +35,7 @@ recipesRouter.post('/', authenticate(), (req, res) => {
 recipesRouter.patch('/:id', authenticate(), (req, res) => {
   recipeService
     .updateRecipe(req.params.id, req.body)
-    .then(recipe => res.json(recipe))
+    .then(recipe => res.status(200).json(recipe))
     .catch(err => res.status(500).json({ error: err }));
 });
 
@@ -41,7 +43,7 @@ recipesRouter.patch('/:id', authenticate(), (req, res) => {
 recipesRouter.delete('/:id', authenticate(), (req, res) => {
   recipeService
     .deleteRecipe(req.params.id)
-    .then(recipe => res.json(recipe))
+    .then(recipe => res.status(200).json(recipe))
     .catch(err => res.status(500).json({ error: err }));
 });
 

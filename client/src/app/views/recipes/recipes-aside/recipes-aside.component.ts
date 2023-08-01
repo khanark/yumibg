@@ -45,6 +45,5 @@ export class RecipesAsideComponent {
 
   clickedOutside(): void {
     this.formToggle = false;
-    console.log('hello');
   }
 }

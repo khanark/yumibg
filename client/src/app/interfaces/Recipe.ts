@@ -1,3 +1,5 @@
+import { IUser } from './User';
+
 export interface IRecipe {
   _id: string;
   name: string;
@@ -5,7 +7,8 @@ export interface IRecipe {
   ingredients: string[];
   steps: string[];
   image: string;
-  owner: string;
+  owner: any;
   cookTime: number;
-  dishType: String;
+  dishType: string;
+  createdAt: string;
 }

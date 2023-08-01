@@ -21,14 +21,13 @@ const getRecipes = async (query: any) => {
 const getRecipesByUserId = async (userId: string) =>
   Recipe.find({ owner: userId });
 
-const getRecipe = async (id: string) => Recipe.findById(id);
+const getRecipe = async (id: string) => Recipe.findById(id).populate("owner");
 
 const createRecipe = async (recipe: IRecipe) => {
-  const newRecipe = new Recipe(recipe);
+  const newRecipe =  new Recipe(recipe)
   const user = await User.findById(recipe.owner);
 
   if (!user) {
-    console.log('There is no user');
     return;
   }
 
@@ -36,6 +35,7 @@ const createRecipe = async (recipe: IRecipe) => {
 
   await newRecipe.save();
   await user.save();
+  return newRecipe
 };
 
 const updateRecipe = async (id: string, recipe: IRecipe) =>
