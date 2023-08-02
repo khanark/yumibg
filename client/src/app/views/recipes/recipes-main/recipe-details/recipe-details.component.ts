@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { BehaviorSubject } from 'rxjs';
 import { IRecipe } from 'src/app/interfaces/Recipe';
-import { IUser } from 'src/app/interfaces/User';
 
 @Component({
   selector: 'app-recipe-details',
@@ -14,11 +14,19 @@ export class RecipeDetailsComponent implements OnInit {
   private _recipe$ = new BehaviorSubject<IRecipe | null>(null);
   public recipe$ = this._recipe$.asObservable();
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  isOwner: boolean = false;
+  isLoggedIn: boolean = false;
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(({ recipe }) => {
       this._recipe$.next(recipe);
+      this.isOwner = recipe.owner._id === this.authService.loggedUser?._id;
+      this.isLoggedIn = this.authService.isAuthenticated();
     });
   }
 

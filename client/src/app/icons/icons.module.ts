@@ -12,9 +12,11 @@ import {
   faCircleCheck,
   faCircleExclamation,
   faClockRotateLeft,
+  faEraser,
   faEye,
   faEyeSlash,
   faFilter,
+  faHeart,
   faHome,
   faList12,
   faListUl,
@@ -23,10 +25,12 @@ import {
   faMapLocation,
   faMapPin,
   faMobile,
+  faPenToSquare,
   faPeopleCarry,
   faPlus,
   faSearch,
   faSignIn,
+  faTrash,
   faUser,
   faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
@@ -72,6 +76,9 @@ const icons: IconDefinition[] = [
   faListUl,
   faClockRotateLeft,
   faFilter,
+  faHeart,
+  faEraser,
+  faPenToSquare,
 ];
 
 @NgModule({

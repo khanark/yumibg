@@ -13,6 +13,7 @@ export class CustomTitleCasePipe implements PipeTransform {
     });
 
     return capitalizedWords.join(' ');
+    
   }
 
   private capitalize(word: string): string {

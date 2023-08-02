@@ -4,7 +4,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { IconsModule } from 'src/app/icons/icons.module';
 import { NgModule } from '@angular/core';
-import { RecipeDetailsComponent } from './recipes-main/recipe-details/recipe-details.component';
 import { RecipeDetailsModule } from './recipes-main/recipe-details/recipe-details.module';
 import { RecipesAsideModule } from './recipes-aside/recipes-aside.module';
 import { RecipesCatalogModule } from './recipes-main/recipes-catalog/recipes-catalog.module';

@@ -1,4 +1,3 @@
-import { IUser } from './User';
 
 export interface IRecipe {
   _id: string;
