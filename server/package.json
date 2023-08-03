@@ -23,7 +23,7 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "build": " tsc",
+    "build": "tsc",
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "dev": "cross-env NODE_ENV=development concurrently \"npx tsc -w\" \"nodemon dist/index.js\""
   },
