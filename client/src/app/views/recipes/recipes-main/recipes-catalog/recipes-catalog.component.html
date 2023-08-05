@@ -1,19 +1,17 @@
 <div class="p-4 fade-in">
-  <ng-container *ngIf="recipes | async as recipeList">
-    <ul class="grid gap-8 responsive-grid">
-      <li
-        class="card | bg-white rounded-sm cursor-pointer hover:translate-x-[-3px] hover:translate-y-[-3px] drop-shadow-md"
-        *ngFor="let recipe of recipeList"
-      >
-      <a [routerLink]="['/recipes/single', recipe._id]">
-        <app-single-recipe [recipe]="recipe" />
-      </a>
-      </li>
-    </ul>
-    <div *ngIf="recipeList.length === 0" class="col-span-full">
-      <h3 class="mb-4 text-3xl text-red-500">Opps...</h3>
-      <p>Seems like there are no recipes meeting your criteria.</p>
-      <p>Try again with different criteria.</p>
-    </div>
-  </ng-container>
+    <ng-container *ngIf="recipes | async as recipeList">
+        <ul class="grid gap-8 responsive-grid">
+            <li class="card | bg-white rounded-sm cursor-pointer hover:translate-x-[-3px] hover:translate-y-[-3px] drop-shadow-md"
+                *ngFor="let recipe of recipeList">
+                <a [routerLink]="['/recipes/single', recipe._id]">
+                    <app-single-recipe [recipe]="recipe" />
+                </a>
+            </li>
+        </ul>
+        <div *ngIf="recipeList.length === 0" class="col-span-full">
+            <h3 class="mb-4 text-3xl text-red-500">Opps...</h3>
+            <p>Seems like there are no recipes meeting your criteria.</p>
+            <p>Try again with different criteria.</p>
+        </div>
+    </ng-container>
 </div>

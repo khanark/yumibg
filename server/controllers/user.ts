@@ -15,7 +15,6 @@ userRouter.post('/register', (req, res) => {
 
 // login an existing user
 userRouter.post('/login', (req, res) => {
-  console.log(req.body);
   userService
     .login(req.body)
     .then((user) => res.status(200).json(user))

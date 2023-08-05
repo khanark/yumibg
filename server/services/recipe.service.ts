@@ -24,9 +24,23 @@ const composeOrderQuery = (orderQuery: any) => {
 };
 
 const getRecipes = async (query: any) => {
-  return Recipe.find({ dishType: query.dishType || '', name: { $regex: query.search || '', $options: 'i' } }).sort(
-    composeOrderQuery(query.order)
-  );
+  let filter = {};
+  console.log(query);
+
+  if (query.dishType) {
+    filter = { ...filter, dishType: query.dishType };
+  }
+
+  if (query.order) {
+    const sortOrder = query.order === 'oldest' ? 1 : -1;
+    filter = { ...filter, createdAt: sortOrder };
+  }
+
+  if (query.search) {
+    filter = { ...filter, search: { $regex: new RegExp(query.search, 'i') } };
+  }
+
+  return Recipe.find(filter);
 };
 
 const getRecipesByUserId = async (userId: string) => Recipe.find({ owner: userId });

@@ -16,6 +16,7 @@ export class RecipeDetailsComponent implements OnInit {
 
   isOwner: boolean = false;
   isLoggedIn: boolean = false;
+  editMode: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -32,5 +33,9 @@ export class RecipeDetailsComponent implements OnInit {
 
   get recipe() {
     return this._recipe$.getValue();
+  }
+
+  toggleEditMode(): void {
+    this.editMode = !this.editMode;
   }
 }

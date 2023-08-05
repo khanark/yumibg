@@ -27,7 +27,7 @@
                 <fa-icon icon="heart" class="text-orange-600" />
                 <span class="text-sm tracking-wider uppercase font-bold text-[#222]">save</span>
             </button>
-            <ng-container class="flex gap-4" *ngIf="isOwner">
+            <div class="flex gap-2 md:gap-4" *ngIf="isOwner">
                 <button type="button"
                     class="flex items-center gap-2 px-4 py-2 transition-colors bg-orange-100 rounded-sm hover:bg-orange-200">
                     <fa-icon icon="pen-to-square" class="text-orange-600" />
@@ -38,7 +38,7 @@
                     <fa-icon icon="eraser" class="text-orange-950" />
                     <span class="text-sm font-bold tracking-wide text-white uppercase">delete</span>
                 </button>
-            </ng-container>
+            </div>
         </ng-container>
     </div>
     <span class="block w-full h-px my-6 bg-orange-200"></span>

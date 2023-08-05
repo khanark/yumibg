@@ -1,16 +1,12 @@
 <div class="flex flex-col gap-2">
-  <a
-    routerLink="/"
-    class="flex items-center gap-2 px-4 py-2 bg-orange-200 text-[#222] rounded-sm hover:gap-4 transition-all"
-  >
+  <a routerLink="/"
+    class="flex items-center gap-2 px-4 py-2 bg-orange-200 text-[#222] rounded-sm hover:gap-4 transition-all">
     <fa-icon icon="home" class="text-sm" />
     <span class="inline-block text-sm font-medium uppercase">home</span>
   </a>
-  <div clickOutside (clickOutside)="clickedOutside()">
-    <button
-      class="group | flex w-full items-center px-4 py-2 bg-orange-200 text-sm uppercase font-medium text-[#222] rounded-sm justify-between cursor-pointer"
-      (click)="toggleForm()"
-    >
+  <div>
+    <button class="group | flex w-full items-center px-4 py-2 bg-orange-200 text-sm uppercase font-medium text-[#222]
+    rounded-sm justify-between cursor-pointer" (click)="toggleForm()">
       <div class="flex items-center gap-2 transition-all group-hover:gap-4">
         <fa-icon icon="filter" />
         <span>Filter recipes</span>
@@ -18,22 +14,14 @@
       <fa-icon icon="chevron-down" *ngIf="!formToggle" />
       <fa-icon icon="chevron-up" *ngIf="formToggle" />
     </button>
-    <form
-      #filterForm="ngForm"
-      class="flex flex-col mt-6 gap-y-6"
-      *ngIf="formToggle"
-    >
+    <form #filterForm="ngForm" class="flex flex-col mt-6 gap-y-6" *ngIf="formToggle">
       <div>
         <legend class="font-medium text-[#333] mb-2 pl-4 text-base">
           Dishes
         </legend>
         <div
-          class="h-52 overflow-scroll pt-4 px-6 bg-orange-100 text-[#555] flex flex-col space-y-2 accent-orange-600 rounded-sm"
-        >
-          <label
-            class="flex items-center cursor-pointer gap-x-3"
-            *ngFor="let dish of recipes.dishes"
-          >
+          class="h-52 overflow-scroll pt-4 px-6 bg-orange-100 text-[#555] flex flex-col space-y-2 accent-orange-600 rounded-sm">
+          <label class="flex items-center cursor-pointer gap-x-3" *ngFor="let dish of recipes.dishes">
             <input type="checkbox" name="{{ dish.name }}" ngModel />
             {{ dish.text }}
           </label>
@@ -43,36 +31,20 @@
         <legend class="font-medium text-[#333] mb-2 pl-4 text-base">
           Order
         </legend>
-        <div
-          class="py-4 px-6 bg-orange-100 text-[#555] flex flex-col space-y-2 accent-orange-600 rounded-sm"
-        >
-          <label
-            class="flex items-center gap-x-3"
-            *ngFor="let order of recipes.order"
-          >
-            <input
-              type="radio"
-              name="order"
-              value="{{ order.value }}"
-              ngModel
-            />
+        <div class="py-4 px-6 bg-orange-100 text-[#555] flex flex-col space-y-2 accent-orange-600 rounded-sm">
+          <label class="flex items-center gap-x-3" *ngFor="let order of recipes.order">
+            <input type="radio" name="order" value="{{ order.value }}" ngModel />
             {{ order.text }}
           </label>
         </div>
       </div>
       <div class="flex flex-col gap-2">
-        <button
-          type="button"
-          (click)="onFilterSubmit(filterForm)"
-          class="w-full px-4 py-2 text-sm font-bold tracking-wide text-white uppercase transition-colors bg-orange-600 rounded-sm hover:bg-orange-500"
-        >
+        <button type="button" (click)="onFilterSubmit(filterForm)"
+          class="w-full px-4 py-2 text-sm font-bold tracking-wide text-white uppercase transition-colors bg-orange-600 rounded-sm hover:bg-orange-500">
           Filter
         </button>
-        <button
-          type="button"
-          (click)="onFilterReset(filterForm)"
-          class="w-full px-4 py-2 text-sm font-bold tracking-wide text-orange-600 uppercase transition-colors bg-orange-200 rounded-sm hover:bg-orange-300"
-        >
+        <button type="button" (click)="onFilterReset(filterForm)"
+          class="w-full px-4 py-2 text-sm font-bold tracking-wide text-orange-600 uppercase transition-colors bg-orange-200 rounded-sm hover:bg-orange-300">
           Reset
         </button>
       </div>
@@ -80,8 +52,7 @@
   </div>
   <button
     class="group | flex items-center px-4 py-2 bg-orange-200 text-sm uppercase font-medium text-[#222] rounded-sm justify-between cursor-pointer"
-    (click)="toggleProfileMenu()"
-  >
+    (click)="toggleProfileMenu()">
     <div class="flex items-center gap-2 transition-all group-hover:gap-4">
       <fa-icon icon="user" />
       <span class="inline-block text-sm font-medium uppercase">profile</span>
@@ -90,54 +61,30 @@
     <fa-icon icon="chevron-up" *ngIf="profileMenuToggle" />
   </button>
   <!-- logged in user -->
-  <ul
-    class="flex flex-col gap-1"
-    *ngIf="profileMenuToggle && authService.loggedUser"
-    (click)="toggleProfileMenu()"
-  >
+  <ul class="flex flex-col gap-1" *ngIf="profileMenuToggle && authService.loggedUser" (click)="toggleProfileMenu()">
     <li class="border-b-orange-300">
-      <a
-        [routerLink]="['/recipes/users', authService.loggedUser._id]"
-        class="text-xs font-bold w-full uppercase text-[#222] block bg-orange-100 py-2 px-4"
-        >my profile</a
-      >
+      <a [routerLink]="['/recipes/users', authService.loggedUser._id]"
+        class="text-xs font-bold w-full uppercase text-[#222] block bg-orange-100 py-2 px-4">my profile</a>
     </li>
     <li class="border-b-orange-300">
-      <a
-        routerLink=""
-        class="text-xs font-bold w-full uppercase text-[#222] block bg-orange-100 py-2 px-4"
-        >edit</a
-      >
+      <a routerLink="" class="text-xs font-bold w-full uppercase text-[#222] block bg-orange-100 py-2 px-4">edit</a>
     </li>
     <li>
-      <button
-        type="button"
-        (click)="authService.logout()"
-        class="text-xs font-bold w-full text-left uppercase text-[#222] block bg-orange-100 py-2 px-4"
-      >
+      <button type="button" (click)="authService.logout()"
+        class="text-xs font-bold w-full text-left uppercase text-[#222] block bg-orange-100 py-2 px-4">
         logout
       </button>
     </li>
   </ul>
   <!-- guest -->
-  <ul
-    class="flex flex-col gap-1"
-    *ngIf="profileMenuToggle && !authService.loggedUser"
-    (click)="toggleProfileMenu()"
-  >
+  <ul class="flex flex-col gap-1" *ngIf="profileMenuToggle && !authService.loggedUser" (click)="toggleProfileMenu()">
     <li class="border-b-orange-300">
-      <a
-        routerLink="/login"
-        class="text-xs font-bold w-full uppercase text-[#222] block bg-orange-100 py-2 px-4"
-        >login</a
-      >
+      <a routerLink="/login"
+        class="text-xs font-bold w-full uppercase text-[#222] block bg-orange-100 py-2 px-4">login</a>
     </li>
     <li class="border-b-orange-300">
-      <a
-        routerLink="/register"
-        class="text-xs font-bold w-full uppercase text-[#222] block bg-orange-100 py-2 px-4"
-        >sign up</a
-      >
+      <a routerLink="/register"
+        class="text-xs font-bold w-full uppercase text-[#222] block bg-orange-100 py-2 px-4">sign up</a>
     </li>
   </ul>
 </div>

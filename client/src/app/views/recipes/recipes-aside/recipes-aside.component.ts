@@ -27,7 +27,10 @@ export class RecipesAsideComponent {
     // TODO: Fix the order being passed in the selectedDishes when filtering
     const selectedOrder = form.value.order;
 
-    this.recipeService.recipesInit(selectedDishes, selectedOrder);
+    this.recipeService.recipesInit({
+      filterOptions: selectedDishes,
+      order: selectedOrder,
+    });
   }
 
   onFilterReset(form: NgForm) {

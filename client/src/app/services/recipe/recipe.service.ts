@@ -1,25 +1,18 @@
-import { BehaviorSubject, Observable, Subscription, map, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 
 import { AuthService } from '../auth/auth.service';
 import { IRecipe } from 'src/app/interfaces/Recipe';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService implements OnDestroy {
-  baseUrl: string = 'http://localhost:8000/api/recipes';
-  subscription: Subscription | undefined;
-
-  endpoints = {
-    get: this.baseUrl + '/',
-    create: this.baseUrl + '/',
-    single: (id: string) => this.baseUrl + '/' + id,
-  };
-
   private _recipes$ = new BehaviorSubject<IRecipe[]>([]);
   private recipes$ = this._recipes$.asObservable();
+  subscription: Subscription | undefined;
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -31,28 +24,38 @@ export class RecipeService implements OnDestroy {
     return this.recipes$;
   }
 
-  recipesInit(filterOptions?: any, order?: string): void {
+  recipesInit(query?: {
+    filterOptions?: string[];
+    order?: string;
+    search?: string;
+  }): void {
     let params = new HttpParams();
 
-    if (filterOptions && filterOptions.length > 0) {
-      filterOptions.forEach((dish: string) => {
-        params = params.append('dishType', dish);
-      });
-    }
-
-    if (order) {
-      params = params.append('order', order);
+    if (query) {
+      if (query.filterOptions) {
+        query.filterOptions.forEach((option) => {
+          if (option !== 'order') {
+            params = params.append('dishType', option);
+          }
+        });
+      }
+      if (query.order) {
+        params = params.set('order', query.order);
+      }
+      if (query.search) {
+        params = params.set('search', query.search);
+      }
     }
 
     this.subscription = this.http
-      .get<IRecipe[]>(this.endpoints.get, { params: params })
+      .get<IRecipe[]>(`${environment.API_URL}recipes`, { params })
       .subscribe((recipes) => {
         this._recipes$.next(recipes);
       });
   }
 
   getSingleRecipe(id: string): Observable<IRecipe> {
-    return this.http.get<IRecipe>(this.endpoints.single(id));
+    return this.http.get<IRecipe>(`${environment.API_URL}recipes/${id}`);
   }
 
   createRecipe(recipe: IRecipe): void {
@@ -61,7 +64,7 @@ export class RecipeService implements OnDestroy {
       owner: this.authService.loggedUser?._id,
     };
     this.subscription = this.http
-      .post<IRecipe>(this.endpoints.create, recipePayload)
+      .post<IRecipe>(`${environment.API_URL}recipes`, recipePayload)
       .subscribe((newRecipe) => {
         this._recipes$.next([...this._recipes$.getValue(), newRecipe]);
       });
@@ -69,7 +72,7 @@ export class RecipeService implements OnDestroy {
 
   updateRecipe(id: string, recipe: IRecipe): void {
     this.subscription = this.http
-      .patch<IRecipe>(this.endpoints.single(id), recipe)
+      .patch<IRecipe>(`${environment.API_URL}recipes/${id}`, recipe)
       .subscribe((updatedRecipe) => {
         this._recipes$.next(
           this._recipes$
@@ -83,7 +86,7 @@ export class RecipeService implements OnDestroy {
 
   deleteRecipe(id: string): void {
     this.subscription = this.http
-      .delete<IRecipe>(this.endpoints.single(id))
+      .delete<IRecipe>(`${environment.API_URL}recipes/${id}`)
       .subscribe((deletedRecipe) => {
         this._recipes$.next(
           this._recipes$
