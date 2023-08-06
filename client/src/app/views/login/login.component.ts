@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { finalize, tap } from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
-import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -12,20 +12,20 @@ import { finalize } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
   passwordEye: boolean = false;
+  formGroup = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+  });
 
-  constructor(public authService: AuthService, private router: Router) {}
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.authService.resetHttpError();
   }
-
-  formGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-    ]),
-  });
 
   onSubmit(): void {
     if (this.formGroup.invalid) return;
@@ -37,8 +37,9 @@ export class LoginComponent implements OnInit {
 
     this.authService
       .login(email, password)
-      .pipe(finalize(() => this.formGroup.reset()))
-      .subscribe(() => this.router.navigate(['/recipes']));
+      .subscribe(() => this.router.navigate(['/recipes/catalog']));
+
+    this.formGroup.reset();
   }
 
   togglePasswordEye(): void {

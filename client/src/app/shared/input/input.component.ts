@@ -20,5 +20,6 @@ export class InputComponent {
     required: 'Required field',
     email: 'Invalid email format',
     minlength: 'Too short',
+    matchPassword: 'Passwords do not match',
   };
 }

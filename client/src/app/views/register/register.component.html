@@ -12,79 +12,15 @@
     <!-- HTTP REQUEST ERROR -->
     <app-auth-http-error *ngIf="authService.httpError" />
     <!--  -->
-    <form class="flex flex-col gap-6 mx-1" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <div>
-        <label for="username" class="mb-1 text-[#888] text-sm">Username</label>
-        <div class="flex items-center gap-2 p-1 border-2 border-orange-300 rounded-sm md:p-2">
-          <fa-icon class="inline-block ml-1 text-orange-300" icon="user" />
-          <input class="w-full p-1 outline-none" type="text" name="username" formControlName="username"
-            autocomplete="username" placeholder="Type your username" />
-        </div>
-        <!-- username validation -->
-        <div *ngIf="registerForm.get('username')?.touched">
-          <div *ngIf="registerForm.get('username')?.errors?.['required']" class="ml-4 text-red-500">
-            Username is required.
-          </div>
-          <div *ngIf="registerForm.get('username')?.errors?.['minlength']" class="ml-4 text-red-500">
-            Minimum 4 characters.
-          </div>
-        </div>
-        <!--  -->
-      </div>
-      <div>
-        <label for="email" class="mb-1 text-[#888] text-sm">Email</label>
-        <div class="flex items-center gap-2 p-1 border-2 border-orange-300 rounded-sm md:p-2">
-          <fa-icon class="inline-block ml-1 text-orange-300" icon="at" />
-          <input class="w-full p-1 outline-none" type="email" name="email" formControlName="email" autocomplete="email"
-            placeholder="Type your email" />
-        </div>
-        <!-- email validation -->
-        <div *ngIf="registerForm.get('email')?.touched">
-          <div *ngIf="registerForm.get('email')?.errors?.['required']" class="ml-4 text-red-500">
-            Email is required.
-          </div>
-          <div *ngIf="registerForm.get('email')?.errors?.['email']" class="ml-4 text-red-500">
-            Invalid email adress.
-          </div>
-        </div>
-        <!--  -->
-      </div>
-
-      <div>
-        <label for="password" class="mb-1 text-[#888] text-sm">Password</label>
-        <div class="flex items-center gap-2 p-1 border-2 border-orange-300 rounded-sm md:p-2">
-          <fa-icon icon="lock" class="inline-block ml-1 text-orange-300" />
-          <input class="w-full p-1 outline-none" type="password" name="password" formControlName="password"
-            autocomplete="new-password" placeholder="Type your password" />
-        </div>
-        <!-- password validation -->
-        <div *ngIf="registerForm.get('password')?.touched">
-          <div *ngIf="registerForm.get('password')?.errors?.['required']" class="ml-4 text-red-500">
-            Password is required.
-          </div>
-          <div *ngIf="registerForm.get('password')?.errors?.['minlength']" class="ml-4 text-red-500">
-            Minimum 6 characters.
-          </div>
-        </div>
-        <!--  -->
-      </div>
-      <div>
-        <label for="repeatPassword" class="mb-1 text-[#888] text-sm">Repeat password</label>
-        <div class="flex items-center gap-2 p-1 border-2 border-orange-300 rounded-sm md:p-2">
-          <fa-icon icon="lock" class="inline-block ml-1 text-orange-300" />
-          <input class="w-full p-1 outline-none" type="password" name="repeatPassword" formControlName="repeatPassword"
-            #repeatedPassword="" autocomplete="new-password" placeholder="Repeat your password" />
-        </div>
-        <!-- repeat password validation -->
-        <div *ngIf="registerForm.get('repeatPassword')?.touched">
-          <div class="ml-4 text-red-500" *ngIf="
-              registerForm.get('repeatPassword')?.errors?.['matchPassword']
-            ">
-            Passwords do not match.
-          </div>
-        </div>
-        <!--  -->
-      </div>
+    <form class="flex flex-col gap-6 mx-1" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <app-input [control]="formGroup.controls.username" inputId="username" label="Username"
+        placeHolder="Type your username" iconName="user" inputType="username" />
+      <app-input [control]="formGroup.controls.email" inputId="email" label="Email" placeHolder="Type your email"
+        iconName="at" inputType="email" />
+      <app-input [control]="formGroup.controls.password" inputId="password" label="Password"
+        placeHolder="Type your password" iconName="lock" inputType="password" />
+      <app-input [control]=" formGroup.controls.repeatPassword" inputId="repeatPassword" label="Repeat password"
+        placeHolder="Repeat your password" iconName="lock" inputType="password" />
       <button
         class="px-6 py-3 mt-4 text-xl font-medium tracking-wide text-white transition-colors bg-orange-600 rounded-sm hover:bg-orange-500">
         Confirm!
