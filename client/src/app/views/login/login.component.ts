@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 
@@ -19,16 +19,25 @@ export class LoginComponent implements OnInit {
     this.authService.resetHttpError();
   }
 
-  onSubmit(form: NgForm): void {
-    if (form.invalid) {
-      return;
-    }
+  formGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
+  });
 
-    const formValues: { email: string; password: string } = form.value;
+  onSubmit(): void {
+    if (this.formGroup.invalid) return;
+
+    const { email, password } = this.formGroup.value as {
+      email: string;
+      password: string;
+    };
 
     this.authService
-      .login(formValues.email, formValues.password)
-      .pipe(finalize(() => form.reset()))
+      .login(email, password)
+      .pipe(finalize(() => this.formGroup.reset()))
       .subscribe(() => this.router.navigate(['/recipes']));
   }
 

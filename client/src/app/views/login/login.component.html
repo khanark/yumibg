@@ -1,7 +1,6 @@
 <section class="login-section | mx-4">
   <div
-    class="flex flex-1 flex-col max-w-lg gap-8 px-6 py-10 md:p-12 mx-auto bg-white drop-shadow-md rounded-sm text-[#555]"
-  >
+    class="flex flex-1 flex-col max-w-lg gap-8 px-6 py-10 md:p-12 mx-auto bg-white drop-shadow-md rounded-sm text-[#555]">
     <div class="flex items-center justify-center gap-2">
       <fa-icon icon="sign-in" class="text-lg text-orange-600" />
       <h3 class="text-2xl text-center text-orange-600">Login</h3>
@@ -13,98 +12,26 @@
     <!-- HTTP REQUEST ERROR -->
     <app-auth-http-error *ngIf="authService.httpError" />
     <!--  -->
-    <form
-      #loginForm="ngForm"
-      class="flex flex-col gap-6 mx-1"
-      (ngSubmit)="onSubmit(loginForm)"
-    >
-      <div>
-        <label for="email" class="mb-1 text-[#888] text-sm">Email</label>
-        <div
-          class="form-group | flex items-center gap-2 p-1 border-2 border-orange-300 rounded-sm md:p-2"
-        >
-          <fa-icon class="inline-block ml-1 text-orange-300" icon="at" />
-          <input
-            class="w-full p-1 outline-none"
-            type="email"
-            name="email"
-            #inputEmail="ngModel"
-            autocomplete="email"
-            placeholder="Type your email"
-            ngModel
-            email
-            required
-          />
-        </div>
-        <!-- email validation -->
-        <div *ngIf="inputEmail.touched">
-          <div
-            *ngIf="inputEmail.errors?.['required']"
-            class="ml-4 text-red-500"
-          >
-            Email is required.
-          </div>
-          <div *ngIf="inputEmail.errors?.['email']" class="ml-4 text-red-500">
-            Invalid email address.
-          </div>
-        </div>
-        <!--  -->
+    <form #loginForm="ngForm" class="flex flex-col gap-6 mx-1" (ngSubmit)="onSubmit()">
+      <app-input [control]="formGroup.controls.email" inputId="email" label="Email" placeHolder="Type your email"
+        iconName="at" inputType="email" />
+      <div class="relative">
+        <app-input [control]="formGroup.controls.password" inputId="password" label="Password"
+          placeHolder="Type your password" iconName="lock" [inputType]="passwordEye ? 'text' : 'password'" />
+        <button type="button" (click)="togglePasswordEye()"
+          class="absolute right-2 top-9 md:top-10 inline-block w-[40px] ml-1 text-orange-300">
+          <fa-icon icon="eye" *ngIf="passwordEye" />
+          <fa-icon icon="eye-slash" *ngIf="!passwordEye" />
+        </button>
       </div>
-      <div>
-        <label for="password" class="mb-1 text-[#888] text-sm">Password</label>
-        <div
-          class="form-group | flex items-center gap-2 p-1 border-2 border-orange-300 rounded-sm md:p-2"
-        >
-          <fa-icon icon="lock" class="inline-block ml-1 text-orange-300" />
-          <input
-            class="w-full p-1 outline-none"
-            type="{{ !passwordEye ? 'password' : 'text' }}"
-            name="password"
-            #inputPassword="ngModel"
-            autocomplete="current-password"
-            placeholder="Type your password"
-            ngModel
-            minlength="6"
-          />
-          <button
-            type="button"
-            (click)="togglePasswordEye()"
-            class="inline-block w-[40px] ml-1 text-orange-300"
-          >
-            <fa-icon icon="eye" *ngIf="passwordEye" />
-            <fa-icon icon="eye-slash" *ngIf="!passwordEye" />
-          </button>
-        </div>
-        <!-- password validation -->
-        <div
-          *ngIf="
-            inputPassword.invalid &&
-            (inputPassword.dirty || inputPassword.touched)
-          "
-        >
-          <div
-            *ngIf="inputPassword.errors?.['minlength']"
-            class="ml-4 text-red-500"
-          >
-            Minimum 6 characters.
-          </div>
-        </div>
-        <!--  -->
-      </div>
-      <button
-        [disabled]="authService.isLoading"
-        class="px-6 py-3 mt-4 text-xl font-medium tracking-wide text-white transition-colors bg-orange-600 rounded-sm justify-items-start hover:bg-orange-500"
-      >
+      <button [disabled]="authService.isLoading"
+        class="px-6 py-3 mt-4 text-xl font-medium tracking-wide text-white transition-colors bg-orange-600 rounded-sm justify-items-start hover:bg-orange-500">
         Let's go!
       </button>
     </form>
     <div class="text-center">
       <p>Not a member ?</p>
-      <a
-        routerLink="/register"
-        class="text-orange-600 cursor-pointer hover:underline underline-offset-2"
-        >Sign up</a
-      >
+      <a routerLink="/register" class="text-orange-600 cursor-pointer hover:underline underline-offset-2">Sign up</a>
     </div>
   </div>
 </section>

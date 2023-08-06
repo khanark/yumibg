@@ -4,8 +4,10 @@ import { ComponentNavigationComponent } from './component-navigation/component-n
 import { CustomTitleCasePipe } from './pipes/custom-title-case.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconsModule } from '../icons/icons.module';
+import { InputComponent } from './input/input.component';
 import { LoaderComponent } from './loader/loader.component';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,13 +15,15 @@ import { NgModule } from '@angular/core';
     LoaderComponent,
     AuthHttpErrorComponent,
     CustomTitleCasePipe,
+    InputComponent,
   ],
-  imports: [CommonModule, IconsModule, FontAwesomeModule],
+  imports: [CommonModule, IconsModule, FontAwesomeModule, ReactiveFormsModule],
   exports: [
     ComponentNavigationComponent,
     LoaderComponent,
     AuthHttpErrorComponent,
     CustomTitleCasePipe,
+    InputComponent,
   ],
 })
 export class SharedModule {}

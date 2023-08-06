@@ -1,0 +1,13 @@
+<div class="form-control">
+    <label [for]="inputId" class="mb-1 text-[#888] text-sm">{{label}}</label>
+    <div class="form-group | flex items-center gap-2 p-1 border-2 border-orange-300 rounded-sm md:p-2">
+        <fa-icon *ngIf="iconName" class="inline-block ml-1 text-orange-300" [icon]="iconName" />
+        <input [formControl]="control" class="w-full p-1 bg-transparent outline-none" [type]="inputType" [id]="inputId"
+            [placeholder]="placeHolder" />
+    </div>
+    <ng-container *ngIf="control.invalid && control.dirty && control.touched">
+        <div *ngFor="let err of control.errors | keyvalue" class="text-base text-red-500">
+            {{errorMessages[err.key]}}
+        </div>
+    </ng-container>
+</div>
