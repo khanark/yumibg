@@ -4,6 +4,7 @@ import {
 } from '@fortawesome/angular-fontawesome';
 import {
   IconDefinition,
+  faArrowDown,
   faAt,
   faBars,
   faChevronDown,
@@ -79,6 +80,7 @@ const icons: IconDefinition[] = [
   faHeart,
   faEraser,
   faPenToSquare,
+  faArrowDown,
 ];
 
 @NgModule({

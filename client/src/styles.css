@@ -8,6 +8,7 @@
 
 html {
   --webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
 }
 
 /* style the scroll using the following color #d97706 */
@@ -107,12 +108,10 @@ input {
 }
 
 .bg-linear {
-  background-image: linear-gradient(
-      to bottom,
+  background-image: linear-gradient(to bottom,
       hsl(34, 100%, 92%),
       hsl(34, 100%, 10%, 0),
-      hsl(34, 100%, 92%)
-    ),
+      hsl(34, 100%, 92%)),
     url(./assets/section-heading-image.jpg);
   background-size: cover;
   background-position: center;
@@ -122,22 +121,27 @@ input {
 .btn-shadow {
   box-shadow: inset 0px 0px 0px 2px #ffffff;
 }
+
 .fade-in {
   -webkit-animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
   animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both 0.5s;
 }
+
 @-webkit-keyframes fade-in {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
 }
+
 @keyframes fade-in {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }

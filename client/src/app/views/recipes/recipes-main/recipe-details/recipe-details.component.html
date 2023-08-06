@@ -1,5 +1,5 @@
 <div class="fade-in max-w-6xl">
-  <ng-container *ngIf="false">
+  <ng-container *ngIf="!editMode">
     <h2 class="mb-2 text-4xl tracking-tight text-[#222] md:text-5xl">
       {{ recipe?.name | titlecase }}
     </h2>
@@ -95,7 +95,7 @@
       </div>
     </div>
   </ng-container>
-  <div *ngIf="true" class="fade-in">
+  <div *ngIf="editMode" class="fade-in">
     <h3 class="mb-4 text-3xl text-orange-600">Edit Your Recipe</h3>
     <form>
       <app-input />

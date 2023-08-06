@@ -1,5 +1,5 @@
 <!-- HERO -->
-<section class="section-hero grid place-content-center">
+<section class="section-hero relative grid place-content-center">
   <div class="container flex flex-col items-center text-white">
     <h1
       class="text-shadow mb-6 text-center text-4xl font-bold md:mb-12 md:text-6xl"
@@ -26,20 +26,35 @@
       {{ homeContent.text }}
     </p>
     <a
-      class="animate-bounce rounded-full bg-orange-600 px-8 py-4 text-lg font-medium text-white transition-colors delay-1000 duration-500 hover:bg-orange-500 md:px-12 md:py-6 md:text-xl"
+      class="rounded-full bg-orange-600 px-8 py-4 text-lg font-medium text-white transition-colors delay-1000 duration-500 hover:bg-orange-500 md:px-12 md:py-6 md:text-xl"
       routerLink="/recipes"
       >{{ homeContent.cta }}</a
     >
   </div>
+  <div class="mt-16 flex justify-center">
+    <a
+      href="#features"
+      class="group flex h-16 w-16 animate-bounce items-center justify-center rounded-full border-[2px] border-orange-600 transition-all hover:bg-orange-600"
+    >
+      <fa-icon
+        icon="arrow-down"
+        class="text-xl text-orange-600 group-hover:text-white"
+      />
+    </a>
+  </div>
 </section>
 
 <!-- FEATURES -->
-<section class="section-features">
+<section class="section-features" id="features">
   <div class="container p-16">
     <div
       class="feature | grid grid-cols-1 justify-items-center gap-8 md:grid-cols-2"
     >
-      <div class="md:feature-image | h-full w-full overflow-hidden rounded-sm">
+      <div
+        data-aos="fade-right"
+        data-aos-delay="50"
+        class="md:feature-image | h-full w-full overflow-hidden rounded-sm"
+      >
         <img
           class="h-full w-full object-cover"
           src="../assets/what-we-offer-2.jpg"
@@ -47,7 +62,11 @@
         />
       </div>
       <ul class="flex-col-1 grid content-center gap-6 md:gap-12 lg:grid-cols-2">
-        <li *ngFor="let feature of homeContent.features">
+        <li
+          data-aos="fade-down"
+          data-aos-delay="50"
+          *ngFor="let feature of homeContent.features"
+        >
           <div class="mb-2 flex items-center gap-2 md:mb-4">
             <fa-icon
               [icon]="feature.icon"
@@ -72,7 +91,10 @@
     class="bg-linear flex h-[150px] flex-col items-center justify-center md:h-[300px]"
   >
     <div class="container">
-      <h3 class="w-[50%] text-2xl text-[#222] md:text-5xl">
+      <h3
+        data-aos="fade-right"
+        class="w-[50%] text-2xl text-[#222] md:text-5xl"
+      >
         Why choose Yummi.bg
       </h3>
     </div>
@@ -82,6 +104,8 @@
       class="flex-col-1 grid content-center gap-6 md:mt-16 md:gap-12 lg:grid-cols-2"
     >
       <li
+        data-aos="fade-down"
+        data-aos-delay="50"
         *ngFor="let quality of homeContent.qualities"
         class="flex flex-col gap-2 rounded-xl shadow-orange-400 md:flex-row md:items-center md:gap-12"
       >
