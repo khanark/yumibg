@@ -1,69 +1,105 @@
-<div class="max-w-6xl fade-in">
-    <h2 class="text-4xl md:text-5xl text-[#222] mb-2 tracking-tight">
-        {{ recipe?.name | titlecase }}
+<div class="fade-in max-w-6xl">
+  <ng-container *ngIf="false">
+    <h2 class="mb-2 text-4xl tracking-tight text-[#222] md:text-5xl">
+      {{ recipe?.name | titlecase }}
     </h2>
-    <h5 class="text-xl md:text-2xl text-[#555]">{{ recipe?.description }}</h5>
+    <h5 class="text-xl text-[#555] md:text-2xl">{{ recipe?.description }}</h5>
     <div class="flex flex-col gap-4 pt-6 lg:flex-row">
-        <div class="flex gap-4">
-            <div class="w-12 h-12 rounded-full bg-slate-400">
-                <!-- <img src="" alt=""> -->
-                <!-- Here goes the image of the user -->
-            </div>
-            <div>
-                <p>
-                    By
-                    <a [routerLink]="['/recipes/users/', recipe?.owner._id]"
-                        class="text-sm uppercase text-[#222] font-bold tracking-widest hover:underline underline-offset-2">{{
-                        recipe?.owner?.username | titlecase }}</a>
-                </p>
-                <p class="text-[#888]">
-                    Published {{ recipe?.createdAt | date : "MMMM d, y" }}
-                </p>
-            </div>
+      <div class="flex gap-4">
+        <div class="h-12 w-12 rounded-full bg-slate-400">
+          <!-- <img src="" alt=""> -->
+          <!-- Here goes the image of the user -->
         </div>
-        <ng-container *ngIf="isLoggedIn">
-            <button type="button" *ngIf="!isOwner"
-                class="flex items-center gap-2 px-4 py-2 transition-colors bg-orange-100 rounded-sm w-min hover:bg-orange-200">
-                <fa-icon icon="heart" class="text-orange-600" />
-                <span class="text-sm tracking-wider uppercase font-bold text-[#222]">save</span>
-            </button>
-            <div class="flex gap-2 md:gap-4" *ngIf="isOwner">
-                <button type="button"
-                    class="flex items-center gap-2 px-4 py-2 transition-colors bg-orange-100 rounded-sm hover:bg-orange-200">
-                    <fa-icon icon="pen-to-square" class="text-orange-600" />
-                    <span class="text-sm tracking-wide uppercase font-bold text-[#222]">edit</span>
-                </button>
-                <button type="button"
-                    class="flex items-center gap-2 px-4 py-2 transition-colors bg-red-500 rounded-sm hover:bg-red-600">
-                    <fa-icon icon="eraser" class="text-orange-950" />
-                    <span class="text-sm font-bold tracking-wide text-white uppercase">delete</span>
-                </button>
-            </div>
-        </ng-container>
+        <div>
+          <p>
+            By
+            <a
+              [routerLink]="['/recipes/users/', recipe?.owner._id]"
+              class="text-sm font-bold uppercase tracking-widest text-[#222] underline-offset-2 hover:underline"
+              >{{ recipe?.owner?.username | titlecase }}</a
+            >
+          </p>
+          <p class="text-[#888]">
+            Published {{ recipe?.createdAt | date: "MMMM d, y" }}
+          </p>
+        </div>
+      </div>
+      <ng-container *ngIf="isLoggedIn">
+        <button
+          type="button"
+          *ngIf="!isOwner"
+          class="flex w-min items-center gap-2 rounded-sm bg-orange-100 px-4 py-2 transition-colors hover:bg-orange-200"
+        >
+          <fa-icon icon="heart" class="text-orange-600" />
+          <span class="text-sm font-bold uppercase tracking-wider text-[#222]"
+            >save</span
+          >
+        </button>
+        <div class="flex gap-2 md:gap-4" *ngIf="isOwner">
+          <button
+            (click)="toggleEditMode()"
+            type="button"
+            class="flex items-center gap-2 rounded-sm bg-orange-100 px-4 py-2 transition-colors hover:bg-orange-200"
+          >
+            <fa-icon icon="pen-to-square" class="text-orange-600" />
+            <span class="text-sm font-bold uppercase tracking-wide text-[#222]"
+              >edit</span
+            >
+          </button>
+          <button
+            type="button"
+            class="flex items-center gap-2 rounded-sm bg-red-500 px-4 py-2 transition-colors hover:bg-red-600"
+          >
+            <fa-icon icon="eraser" class="text-orange-950" />
+            <span class="text-sm font-bold uppercase tracking-wide text-white"
+              >delete</span
+            >
+          </button>
+        </div>
+      </ng-container>
     </div>
-    <span class="block w-full h-px my-6 bg-orange-200"></span>
+    <span class="my-6 block h-px w-full bg-orange-200"></span>
     <div class="w-full lg:w-2/3">
-        <div class="h-auto mb-8 overflow-hidden rounded-sm">
-            <img src="{{ recipe?.image }}" alt="image of the recipe" class="object-cover w-full h-full" />
+      <div class="mb-8 h-auto overflow-hidden rounded-sm">
+        <img
+          src="{{ recipe?.image }}"
+          alt="image of the recipe"
+          class="h-full w-full object-cover"
+        />
+      </div>
+      <div class="flex flex-col gap-8 md:px-8">
+        <div>
+          <h3 class="mb-4 text-3xl text-[#222] md:text-4xl">
+            All the ingredients
+          </h3>
+          <ul class="flex list-disc flex-col gap-2">
+            <li
+              *ngFor="let ingredient of recipe?.ingredients"
+              class="ml-8 text-orange-900 underline underline-offset-4 md:text-lg"
+            >
+              {{ ingredient }}
+            </li>
+          </ul>
         </div>
-        <div class="flex flex-col gap-8 md:px-8">
-            <div>
-                <h3 class="mb-4 text-3xl md:text-4xl text-[#222]">All the ingredients</h3>
-                <ul class="flex flex-col gap-2 list-disc">
-                    <li *ngFor="let ingredient of recipe?.ingredients"
-                        class="ml-8 text-orange-900 underline md:text-lg underline-offset-4">
-                        {{ ingredient }}
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="mb-4 text-3xl md:text-4xl text-[#222]">How to make</h3>
-                <ul class="flex flex-col gap-2">
-                    <li *ngFor="let step of recipe?.steps" class="ml-4 md:text-lg text-[#444]">
-                        {{ step }}
-                    </li>
-                </ul>
-            </div>
+        <div>
+          <h3 class="mb-4 text-3xl text-[#222] md:text-4xl">How to make</h3>
+          <ul class="flex flex-col gap-2">
+            <li
+              *ngFor="let step of recipe?.steps"
+              class="ml-4 text-[#444] md:text-lg"
+            >
+              {{ step }}
+            </li>
+          </ul>
         </div>
+      </div>
     </div>
+  </ng-container>
+  <div *ngIf="true" class="fade-in">
+    <h3 class="mb-4 text-3xl text-orange-600">Edit Your Recipe</h3>
+    <form>
+      <app-input />
+      <button>Save</button>
+    </form>
+  </div>
 </div>

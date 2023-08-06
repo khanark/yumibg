@@ -12,7 +12,7 @@
     <!-- HTTP REQUEST ERROR -->
     <app-auth-http-error *ngIf="authService.httpError" />
     <!--  -->
-    <form class="flex flex-col gap-6 mx-1" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <form [formGroup]="formGroup" class="flex flex-col gap-6 mx-1" (ngSubmit)="onSubmit()">
       <app-input [control]="formGroup.controls.username" inputId="username" label="Username"
         placeHolder="Type your username" iconName="user" inputType="username" />
       <app-input [control]="formGroup.controls.email" inputId="email" label="Email" placeHolder="Type your email"

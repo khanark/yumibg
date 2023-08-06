@@ -1,14 +1,16 @@
 <div class="fade-in">
   <h3 class="mb-4 text-3xl text-orange-600">My Profile</h3>
-  <div class="flex gap-4 mb-4">
+  <div class="mb-4 flex gap-4">
     <div>
-      <p class="inline text-xs uppercase font-bold tracking-wide text-[#888]">
+      <p class="inline text-xs font-bold uppercase tracking-wide text-[#888]">
         username:
       </p>
-      <span class="ml-2 text-lg text-[#222]">{{ user?.username | titlecase }}</span>
+      <span class="ml-2 text-lg text-[#222]">{{
+        user?.username | titlecase
+      }}</span>
     </div>
     <div>
-      <p class="inline text-xs uppercase font-bold tracking-wide text-[#888]">
+      <p class="inline text-xs font-bold uppercase tracking-wide text-[#888]">
         email:
       </p>
       <span class="ml-2 text-lg text-[#222]">{{ user?.email }}</span>
@@ -16,12 +18,12 @@
   </div>
   <div class="button-wrapper | flex gap-2">
     <button
-      class="px-4 py-2 text-sm font-bold text-white uppercase bg-orange-500 rounded-t-lg hover:border-b-orange-700"
+      class="rounded-t-lg bg-orange-500 px-4 py-2 text-sm font-bold uppercase text-white hover:border-b-orange-700"
     >
       My Recipes
     </button>
     <button
-      class="px-4 py-2 text-sm font-bold text-white uppercase bg-orange-500 rounded-t-lg hover:border-b-orange-700"
+      class="rounded-t-lg bg-orange-500 px-4 py-2 text-sm font-bold uppercase text-white hover:border-b-orange-700"
     >
       Saved Recipes
     </button>

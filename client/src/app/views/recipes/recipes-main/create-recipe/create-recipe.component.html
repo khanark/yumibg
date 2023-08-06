@@ -1,16 +1,16 @@
-<div class="w-full overflow-scroll fade-in md:max-w-lg">
+<div class="fade-in w-full overflow-scroll md:max-w-lg">
   <h3 class="mb-4 text-3xl tracking-wide text-orange-600">Add New Recipe</h3>
   <form
     #createRecipeForm="ngForm"
-    class="flex flex-col gap-4 mx-1"
+    class="mx-1 flex flex-col gap-4"
     (ngSubmit)="onSubmit(createRecipeForm)"
   >
     <div class="flex flex-col justify-between gap-4 lg:flex-row">
       <div class="flex-1">
         <div class="flex-1">
-          <label for="name" class="mb-1 text-[#888] text-sm">Name</label>
+          <label for="name" class="mb-1 text-sm text-[#888]">Name</label>
           <input
-            class="w-full px-2 py-1 outline-none border-[1px] border-orange-300 rounded-md"
+            class="w-full rounded-md border-[1px] border-orange-300 px-2 py-1 outline-none"
             type="text"
             name="name"
             #nameInput="ngModel"
@@ -36,11 +36,11 @@
       </div>
       <div>
         <div class="flex-1">
-          <label for="cookTime" class="mb-1 text-[#888] text-sm"
+          <label for="cookTime" class="mb-1 text-sm text-[#888]"
             >Preparation time</label
           >
           <div
-            class="flex items-center border-[1px] border-orange-300 rounded-md overflow-hidden"
+            class="flex items-center overflow-hidden rounded-md border-[1px] border-orange-300"
           >
             <input
               class="flex-1 px-2 py-1 outline-none"
@@ -57,7 +57,9 @@
         <div *ngIf="cookTime.touched || cookTime.touched">
           <div class="ml-4 text-red-500">
             <div
-              *ngIf="cookTime.errors?.['required'] || cookTime.errors?.['required']"
+              *ngIf="
+                cookTime.errors?.['required'] || cookTime.errors?.['required']
+              "
             >
               Preparation time is required.
             </div>
@@ -68,9 +70,9 @@
     </div>
     <div>
       <div class="form-group">
-        <label for="dishType" class="mb-1 text-[#888] text-sm">Dish type</label>
+        <label for="dishType" class="mb-1 text-sm text-[#888]">Dish type</label>
         <select
-          class="w-full px-2 py-1 outline-none border-[1px] border-orange-300 rounded-md"
+          class="w-full rounded-md border-[1px] border-orange-300 px-2 py-1 outline-none"
           name="dishType"
           #dishInput="ngModel"
           ngModel
@@ -91,9 +93,9 @@
     </div>
     <div>
       <div class="form-group">
-        <label for="image" class="mb-1 text-[#888] text-sm">Image</label>
+        <label for="image" class="mb-1 text-sm text-[#888]">Image</label>
         <input
-          class="w-full px-2 py-1 outline-none border-[1px] border-orange-300 rounded-md"
+          class="w-full rounded-md border-[1px] border-orange-300 px-2 py-1 outline-none"
           name="image"
           #imageInput="ngModel"
           placeholder="Link to your image."
@@ -115,11 +117,11 @@
     </div>
     <div>
       <div class="form-group">
-        <label for="description" class="mb-1 text-[#888] text-sm"
+        <label for="description" class="mb-1 text-sm text-[#888]"
           >Description</label
         >
         <textarea
-          class="w-full px-2 py-1 outline-none border-[1px] border-orange-300 rounded-md"
+          class="w-full rounded-md border-[1px] border-orange-300 px-2 py-1 outline-none"
           name="description"
           #descriptionInput="ngModel"
           placeholder="Write your recipe description."
@@ -148,11 +150,11 @@
     </div>
     <div>
       <div class="form-group">
-        <label for="ingidients" class="mb-1 text-[#888] text-sm"
+        <label for="ingidients" class="mb-1 text-sm text-[#888]"
           >Ingredients</label
         >
         <textarea
-          class="w-full px-2 py-1 outline-none border-[1px] border-orange-300 rounded-md"
+          class="w-full rounded-md border-[1px] border-orange-300 px-2 py-1 outline-none"
           name="ingredients"
           #ingredientsInput="ngModel"
           placeholder="Each ingredient on a new line *"
@@ -173,10 +175,10 @@
       <!--  -->
     </div>
     <div>
-      <div class="m-0 form-group">
-        <label for="steps" class="mb-1 text-[#888] text-sm">Steps</label>
+      <div class="form-group m-0">
+        <label for="steps" class="mb-1 text-sm text-[#888]">Steps</label>
         <textarea
-          class="w-full px-2 py-1 outline-none border-[1px] border-orange-300 rounded-md"
+          class="w-full rounded-md border-[1px] border-orange-300 px-2 py-1 outline-none"
           name="steps"
           #stepsInput="ngModel"
           placeholder="Each step on a new line *"
@@ -192,7 +194,7 @@
       </div>
     </div>
     <button
-      class="px-6 py-2 text-sm font-medium text-white uppercase transition-colors bg-orange-600 rounded-md w-min justify-self-start hover:bg-orange-500"
+      class="w-min justify-self-start rounded-md bg-orange-600 px-6 py-2 text-sm font-medium uppercase text-white transition-colors hover:bg-orange-500"
     >
       Save
     </button>

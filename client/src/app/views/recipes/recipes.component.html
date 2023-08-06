@@ -1,25 +1,32 @@
 <!-- LAYOUT -->
 <div
-    class="relative grid md:h-screen grid-cols-6 grid-rows-[auto,auto,1fr] md:grid-rows-[auto,1fr] gap-3 text-[#333] p-4">
-    <!-- The loader between the resolvers -->
-    <div *ngIf="loading" class="absolute z-10 flex items-center justify-center w-full h-screen bg-gray-100/90">
-        <div class="flex flex-col items-center justify-center">
-            <app-loader />
-            <p class="text-xl text-gray-700 mt-[-30px]">Loading, please wait...</p>
-        </div>
+  class="relative grid grid-cols-6 grid-rows-[auto,auto,1fr] gap-3 p-4 text-[#333] md:h-screen md:grid-rows-[auto,1fr]"
+>
+  <!-- The loader between the resolvers -->
+  <div
+    *ngIf="loading"
+    class="absolute z-10 flex h-screen w-full items-center justify-center bg-gray-100/90"
+  >
+    <div class="flex flex-col items-center justify-center">
+      <app-loader />
+      <p class="mt-[-30px] text-xl text-gray-700">Loading, please wait...</p>
     </div>
-    <!-- ASIDE -->
-    <app-recipes-aside
-        class="h-full p-4 bg-white rounded-sm drop-shadow-md col-span-full md:col-span-3 lg:col-span-2 2xl:col-span-1 md:row-span-full" />
-    <!-- HEADER -->
-    <app-recipes-header
-        class="flex flex-col items-center row-span-1 gap-4 p-4 bg-white rounded-sm drop-shadow-md col-span-full lg:gap-8 lg:flex-row md:col-span-3 lg:col-span-4 2xl:col-span-5" />
+  </div>
+  <!-- ASIDE -->
+  <app-recipes-aside
+    class="col-span-full h-full rounded-sm bg-white p-4 drop-shadow-md md:col-span-3 md:row-span-full lg:col-span-2 2xl:col-span-1"
+  />
+  <!-- HEADER -->
+  <app-recipes-header
+    class="col-span-full row-span-1 flex flex-col items-center gap-4 rounded-sm bg-white p-4 drop-shadow-md md:col-span-3 lg:col-span-4 lg:flex-row lg:gap-8 2xl:col-span-5"
+  />
 
-    <!-- MAIN -->
-    <main
-        class="p-4 bg-white rounded-sm drop-shadow-md md:overflow-scroll row-span md:col-span-3 lg:col-span-4 2xl:col-span-5 col-span-full">
-        <app-component-navigation />
-        <!-- OUTLET -->
-        <router-outlet />
-    </main>
+  <!-- MAIN -->
+  <main
+    class="row-span col-span-full rounded-sm bg-white p-4 drop-shadow-md md:col-span-3 md:overflow-scroll lg:col-span-4 2xl:col-span-5"
+  >
+    <app-component-navigation />
+    <!-- OUTLET -->
+    <router-outlet />
+  </main>
 </div>

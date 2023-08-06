@@ -1,9 +1,10 @@
 <section class="login-section | mx-4">
   <div
-    class="flex flex-1 flex-col max-w-lg gap-8 px-6 py-10 md:p-12 mx-auto bg-white drop-shadow-md rounded-sm text-[#555]">
+    class="mx-auto flex max-w-lg flex-1 flex-col gap-8 rounded-sm bg-white px-6 py-10 text-[#555] drop-shadow-md md:p-12"
+  >
     <div class="flex items-center justify-center gap-2">
       <fa-icon icon="sign-in" class="text-lg text-orange-600" />
-      <h3 class="text-2xl text-center text-orange-600">Login</h3>
+      <h3 class="text-center text-2xl text-orange-600">Login</h3>
     </div>
     <div class="h-[1px] bg-orange-300"></div>
     <!-- LOADER -->
@@ -12,26 +13,51 @@
     <!-- HTTP REQUEST ERROR -->
     <app-auth-http-error *ngIf="authService.httpError" />
     <!--  -->
-    <form #loginForm="ngForm" class="flex flex-col gap-6 mx-1" (ngSubmit)="onSubmit()">
-      <app-input [control]="formGroup.controls.email" inputId="email" label="Email" placeHolder="Type your email"
-        iconName="at" inputType="email" />
+    <form
+      [formGroup]="formGroup"
+      class="mx-1 flex flex-col gap-6"
+      (ngSubmit)="onSubmit()"
+    >
+      <app-input
+        [control]="formGroup.controls.email"
+        inputId="email"
+        label="Email"
+        placeHolder="Type your email"
+        iconName="at"
+        inputType="email"
+      />
       <div class="relative">
-        <app-input [control]="formGroup.controls.password" inputId="password" label="Password"
-          placeHolder="Type your password" iconName="lock" [inputType]="passwordEye ? 'text' : 'password'" />
-        <button type="button" (click)="togglePasswordEye()"
-          class="absolute right-2 top-9 md:top-10 inline-block w-[40px] ml-1 text-orange-300">
+        <app-input
+          [control]="formGroup.controls.password"
+          inputId="password"
+          label="Password"
+          placeHolder="Type your password"
+          iconName="lock"
+          [inputType]="passwordEye ? 'text' : 'password'"
+        />
+        <button
+          type="button"
+          (click)="togglePasswordEye()"
+          class="absolute right-2 top-9 ml-1 inline-block w-[40px] text-orange-300 md:top-10"
+        >
           <fa-icon icon="eye" *ngIf="passwordEye" />
           <fa-icon icon="eye-slash" *ngIf="!passwordEye" />
         </button>
       </div>
-      <button [disabled]="authService.isLoading"
-        class="px-6 py-3 mt-4 text-xl font-medium tracking-wide text-white transition-colors bg-orange-600 rounded-sm justify-items-start hover:bg-orange-500">
+      <button
+        [disabled]="authService.isLoading"
+        class="mt-4 justify-items-start rounded-sm bg-orange-600 px-6 py-3 text-xl font-medium tracking-wide text-white transition-colors hover:bg-orange-500"
+      >
         Let's go!
       </button>
     </form>
     <div class="text-center">
       <p>Not a member ?</p>
-      <a routerLink="/register" class="text-orange-600 cursor-pointer hover:underline underline-offset-2">Sign up</a>
+      <a
+        routerLink="/register"
+        class="cursor-pointer text-orange-600 underline-offset-2 hover:underline"
+        >Sign up</a
+      >
     </div>
   </div>
 </section>

@@ -1,17 +1,23 @@
-<div class="border-b-[1px] border-orange-200 mb-4">
-    <span class="inline-block text-sm text-[#888] mb-1">...{{ currentLocation$ | async }}</span>
-    <div class="flex gap-4">
-        <button class="flex items-center gap-2 px-4 py-2 mb-4 transition-all bg-orange-200 hover:bg-orange-300"
-            (click)="onGoBack()">
-            <fa-icon icon="chevron-left" class="text-sm text-[#222]" />
-            <span class="text-sm font-medium uppercase text-[#222]">back</span>
-        </button>
-        <button *ngIf="!isCatalogPage"
-            class="flex items-center gap-2 px-4 py-2 mb-4 transition-all bg-orange-200 hover:bg-orange-300"
-            (click)="onGoToCatalog()">
-            <fa-icon icon="list-ul" class="text-sm text-[#222]" />
+<div class="mb-4 border-b-[1px] border-orange-200">
+  <span class="mb-1 inline-block text-sm text-[#888]"
+    >...{{ currentLocation$ | async }}</span
+  >
+  <div class="flex gap-4">
+    <button
+      class="mb-4 flex items-center gap-2 bg-orange-200 px-4 py-2 transition-all hover:bg-orange-300"
+      (click)="onGoBack()"
+    >
+      <fa-icon icon="chevron-left" class="text-sm text-[#222]" />
+      <span class="text-sm font-medium uppercase text-[#222]">back</span>
+    </button>
+    <button
+      *ngIf="!isCatalogPage"
+      class="mb-4 flex items-center gap-2 bg-orange-200 px-4 py-2 transition-all hover:bg-orange-300"
+      (click)="onGoToCatalog()"
+    >
+      <fa-icon icon="list-ul" class="text-sm text-[#222]" />
 
-            <span class="text-sm font-medium uppercase text-[#222]">catalog</span>
-        </button>
-    </div>
+      <span class="text-sm font-medium uppercase text-[#222]">catalog</span>
+    </button>
+  </div>
 </div>

@@ -1,39 +1,53 @@
 <div class="bg-orange-600">
-    <div class="site-navigation | m-auto">
-        <nav class="container relative flex items-center justify-between h-20 mx-auto mb-10 font-semibold text-white">
-            <a routerLink="">
-                <h3
-                    class="px-2 py-1 text-xl italic font-bold text-orange-600 uppercase rounded-full bg-slate-50 md:text-2xl md:py-2 md:px-4 font-rancho">
-                    Yummi.bg
-                </h3>
+  <div class="site-navigation | m-auto">
+    <nav
+      class="container relative mx-auto mb-10 flex h-20 items-center justify-between font-semibold text-white"
+    >
+      <a routerLink="">
+        <h3
+          class="rounded-full bg-slate-50 px-2 py-1 font-rancho text-xl font-bold uppercase italic text-orange-600 md:px-4 md:py-2 md:text-2xl"
+        >
+          Yummi.bg
+        </h3>
+      </a>
+      <!-- bigger devices -->
+      <ul class="hidden items-center gap-1 md:flex">
+        <li *ngFor="let link of navLinks">
+          <a
+            class="inline-block cursor-pointer rounded-sm px-4 py-2 text-sm font-bold uppercase tracking-widest transition-colors hover:bg-orange-500"
+            [routerLink]="link.path"
+            >{{ link.name }}</a
+          >
+        </li>
+      </ul>
+
+      <!-- smaller devices -->
+      <div class="md:hidden" clickOutside (clickOutside)="clickedOutside()">
+        <button class="p-2 md:hidden" (click)="toggleNavigation()">
+          <fa-icon icon="bars" class="inline-block text-2xl text-slate-50" />
+        </button>
+
+        <ul
+          *ngIf="dropdownNavigation"
+          class="absolute left-0 top-[100%] flex w-full flex-col items-center justify-center gap-1 bg-orange-600 pb-1 text-white"
+          [ngClass]="dropdownNavigation && 'drop-nav'"
+          (click)="toggleNavigation()"
+        >
+          <li
+            *ngFor="let link of navLinks"
+            class="w-full border-b border-orange-500 last:border-none"
+          >
+            <a
+              class="rouded-sm block w-full cursor-pointer px-2 py-1 transition-colors"
+              [routerLink]="link.path"
+            >
+              <p class="ml-6 text-sm uppercase tracking-wide">
+                {{ link.name }}
+              </p>
             </a>
-            <!-- bigger devices -->
-            <ul class="items-center hidden gap-1 md:flex">
-                <li *ngFor="let link of navLinks">
-                    <a class="inline-block px-4 py-2 text-sm font-bold tracking-widest uppercase transition-colors rounded-sm cursor-pointer hover:bg-orange-500"
-                        [routerLink]="link.path">{{ link.name }}</a>
-                </li>
-            </ul>
-
-            <!-- smaller devices -->
-            <div class="md:hidden" clickOutside (clickOutside)="clickedOutside()">
-                <button class="p-2 md:hidden" (click)="toggleNavigation()">
-                    <fa-icon icon="bars" class="inline-block text-2xl text-slate-50" />
-                </button>
-
-                <ul *ngIf="dropdownNavigation"
-                    class="flex pb-1 flex-col items-center justify-center gap-1 absolute top-[100%] left-0 text-white w-full bg-orange-600"
-                    [ngClass]="dropdownNavigation && 'drop-nav'" (click)="toggleNavigation()">
-                    <li *ngFor="let link of navLinks" class="w-full border-b border-orange-500 last:border-none">
-                        <a class="block w-full px-2 py-1 transition-colors cursor-pointer rouded-sm"
-                            [routerLink]="link.path">
-                            <p class="ml-6 text-sm tracking-wide uppercase">
-                                {{ link.name }}
-                            </p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </div>
