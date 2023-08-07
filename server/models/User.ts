@@ -25,6 +25,7 @@ const userSchema: Schema = new Schema({
     minLength: 4,
   },
   createdRecipes: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
+  savedRecipes: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
 });
 
 export default model<IUser>('User', userSchema);
