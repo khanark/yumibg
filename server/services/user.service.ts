@@ -55,12 +55,19 @@ const register = async (user: IUser) => {
 };
 
 const getSingleUser = async (id: string) => {
-  return await User.findById(id);
+  return await User.findById(id).populate('createdRecipes savedRecipes');
 };
 
 const updateUser = async (id: string, user: IUser) => {
   await User.findByIdAndUpdate(id, user), { runValidators: true };
   return getSingleUser(id);
+};
+
+const saveRecipe = async (recipeId: string, userId: string) => {
+  console.log(recipeId);
+  const user = await User.findById(userId);
+  user?.savedRecipes.push(recipeId);
+  await user?.save();
 };
 
 function returnUserWithoutPassword(user: any) {
@@ -82,4 +89,4 @@ function createToken(user: IUser) {
   });
 }
 
-export { login, register, getSingleUser, updateUser };
+export { login, register, getSingleUser, updateUser, saveRecipe };
