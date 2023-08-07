@@ -1,4 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+
 import { IUser } from 'src/app/interfaces/User';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -20,7 +21,7 @@ export class UserService {
   registerUser(
     username: string,
     email: string,
-    password: string
+    password: string,
   ): Observable<IUser> {
     return this.http.post<IUser>(`${environment.API_URL}users/register`, {
       username,
@@ -39,5 +40,16 @@ export class UserService {
 
   updateUser(id: string, user: IUser): Observable<IUser> {
     return this.http.patch<IUser>(`${environment.API_URL}users/${id}`, user);
+  }
+
+  saveRecipe(recipeId: string, userId: string): Observable<IUser> {
+    return this.http.get<IUser>(`${environment.API_URL}users/where`, {
+      params: new HttpParams({
+        fromObject: {
+          recipeId: recipeId,
+          userId: userId,
+        },
+      }),
+    });
   }
 }
