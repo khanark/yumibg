@@ -2,7 +2,7 @@
   <ng-container *ngIf="recipes | async as recipeList">
     <ul class="responsive-grid grid gap-8">
       <li
-        class="card | cursor-pointer rounded-sm bg-white drop-shadow-2xl hover:translate-x-[-3px] hover:translate-y-[-3px]"
+        class="card | cursor-pointer rounded-sm bg-white drop-shadow-md hover:translate-x-[-3px] hover:translate-y-[-3px]"
         *ngFor="let recipe of recipeList"
       >
         <a [routerLink]="['/recipes/single', recipe._id]">
