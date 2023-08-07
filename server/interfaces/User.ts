@@ -4,4 +4,5 @@ export interface IUser {
   email: string;
   password: string;
   createdRecipes: string[];
+  savedRecipes: string[];
 }
