@@ -13,10 +13,8 @@ export class HomeComponent implements OnInit {
   homeContent = pageContent.home;
   ngOnInit(): void {
     Aos.init({
-      startEvent: 'scroll',
       once: true,
-      offset: 300,
-      duration: 700,
+      delay: 50,
     });
   }
 }

@@ -52,8 +52,7 @@
     >
       <div
         data-aos="fade-right"
-        data-aos-delay="50"
-        class="md:feature-image | h-full w-full overflow-hidden rounded-sm"
+        class="md:feature-image h-full w-full overflow-hidden rounded-sm"
       >
         <img
           class="h-full w-full object-cover"
@@ -64,7 +63,7 @@
       <ul class="flex-col-1 grid content-center gap-6 md:gap-12 lg:grid-cols-2">
         <li
           data-aos="fade-down"
-          data-aos-delay="50"
+          class="transition-transform"
           *ngFor="let feature of homeContent.features"
         >
           <div class="mb-2 flex items-center gap-2 md:mb-4">
@@ -105,7 +104,6 @@
     >
       <li
         data-aos="fade-down"
-        data-aos-delay="50"
         *ngFor="let quality of homeContent.qualities"
         class="flex flex-col gap-2 rounded-xl shadow-orange-400 md:flex-row md:items-center md:gap-12"
       >
