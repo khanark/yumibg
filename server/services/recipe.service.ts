@@ -25,7 +25,6 @@ const composeOrderQuery = (orderQuery: any) => {
 
 const getRecipes = async (query: any) => {
   let filter = {};
-  console.log(query);
 
   if (query.dishType) {
     filter = { ...filter, dishType: query.dishType };

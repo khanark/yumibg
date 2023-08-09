@@ -1,32 +1,30 @@
-<div class="fade-in max-w-6xl">
-  <ng-container *ngIf="!editMode">
+<div class="max-w-6xl">
+  <div *ngIf="!editMode" class="fade-in">
     <h2 class="mb-2 text-4xl tracking-tight text-[#222] md:text-5xl">
-      {{ recipe?.name | titlecase }}
+      {{ recipe.name | titlecase }}
     </h2>
-    <h5 class="text-xl text-[#555] md:text-2xl">{{ recipe?.description }}</h5>
-    <div class="flex flex-col gap-4 pt-6 lg:flex-row">
+    <h5 class="text-xl text-[#555] md:text-2xl">{{ recipe.description }}</h5>
+    <div class="flex flex-col gap-8 pt-6 lg:flex-row">
       <div class="flex gap-4">
-        <div class="h-12 w-12 rounded-full bg-slate-400">
-          <!-- <img src="" alt=""> -->
-          <!-- Here goes the image of the user -->
-        </div>
+        <div class="h-12 w-12 rounded-full bg-slate-400"></div>
         <div>
           <p>
             By
             <a
-              [routerLink]="['/recipes/users/', recipe?.owner._id]"
+              [routerLink]="['/recipes/users/', recipe.owner._id]"
               class="text-sm font-bold uppercase tracking-widest text-[#222] underline-offset-2 hover:underline"
-              >{{ recipe?.owner?.username | titlecase }}</a
+              >{{ recipe.owner.username | titlecase }}</a
             >
           </p>
           <p class="text-[#888]">
-            Published {{ recipe?.createdAt | date: "MMMM d, y" }}
+            Published {{ recipe.createdAt | date: "MMMM d, y" }}
           </p>
         </div>
       </div>
       <ng-container *ngIf="isLoggedIn">
         <button
           type="button"
+          (click)="onSaveRecipe()"
           *ngIf="!isOwner"
           class="flex w-min items-center gap-2 rounded-sm bg-orange-100 px-4 py-2 transition-colors hover:bg-orange-200"
         >
@@ -47,6 +45,7 @@
             >
           </button>
           <button
+            (click)="onDelete()"
             type="button"
             class="flex items-center gap-2 rounded-sm bg-red-500 px-4 py-2 transition-colors hover:bg-red-600"
           >
@@ -62,7 +61,7 @@
     <div class="w-full lg:w-2/3">
       <div class="mb-8 h-auto overflow-hidden rounded-sm">
         <img
-          src="{{ recipe?.image }}"
+          src="{{ recipe.image }}"
           alt="image of the recipe"
           class="h-full w-full object-cover"
         />
@@ -94,12 +93,220 @@
         </div>
       </div>
     </div>
-  </ng-container>
-  <div *ngIf="editMode" class="fade-in">
+  </div>
+  <div *ngIf="editMode" class="fade-in md:max-w-lg">
     <h3 class="mb-4 text-3xl text-orange-600">Edit Your Recipe</h3>
-    <form>
-      <app-input />
-      <button>Save</button>
+    <app-loader *ngIf="isLoading" />
+    <form
+      #editForm="ngForm"
+      class="mx-1 flex flex-col gap-4"
+      (ngSubmit)="onSubmit(editForm)"
+    >
+      <div class="flex flex-col justify-between gap-4 lg:flex-row">
+        <div class="flex-1">
+          <div class="flex-1">
+            <label for="name" class="mb-1 text-sm text-[#888]">Name</label>
+            <input
+              class="w-full rounded-md border-[1px] border-orange-300 px-2 py-1 outline-none"
+              type="text"
+              name="name"
+              #nameInput="ngModel"
+              placeholder="Type recipe name."
+              [(ngModel)]="recipe.name"
+              minlength="3"
+              required
+            />
+          </div>
+          <!-- Recipe name validation -->
+          <div *ngIf="nameInput.touched">
+            <div
+              class="ml-4 text-red-500"
+              *ngIf="nameInput.errors?.['minlength']"
+            >
+              Minimum 3 characters.
+            </div>
+            <div
+              class="ml-4 text-red-500"
+              *ngIf="nameInput.errors?.['required']"
+            >
+              Name is required.
+            </div>
+          </div>
+          <!--  -->
+        </div>
+        <div>
+          <div class="flex-1">
+            <label for="cookTime" class="mb-1 text-sm text-[#888]"
+              >Preparation time</label
+            >
+            <div
+              class="flex items-center overflow-hidden rounded-md border-[1px] border-orange-300"
+            >
+              <input
+                class="flex-1 px-2 py-1 outline-none"
+                type="number"
+                name="cookTime"
+                #cookTime="ngModel"
+                placeholder="Cook time in minutes."
+                [(ngModel)]="recipe.cookTime"
+                required
+              />
+            </div>
+          </div>
+          <!-- Preparation time validation -->
+          <div *ngIf="cookTime.touched || cookTime.touched">
+            <div class="ml-4 text-red-500">
+              <div
+                *ngIf="
+                  cookTime.errors?.['required'] || cookTime.errors?.['required']
+                "
+              >
+                Preparation time is required.
+              </div>
+            </div>
+          </div>
+          <!--  -->
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label for="dishType" class="mb-1 text-sm text-[#888]"
+            >Dish type</label
+          >
+          <select
+            class="w-full rounded-md border-[1px] border-orange-300 px-2 py-1 outline-none"
+            name="dishType"
+            #dishInput="ngModel"
+            [(ngModel)]="recipe.dishType"
+            required
+          >
+            <option *ngFor="let dish of dishes" [value]="dish.name">
+              {{ dish.text }}
+            </option>
+          </select>
+        </div>
+        <!-- Dish type validation -->
+        <div *ngIf="dishInput.touched">
+          <div class="ml-4 text-red-500" *ngIf="dishInput.errors?.['required']">
+            Dish type is required.
+          </div>
+        </div>
+        <!--  -->
+      </div>
+      <div>
+        <div class="form-group">
+          <label for="image" class="mb-1 text-sm text-[#888]">Image</label>
+          <input
+            class="w-full rounded-md border-[1px] border-orange-300 px-2 py-1 outline-none"
+            name="image"
+            #imageInput="ngModel"
+            placeholder="Link to your image."
+            [(ngModel)]="recipe.image"
+            required
+            pattern="^(https?:\/\/).*\.(png|jpe?g)$"
+          />
+        </div>
+        <!-- Image validation -->
+        <div *ngIf="imageInput.touched">
+          <div
+            class="ml-4 text-red-500"
+            *ngIf="imageInput.errors?.['required']"
+          >
+            Image is required.
+          </div>
+          <div class="ml-4 text-red-500" *ngIf="imageInput.errors?.['pattern']">
+            Invalid format.
+          </div>
+        </div>
+        <!--  -->
+      </div>
+      <div>
+        <div class="form-group">
+          <label for="description" class="mb-1 text-sm text-[#888]"
+            >Description</label
+          >
+          <textarea
+            class="w-full rounded-md border-[1px] border-orange-300 px-2 py-1 outline-none"
+            name="description"
+            #descriptionInput="ngModel"
+            placeholder="Write your recipe description."
+            rows="3"
+            [(ngModel)]="recipe.description"
+            minlength="10"
+            required
+          ></textarea>
+        </div>
+        <!-- Description validation -->
+        <div *ngIf="descriptionInput.touched" class="mt-[-7px]">
+          <div
+            class="ml-4 text-red-500"
+            *ngIf="descriptionInput.errors?.['required']"
+          >
+            Description is required.
+          </div>
+          <div
+            class="ml-4 text-red-500"
+            *ngIf="descriptionInput.errors?.['minlength']"
+          >
+            Minimum 10 characters.
+          </div>
+        </div>
+        <!--  -->
+      </div>
+      <div>
+        <div class="form-group">
+          <label for="ingidients" class="mb-1 text-sm text-[#888]"
+            >Ingredients</label
+          >
+          <textarea
+            class="w-full rounded-md border-[1px] border-orange-300 px-2 py-1 outline-none"
+            name="ingredients"
+            #ingredientsInput="ngModel"
+            placeholder="Each ingredient on a new line *"
+            rows="3"
+            [(ngModel)]="formRecipe.ingredients"
+            required
+          ></textarea>
+        </div>
+        <!-- Ingredients validation -->
+        <div *ngIf="ingredientsInput.touched" class="mt-[-7px]">
+          <div
+            class="ml-4 text-red-500"
+            *ngIf="ingredientsInput.errors?.['required']"
+          >
+            Ingredients are required.
+          </div>
+        </div>
+        <!--  -->
+      </div>
+      <div>
+        <div class="form-group m-0">
+          <label for="steps" class="mb-1 text-sm text-[#888]">Steps</label>
+          <textarea
+            class="w-full rounded-md border-[1px] border-orange-300 px-2 py-1 outline-none"
+            name="steps"
+            #stepsInput="ngModel"
+            placeholder="Each step on a new line *"
+            rows="3"
+            [(ngModel)]="formRecipe.steps"
+            required
+          ></textarea>
+        </div>
+        <div *ngIf="stepsInput.touched" class="mt-[-7px]">
+          <div
+            class="ml-4 text-red-500"
+            *ngIf="stepsInput.errors?.['required']"
+          >
+            Steps are required.
+          </div>
+        </div>
+      </div>
+      <button
+        [disabled]="isLoading"
+        class="w-min justify-self-start rounded-md bg-orange-600 px-6 py-2 text-sm font-medium uppercase text-white transition-colors hover:bg-orange-500"
+      >
+        Save
+      </button>
     </form>
   </div>
 </div>
