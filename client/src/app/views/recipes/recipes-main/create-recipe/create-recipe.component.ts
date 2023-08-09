@@ -13,10 +13,13 @@ export class CreateRecipeComponent {
   dishes = pageContent.recipes.dishes;
   isLoading: boolean = false;
 
-  constructor(private recipeService: RecipeService, private router: Router) {}
+  constructor(
+    private recipeService: RecipeService,
+    private router: Router,
+  ) {}
 
   onSubmit(createRecipeForm: NgForm) {
-    // if(createRecipeForm.invalid) {return;}
+    if(createRecipeForm.invalid) {return;}
     const formData = {
       ...createRecipeForm.value,
       ingredients: createRecipeForm.value.ingredients.split('\n'),
@@ -25,7 +28,9 @@ export class CreateRecipeComponent {
 
     this.isLoading = true;
 
-    this.recipeService.createRecipe(formData);
-    this.router.navigate(["/recipes/catalog"])
+    this.recipeService.createRecipe(formData).subscribe(() => {
+      this.isLoading = false;
+      this.router.navigate(['/recipes/catalog']);
+    });
   }
 }

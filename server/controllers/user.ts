@@ -21,6 +21,15 @@ userRouter.post('/login', (req, res) => {
     .catch((err) => res.status(400).json({ message: err.message }));
 });
 
+// save recipe to user
+userRouter.get('/where', authenticate(), (req, res) => {
+  const { userId, recipeId } = req.query as { userId: string; recipeId: string };
+  userService
+    .saveRecipe(recipeId, userId)
+    .then(() => res.status(200).json({ message: 'Successfully saved recipe!' }))
+    .catch((err) => res.status(400).json({ message: err.message }));
+});
+
 // return single user
 userRouter.get('/:id', authenticate(), (req, res) => {
   userService

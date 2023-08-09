@@ -11,18 +11,18 @@ import { pageContent } from 'src/app/constants/constants';
 })
 export class RecipesAsideComponent {
   recipes = pageContent.recipes; // dishTypes are stored here
-  formToggle: boolean = false;
+  formToggle: boolean = true;
   profileMenuToggle: boolean = false;
   outsideFormClick: boolean = false;
 
   constructor(
     public authService: AuthService,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
   ) {}
 
   onFilterSubmit(form: NgForm) {
     const selectedDishes: string[] = Object.keys(form.value).filter(
-      (key) => form.value[key]
+      (key) => form.value[key],
     );
     // TODO: Fix the order being passed in the selectedDishes when filtering
     const selectedOrder = form.value.order;
