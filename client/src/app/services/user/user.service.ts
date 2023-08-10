@@ -12,6 +12,7 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   loginUser(email: string, password: string): Observable<IUser> {
+    console.log(`${environment.API_URL}users/login`);
     return this.http.post<IUser>(`${environment.API_URL}users/login`, {
       email,
       password,
