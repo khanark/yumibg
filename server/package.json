@@ -23,8 +23,8 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "build": "npm install && tsc",
-    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "build": "tsc",
+    "start": "cross-env NODE_ENV=production node ./dist/index.js",
     "dev": "cross-env NODE_ENV=development concurrently \"npx tsc -w\" \"nodemon dist/index.js\""
   },
   "keywords": [],
