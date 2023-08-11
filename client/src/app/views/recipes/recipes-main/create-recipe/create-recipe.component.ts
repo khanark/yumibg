@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { RecipeService } from 'src/app/services/recipe/recipe.service';
 import { Router } from '@angular/router';
+import { UtilityService } from 'src/app/services/util/util.service';
 import { pageContent } from 'src/app/constants/constants';
 
 @Component({
@@ -15,15 +16,22 @@ export class CreateRecipeComponent {
 
   constructor(
     private recipeService: RecipeService,
+    private utilityService: UtilityService,
     private router: Router,
   ) {}
 
   onSubmit(createRecipeForm: NgForm) {
-    if(createRecipeForm.invalid) {return;}
+    if (createRecipeForm.invalid) {
+      return;
+    }
     const formData = {
       ...createRecipeForm.value,
-      ingredients: createRecipeForm.value.ingredients.split('\n'),
-      steps: createRecipeForm.value.steps.split('\n'),
+      ingredients: this.utilityService.trimTextAreaEmptyLines(
+        createRecipeForm.value.ingredients,
+      ),
+      steps: this.utilityService.trimTextAreaEmptyLines(
+        createRecipeForm.value.steps,
+      ),
     };
 
     this.isLoading = true;

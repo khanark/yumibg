@@ -7,6 +7,7 @@ import {
   faArrowDown,
   faAt,
   faBars,
+  faCheck,
   faChevronDown,
   faChevronLeft,
   faChevronUp,
@@ -81,6 +82,7 @@ const icons: IconDefinition[] = [
   faEraser,
   faPenToSquare,
   faArrowDown,
+  faCheck,
 ];
 
 @NgModule({

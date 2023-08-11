@@ -17,7 +17,6 @@ export const authenticate = (): RequestHandler => {
 
       jwt.verify(token, process.env.JWT_SECRET as string, (err, decoded) => {
         if (err) {
-          console.log(err);
           return res.status(403).json({ message: 'Forbidden' });
         }
 

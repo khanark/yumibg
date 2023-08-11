@@ -42,6 +42,12 @@ const RecipeSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
+    savedByUserData: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
   },
   { timestamps: true }
 );

@@ -25,22 +25,36 @@
         <button
           type="button"
           (click)="onSaveRecipe()"
+          [disabled]="isRecipeSaved"
           *ngIf="!isOwner"
-          class="flex w-min items-center gap-2 rounded-sm bg-orange-100 px-4 py-2 transition-colors hover:bg-orange-200"
+          class="flex w-min items-center gap-1 rounded-sm bg-orange-100 px-4 py-2 transition-colors hover:bg-orange-200"
+          [ngClass]="
+            isRecipeSaved
+              ? 'bg-green-200 disabled:pointer-events-none'
+              : 'bg-orange-100'
+          "
         >
-          <fa-icon icon="heart" class="text-orange-600" />
-          <span class="text-sm font-bold uppercase tracking-wider text-[#222]"
-            >save</span
-          >
+          <ng-container *ngIf="!isRecipeSaved">
+            <fa-icon icon="heart" class="text-lg text-orange-600" />
+            <span class="text-xs font-bold uppercase tracking-wider text-[#222]"
+              >save</span
+            >
+          </ng-container>
+          <ng-container *ngIf="isRecipeSaved">
+            <fa-icon icon="check" class="text-lg text-orange-600" />
+            <span class="text-xs font-bold uppercase tracking-wider text-[#222]"
+              >saved</span
+            >
+          </ng-container>
         </button>
         <div class="flex gap-2 md:gap-4" *ngIf="isOwner">
           <button
             (click)="toggleEditMode()"
             type="button"
-            class="flex items-center gap-2 rounded-sm bg-orange-100 px-4 py-2 transition-colors hover:bg-orange-200"
+            class="flex items-center gap-1 rounded-sm bg-orange-100 px-4 py-2 transition-colors hover:bg-orange-200"
           >
-            <fa-icon icon="pen-to-square" class="text-orange-600" />
-            <span class="text-sm font-bold uppercase tracking-wide text-[#222]"
+            <fa-icon icon="pen-to-square" class="text-lg text-orange-600" />
+            <span class="text-xs font-bold uppercase tracking-wide text-[#222]"
               >edit</span
             >
           </button>
@@ -49,8 +63,8 @@
             type="button"
             class="flex items-center gap-2 rounded-sm bg-red-500 px-4 py-2 transition-colors hover:bg-red-600"
           >
-            <fa-icon icon="eraser" class="text-orange-950" />
-            <span class="text-sm font-bold uppercase tracking-wide text-white"
+            <fa-icon icon="eraser" class="text-lg text-orange-950" />
+            <span class="text-xs font-bold uppercase tracking-wide text-white"
               >delete</span
             >
           </button>

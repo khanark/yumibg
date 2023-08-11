@@ -1,4 +1,5 @@
 import { IUser } from '../interfaces/User';
+import Recipe from '../models/Recipe';
 import User from '../models/User';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -64,8 +65,10 @@ const updateUser = async (id: string, user: IUser) => {
 };
 
 const saveRecipe = async (recipeId: string, userId: string) => {
-  console.log(recipeId);
   const user = await User.findById(userId);
+  const recipe = await Recipe.findById(recipeId);
+  recipe?.savedByUserData.push(userId);
+  await recipe.save();
   user?.savedRecipes.push(recipeId);
   await user?.save();
 };

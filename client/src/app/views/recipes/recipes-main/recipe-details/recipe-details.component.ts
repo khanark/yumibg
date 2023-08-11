@@ -7,6 +7,7 @@ import { IRecipe } from 'src/app/interfaces/Recipe';
 import { NgForm } from '@angular/forms';
 import { RecipeService } from 'src/app/services/recipe/recipe.service';
 import { UserService } from './../../../../services/user/user.service';
+import { UtilityService } from 'src/app/services/util/util.service';
 import { pageContent } from 'src/app/constants/constants';
 
 @Component({
@@ -33,6 +34,7 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private recipeService: RecipeService,
     private userService: UserService,
+    private utilityService: UtilityService,
     private router: Router,
   ) {}
 
@@ -41,8 +43,8 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
       this._recipe$.next(recipe);
       this.isOwner = recipe.owner._id === this.authService.loggedUser?._id;
       this.isLoggedIn = this.authService.isAuthenticated();
-      this.isRecipeSaved = !!this.authService.loggedUser?.savedRecipes.includes(
-        recipe._id,
+      this.isRecipeSaved = !!recipe.savedByUserData.includes(
+        this.authService.loggedUser?._id,
       );
     });
   }
@@ -71,14 +73,19 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     if (form.invalid || !form.dirty) return;
     const formData = {
       ...form.value,
-      ingredients: form.value.ingredients.split('\n'),
-      steps: form.value.steps.split('\n'),
+      ingredients: this.utilityService.trimTextAreaEmptyLines(
+        form.value.ingredients,
+      ),
+      steps: this.utilityService.trimTextAreaEmptyLines(form.value.steps),
     };
     this.isLoading = true;
-    this.recipeService.updateRecipe(this.recipe._id, formData).subscribe(() => {
-      this.isLoading = false;
-      this.toggleEditMode();
-    });
+    this.recipeService
+      .updateRecipe(this.recipe._id, formData)
+      .subscribe((recipe) => {
+        this._recipe$.next(recipe);
+        this.isLoading = false;
+        this.toggleEditMode();
+      });
   }
 
   onDelete(): void {

@@ -7,4 +7,5 @@ export interface IRecipe {
   steps: string[];
   image: string;
   owner: string | IUser;
+  savedByUserData: string[];
 }
