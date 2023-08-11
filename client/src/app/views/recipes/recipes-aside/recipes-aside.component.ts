@@ -11,7 +11,7 @@ import { pageContent } from 'src/app/constants/constants';
 })
 export class RecipesAsideComponent {
   recipes = pageContent.recipes; // dishTypes are stored here
-  formToggle: boolean = true;
+  formToggle: boolean = false;
   profileMenuToggle: boolean = false;
   outsideFormClick: boolean = false;
 

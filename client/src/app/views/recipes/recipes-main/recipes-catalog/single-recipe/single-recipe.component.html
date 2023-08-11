@@ -1,4 +1,10 @@
-<div class="h-[200px] w-full">
+<div class="relative h-[200px] w-full">
+  <ng-container *ngIf="isRecipeNew">
+    <span
+      class="absolute top-0 inline-block bg-red-500 p-2 text-xs font-medium uppercase tracking-wider text-white"
+      >new</span
+    >
+  </ng-container>
   <img
     src="{{ recipe?.image }}"
     class="h-full w-full object-cover"
