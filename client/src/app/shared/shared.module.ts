@@ -1,6 +1,7 @@
 import { AuthHttpErrorComponent } from './auth-http-error/auth-http-error.component';
 import { CommonModule } from '@angular/common';
 import { ComponentNavigationComponent } from './component-navigation/component-navigation.component';
+import { CookTimePipe } from './pipes/cookTime.pipe';
 import { CustomTitleCasePipe } from './pipes/custom-title-case.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconsModule } from '../icons/icons.module';
@@ -15,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoaderComponent,
     AuthHttpErrorComponent,
     CustomTitleCasePipe,
+    CookTimePipe,
     InputComponent,
   ],
   imports: [CommonModule, IconsModule, FontAwesomeModule, ReactiveFormsModule],
@@ -24,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AuthHttpErrorComponent,
     CustomTitleCasePipe,
     InputComponent,
+    CookTimePipe,
   ],
 })
 export class SharedModule {}

@@ -13,7 +13,6 @@ export class SingleRecipeComponent implements OnInit {
 
   ngOnInit(): void {
     this.isRecipeNew = this.isNewRecord(this.recipe.createdAt);
-    console.log(this.isRecipeNew);
   }
 
   isNewRecord(creationDate: string): boolean {

@@ -21,7 +21,7 @@
     </h3>
     <div class="flex items-center gap-1">
       <fa-icon icon="clock-rotate-left" class="text-orange-600" />
-      <span class="text-sm">{{ recipe?.cookTime }} mins</span>
+      <span class="text-sm">{{ recipe?.cookTime | cookTime }}</span>
     </div>
   </div>
 </div>
