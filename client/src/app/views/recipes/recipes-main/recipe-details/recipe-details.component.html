@@ -1,9 +1,15 @@
 <div class="max-w-6xl">
   <div *ngIf="!editMode" class="fade-in">
-    <h2 class="mb-2 text-4xl tracking-tight text-[#222] md:text-5xl">
+    <h2
+      class="mb-2 text-4xl font-extralight tracking-tight text-[#222] md:text-5xl"
+    >
       {{ recipe.name | titlecase }}
     </h2>
-    <h5 class="text-xl text-[#555] md:text-2xl">{{ recipe.description }}</h5>
+    <h5
+      class="mb-8 rounded-sm bg-gradient-to-r from-orange-50 to-white p-4 text-xl text-[#555] md:text-2xl"
+    >
+      {{ recipe.description }}
+    </h5>
     <div class="flex flex-col gap-8 pt-6 lg:flex-row">
       <div class="flex gap-4">
         <div class="h-12 w-12 rounded-full bg-slate-400"></div>
@@ -81,20 +87,20 @@
         />
       </div>
       <div class="flex flex-col gap-8 md:px-8">
-        <div>
+        <div class="bg-gradient-to-b from-orange-200 to-white p-4">
           <h3 class="mb-4 text-3xl text-[#222] md:text-4xl">
             All the ingredients
           </h3>
-          <ul class="flex list-disc flex-col gap-2">
+          <ul class="grid grid-cols-1 lg:grid-cols-3">
             <li
-              *ngFor="let ingredient of recipe?.ingredients"
+              *ngFor="let ingredient of recipe?.ingredients; let i = index"
               class="ml-8 text-orange-900 underline underline-offset-4 md:text-lg"
             >
-              {{ ingredient }}
+              {{ i + 1 }}. {{ ingredient }}
             </li>
           </ul>
         </div>
-        <div>
+        <div class="p-4">
           <h3 class="mb-4 text-3xl text-[#222] md:text-4xl">How to make</h3>
           <ul class="flex flex-col gap-2">
             <li
