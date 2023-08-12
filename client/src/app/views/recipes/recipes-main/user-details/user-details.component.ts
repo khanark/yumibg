@@ -10,6 +10,7 @@ import { IUser } from 'src/app/interfaces/User';
 })
 export class UserDetailsComponent implements OnInit {
   user: IUser | undefined;
+  activeButton: string = 'button1';
 
   constructor(private route: ActivatedRoute) {}
 
@@ -17,5 +18,9 @@ export class UserDetailsComponent implements OnInit {
     this.route.data.subscribe(({ user }) => {
       this.user = user;
     });
+  }
+
+  setActiveButton(button: string) {
+    this.activeButton = button;
   }
 }

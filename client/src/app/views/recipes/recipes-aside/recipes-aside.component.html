@@ -28,7 +28,7 @@
           Dishes
         </legend>
         <div
-          class="flex h-52 flex-col space-y-2 overflow-scroll rounded-sm bg-orange-100 px-6 pt-4 text-[#555] accent-orange-600"
+          class="flex h-52 flex-col space-y-2 overflow-auto rounded-sm bg-orange-100 px-6 pt-4 text-[#555] accent-orange-600"
         >
           <label
             class="flex cursor-pointer items-center gap-x-3"
@@ -47,7 +47,7 @@
           class="flex flex-col space-y-2 rounded-sm bg-orange-100 px-6 py-4 text-[#555] accent-orange-600"
         >
           <label
-            class="flex items-center gap-x-3"
+            class="flex cursor-pointer items-center gap-x-3"
             *ngFor="let order of recipes.order"
           >
             <input

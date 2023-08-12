@@ -16,16 +16,49 @@
       <span class="ml-2 text-lg text-[#222]">{{ user?.email }}</span>
     </div>
   </div>
-  <div class="button-wrapper | flex gap-2">
+  <div class="button-wrapper | mb-8 flex gap-2">
     <button
-      class="rounded-t-lg bg-orange-500 px-4 py-2 text-sm font-bold uppercase text-white hover:border-b-orange-700"
+      class="rounded-t-lg bg-orange-100 px-4 py-2 text-sm font-bold uppercase text-[#444] transition-colors hover:bg-orange-600 hover:text-white"
+      [ngClass]="activeButton == 'button1' ? 'bg-orange-600 text-white' : ''"
+      (click)="setActiveButton('button1')"
     >
       My Recipes
     </button>
     <button
-      class="rounded-t-lg bg-orange-500 px-4 py-2 text-sm font-bold uppercase text-white hover:border-b-orange-700"
+      class="rounded-t-lg bg-orange-100 px-4 py-2 text-sm font-bold uppercase text-[#444] transition-colors hover:bg-orange-600 hover:text-white"
+      [ngClass]="activeButton == 'button2' ? 'bg-orange-600 text-white' : ''"
+      (click)="setActiveButton('button2')"
     >
       Saved Recipes
     </button>
+  </div>
+  <ng-container *ngIf="activeButton === 'button1'">
+    <ul class="responsive-grid grid gap-8">
+      <li
+        class="card | cursor-pointer rounded-sm bg-white drop-shadow-md hover:translate-x-[-3px] hover:translate-y-[-3px]"
+        *ngFor="let recipe of user?.createdRecipes as recipeList"
+      >
+        <a [routerLink]="['/recipes/single', recipe._id]">
+          <app-single-recipe [recipe]="recipe" />
+        </a>
+      </li>
+    </ul>
+  </ng-container>
+  <ng-container *ngIf="activeButton === 'button2'">
+    <ul class="responsive-grid grid gap-8">
+      <li
+        class="card | cursor-pointer rounded-sm bg-white drop-shadow-md hover:translate-x-[-3px] hover:translate-y-[-3px]"
+        *ngFor="let recipe of user?.savedRecipes as recipeList"
+      >
+        <a [routerLink]="['/recipes/single', recipe._id]">
+          <app-single-recipe [recipe]="recipe" />
+        </a>
+      </li>
+    </ul>
+  </ng-container>
+  <div *ngIf="user?.createdRecipes?.length === 0" class="col-span-full">
+    <h3 class="mb-4 text-3xl text-red-500">No recipes yet!</h3>
+    <p>You haven't created any recipes yet.</p>
+    <p>Try again with different criteria.</p>
   </div>
 </div>
