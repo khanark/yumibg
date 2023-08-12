@@ -24,7 +24,6 @@ export class RecipesAsideComponent {
     const selectedDishes: string[] = Object.keys(form.value).filter(
       (key) => form.value[key],
     );
-    // TODO: Fix the order being passed in the selectedDishes when filtering
     const selectedOrder = form.value.order;
 
     this.recipeService.recipesInit({

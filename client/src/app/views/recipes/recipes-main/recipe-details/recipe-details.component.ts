@@ -43,7 +43,7 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
       this._recipe$.next(recipe);
       this.isOwner = recipe.owner._id === this.authService.loggedUser?._id;
       this.isLoggedIn = this.authService.isAuthenticated();
-      this.isRecipeSaved = !!recipe.savedByUserData.includes(
+      this.isRecipeSaved = !!recipe.savedByUserData.savedUsers.includes(
         this.authService.loggedUser?._id,
       );
     });

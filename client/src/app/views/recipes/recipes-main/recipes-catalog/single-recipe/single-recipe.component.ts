@@ -10,9 +10,11 @@ import { IRecipe } from 'src/app/interfaces/Recipe';
 export class SingleRecipeComponent implements OnInit {
   @Input() recipe!: IRecipe;
   isRecipeNew: boolean = false;
+  timesSavedCounter: number = 0;
 
   ngOnInit(): void {
     this.isRecipeNew = this.isNewRecord(this.recipe.createdAt);
+    this.timesSavedCounter = this.recipe.savedByUserData.count;
   }
 
   isNewRecord(creationDate: string): boolean {

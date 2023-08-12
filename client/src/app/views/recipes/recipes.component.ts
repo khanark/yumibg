@@ -7,6 +7,7 @@ import {
 } from '@angular/router';
 
 import { Component } from '@angular/core';
+import { RecipeService } from 'src/app/services/recipe/recipe.service';
 
 @Component({
   selector: 'app-recipes',
@@ -16,7 +17,10 @@ import { Component } from '@angular/core';
 export class RecipesComponent {
   loading: boolean = false;
 
-  constructor(public router: Router) {
+  constructor(
+    public router: Router,
+    public recipeService: RecipeService,
+  ) {
     this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationStart) {
         this.loading = true;

@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment.development';
 export class RecipeService implements OnDestroy {
   private _recipes$ = new BehaviorSubject<IRecipe[]>([]);
   private recipes$ = this._recipes$.asObservable();
+  isLoading: boolean = false;
   subscription!: Subscription;
 
   constructor(
@@ -50,11 +51,16 @@ export class RecipeService implements OnDestroy {
       }
     }
 
+    this.isLoading = true;
+
     this.subscription = this.http
       .get<IRecipe[]>(`${environment.API_URL}recipes`, {
         params,
       })
-      .subscribe((recipes) => this._recipes$.next(recipes));
+      .subscribe((recipes) => {
+        this.isLoading = false;
+        this._recipes$.next(recipes);
+      });
   }
 
   getSingleRecipe(id: string): Observable<IRecipe> {

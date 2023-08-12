@@ -19,9 +19,15 @@
     <h3 class="line-clamp-2 text-[28px] leading-7 text-[#222]">
       {{ recipe?.name | titlecase }}
     </h3>
-    <div class="flex items-center gap-1">
-      <fa-icon icon="clock-rotate-left" class="text-orange-600" />
-      <span class="text-sm">{{ recipe?.cookTime | cookTime }}</span>
+    <div class="flex justify-between">
+      <div class="flex items-center gap-1">
+        <fa-icon icon="clock-rotate-left" class="text-orange-600" />
+        <span class="text-sm">{{ recipe?.cookTime | cookTime }}</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <fa-icon icon="heart" class="text-orange-600" />
+        <span class="text-sm">{{ timesSavedCounter }}</span>
+      </div>
     </div>
   </div>
 </div>

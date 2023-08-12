@@ -67,7 +67,8 @@ const updateUser = async (id: string, user: IUser) => {
 const saveRecipe = async (recipeId: string, userId: string) => {
   const user = await User.findById(userId);
   const recipe = await Recipe.findById(recipeId);
-  recipe?.savedByUserData.push(userId);
+  recipe.savedByUserData.savedUsers.push(userId);
+  recipe.savedByUserData.count++;
   await recipe.save();
   user?.savedRecipes.push(recipeId);
   await user?.save();

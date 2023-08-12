@@ -1,4 +1,3 @@
-
 export interface IRecipe {
   _id: string;
   name: string;
@@ -10,4 +9,8 @@ export interface IRecipe {
   cookTime: number;
   dishType: string;
   createdAt: string;
+  savedByUserData: {
+    count: number;
+    savedUsers: string[];
+  };
 }

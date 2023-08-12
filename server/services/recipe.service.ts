@@ -25,21 +25,35 @@ const composeOrderQuery = (orderQuery: any) => {
 
 const getRecipes = async (query: any) => {
   let filter = {};
+  const sortOrder: any = {};
 
   if (query.dishType) {
     filter = { ...filter, dishType: query.dishType };
   }
 
   if (query.order) {
-    const sortOrder = query.order === 'oldest' ? 1 : -1;
-    filter = { ...filter, createdAt: sortOrder };
+    switch (query.order) {
+      case 'newest':
+        sortOrder.createdAt = -1;
+        break;
+      case 'oldest':
+        sortOrder.createdAt = 1;
+        break;
+      case 'popular':
+        sortOrder['savedByUserData.count'] = -1;
+        break;
+    }
+  }
+
+  if (!query.order) {
+    sortOrder.createdAt = -1;
   }
 
   if (query.search) {
-    filter = { ...filter, search: { $regex: new RegExp(query.search, 'i') } };
+    filter = { ...filter, name: { $regex: new RegExp(query.search, 'i') } };
   }
 
-  return Recipe.find(filter);
+  return await Recipe.find(filter).sort(sortOrder);
 };
 
 const getRecipesByUserId = async (userId: string) => Recipe.find({ owner: userId });
