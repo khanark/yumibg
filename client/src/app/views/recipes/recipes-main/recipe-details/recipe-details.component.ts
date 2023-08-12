@@ -64,8 +64,6 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
         this.authService.loggedUser?._id,
       );
 
-      console.log(recipe.ingredients);
-
       this.editRecipeForm.patchValue({
         name: recipe.name,
         cookTime: recipe.cookTime,
