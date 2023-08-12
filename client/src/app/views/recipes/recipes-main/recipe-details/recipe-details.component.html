@@ -114,218 +114,70 @@
       </div>
     </div>
   </div>
-  <div *ngIf="editMode" class="fade-in md:max-w-lg">
+  <div *ngIf="editMode" class="fade-in md:max-w-full">
     <h3 class="mb-4 text-3xl text-orange-600">Edit Your Recipe</h3>
     <app-loader *ngIf="isLoading" />
     <form
-      #editForm="ngForm"
-      class="mx-1 flex flex-col gap-4"
-      (ngSubmit)="onSubmit(editForm)"
+      [formGroup]="editRecipeForm"
+      class="mx-1 grid gap-8 lg:grid-cols-2"
+      (ngSubmit)="onSubmit()"
     >
-      <div class="flex flex-col justify-between gap-4 lg:flex-row">
-        <div class="flex-1">
-          <div class="flex-1">
-            <label for="name" class="mb-1 text-sm text-[#888]">Name</label>
-            <input
-              class="w-full rounded-md border-[1px] border-orange-300 px-2 py-1 outline-none"
-              type="text"
-              name="name"
-              #nameInput="ngModel"
-              placeholder="Type recipe name."
-              [(ngModel)]="recipe.name"
-              minlength="3"
-              required
-            />
-          </div>
-          <!-- Recipe name validation -->
-          <div *ngIf="nameInput.touched">
-            <div
-              class="ml-4 text-red-500"
-              *ngIf="nameInput.errors?.['minlength']"
-            >
-              Minimum 3 characters.
-            </div>
-            <div
-              class="ml-4 text-red-500"
-              *ngIf="nameInput.errors?.['required']"
-            >
-              Name is required.
-            </div>
-          </div>
-          <!--  -->
-        </div>
-        <div>
-          <div class="flex-1">
-            <label for="cookTime" class="mb-1 text-sm text-[#888]"
-              >Preparation time</label
-            >
-            <div
-              class="flex items-center overflow-hidden rounded-md border-[1px] border-orange-300"
-            >
-              <input
-                class="flex-1 px-2 py-1 outline-none"
-                type="number"
-                name="cookTime"
-                #cookTime="ngModel"
-                placeholder="Cook time in minutes."
-                [(ngModel)]="recipe.cookTime"
-                required
-              />
-            </div>
-          </div>
-          <!-- Preparation time validation -->
-          <div *ngIf="cookTime.touched || cookTime.touched">
-            <div class="ml-4 text-red-500">
-              <div
-                *ngIf="
-                  cookTime.errors?.['required'] || cookTime.errors?.['required']
-                "
-              >
-                Preparation time is required.
-              </div>
-            </div>
-          </div>
-          <!--  -->
-        </div>
+      <app-loader *ngIf="isLoading" />
+      <div class="flex flex-col gap-4">
+        <app-input
+          [control]="editRecipeForm.controls.name"
+          inputId="name"
+          label="Name"
+          placeHolder="The name of the recipe"
+        />
+        <app-input
+          [control]="editRecipeForm.controls.cookTime"
+          inputId="cookTime"
+          inputType="number"
+          label="Preparation time"
+          placeHolder="Cook time in minutes"
+        />
+        <app-input
+          [control]="editRecipeForm.controls.dishType"
+          label="Dish type"
+          inputId="dishType"
+          inputType="select"
+        />
+        <app-input
+          [control]="editRecipeForm.controls.image"
+          label="Image"
+          inputId="image"
+          placeHolder="Recipe image"
+        />
+        <app-input
+          [control]="editRecipeForm.controls.description"
+          label="Description"
+          inputType="textarea"
+          inputId="description"
+          placeHolder="Recipe description"
+        />
       </div>
-      <div>
-        <div class="form-group">
-          <label for="dishType" class="mb-1 text-sm text-[#888]"
-            >Dish type</label
-          >
-          <select
-            class="w-full rounded-md border-[1px] border-orange-300 px-2 py-1 outline-none"
-            name="dishType"
-            #dishInput="ngModel"
-            [(ngModel)]="recipe.dishType"
-            required
-          >
-            <option *ngFor="let dish of dishes" [value]="dish.name">
-              {{ dish.text }}
-            </option>
-          </select>
-        </div>
-        <!-- Dish type validation -->
-        <div *ngIf="dishInput.touched">
-          <div class="ml-4 text-red-500" *ngIf="dishInput.errors?.['required']">
-            Dish type is required.
-          </div>
-        </div>
-        <!--  -->
-      </div>
-      <div>
-        <div class="form-group">
-          <label for="image" class="mb-1 text-sm text-[#888]">Image</label>
-          <input
-            class="w-full rounded-md border-[1px] border-orange-300 px-2 py-1 outline-none"
-            name="image"
-            #imageInput="ngModel"
-            placeholder="Link to your image."
-            [(ngModel)]="recipe.image"
-            required
-            pattern="^(https?:\/\/).*\.(png|jpe?g)$"
-          />
-        </div>
-        <!-- Image validation -->
-        <div *ngIf="imageInput.touched">
-          <div
-            class="ml-4 text-red-500"
-            *ngIf="imageInput.errors?.['required']"
-          >
-            Image is required.
-          </div>
-          <div class="ml-4 text-red-500" *ngIf="imageInput.errors?.['pattern']">
-            Invalid format.
-          </div>
-        </div>
-        <!--  -->
-      </div>
-      <div>
-        <div class="form-group">
-          <label for="description" class="mb-1 text-sm text-[#888]"
-            >Description</label
-          >
-          <textarea
-            class="w-full rounded-md border-[1px] border-orange-300 px-2 py-1 outline-none"
-            name="description"
-            #descriptionInput="ngModel"
-            placeholder="Write your recipe description."
-            rows="3"
-            [(ngModel)]="recipe.description"
-            minlength="10"
-            required
-          ></textarea>
-        </div>
-        <!-- Description validation -->
-        <div *ngIf="descriptionInput.touched" class="mt-[-7px]">
-          <div
-            class="ml-4 text-red-500"
-            *ngIf="descriptionInput.errors?.['required']"
-          >
-            Description is required.
-          </div>
-          <div
-            class="ml-4 text-red-500"
-            *ngIf="descriptionInput.errors?.['minlength']"
-          >
-            Minimum 10 characters.
-          </div>
-        </div>
-        <!--  -->
-      </div>
-      <div>
-        <div class="form-group">
-          <label for="ingidients" class="mb-1 text-sm text-[#888]"
-            >Ingredients</label
-          >
-          <textarea
-            class="w-full rounded-md border-[1px] border-orange-300 px-2 py-1 outline-none"
-            name="ingredients"
-            #ingredientsInput="ngModel"
-            placeholder="Each ingredient on a new line *"
-            rows="3"
-            [(ngModel)]="formRecipe.ingredients"
-            required
-          ></textarea>
-        </div>
-        <!-- Ingredients validation -->
-        <div *ngIf="ingredientsInput.touched" class="mt-[-7px]">
-          <div
-            class="ml-4 text-red-500"
-            *ngIf="ingredientsInput.errors?.['required']"
-          >
-            Ingredients are required.
-          </div>
-        </div>
-        <!--  -->
-      </div>
-      <div>
-        <div class="form-group m-0">
-          <label for="steps" class="mb-1 text-sm text-[#888]">Steps</label>
-          <textarea
-            class="w-full rounded-md border-[1px] border-orange-300 px-2 py-1 outline-none"
-            name="steps"
-            #stepsInput="ngModel"
-            placeholder="Each step on a new line *"
-            rows="3"
-            [(ngModel)]="formRecipe.steps"
-            required
-          ></textarea>
-        </div>
-        <div *ngIf="stepsInput.touched" class="mt-[-7px]">
-          <div
-            class="ml-4 text-red-500"
-            *ngIf="stepsInput.errors?.['required']"
-          >
-            Steps are required.
-          </div>
-        </div>
+      <div class="flex flex-col gap-4">
+        <app-input
+          [control]="editRecipeForm.controls.ingredients"
+          inputType="textarea"
+          label="Ingredients"
+          inputId="ingredients"
+          placeHolder="Each ingredient on a new line **"
+        />
+        <app-input
+          [control]="editRecipeForm.controls.steps"
+          inputType="textarea"
+          label="Steps"
+          inputId="steps"
+          placeHolder="Each step on a new line **"
+        />
       </div>
       <button
-        [disabled]="isLoading"
-        class="w-min justify-self-start rounded-md bg-orange-600 px-6 py-2 text-sm font-medium uppercase text-white transition-colors hover:bg-orange-500"
+        class="w-min rounded-sm bg-orange-600 px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-orange-500"
+        type="submit"
       >
-        Save
+        save
       </button>
     </form>
   </div>

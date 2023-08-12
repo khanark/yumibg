@@ -1,5 +1,6 @@
+import { FormBuilder, NgForm, Validators } from '@angular/forms';
+
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { RecipeService } from 'src/app/services/recipe/recipe.service';
 import { Router } from '@angular/router';
 import { UtilityService } from 'src/app/services/util/util.service';
@@ -13,30 +14,46 @@ import { pageContent } from 'src/app/constants/constants';
 export class CreateRecipeComponent {
   dishes = pageContent.recipes.dishes;
   isLoading: boolean = false;
+  createRecipeForm = this.fb.group({
+    name: ['', [Validators.required, Validators.minLength(3)]],
+    cookTime: ['', [Validators.required]],
+    dishType: ['', [Validators.required]],
+    image: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern(/^(https?:\/\/).*\.(png|jpe?g)$/),
+      ],
+    ],
+    description: ['', [Validators.required, Validators.minLength(10)]],
+    ingredients: ['', [Validators.required]],
+    steps: ['', [Validators.required]],
+  });
 
   constructor(
     private recipeService: RecipeService,
     private utilityService: UtilityService,
     private router: Router,
+    private fb: FormBuilder,
   ) {}
 
-  onSubmit(createRecipeForm: NgForm) {
-    if (createRecipeForm.invalid) {
+  onSubmit() {
+    if (this.createRecipeForm.invalid) {
       return;
     }
     const formData = {
-      ...createRecipeForm.value,
+      ...this.createRecipeForm.value,
       ingredients: this.utilityService.trimTextAreaEmptyLines(
-        createRecipeForm.value.ingredients,
+        this.createRecipeForm.value.ingredients as string,
       ),
       steps: this.utilityService.trimTextAreaEmptyLines(
-        createRecipeForm.value.steps,
+        this.createRecipeForm.value.steps as string,
       ),
     };
 
     this.isLoading = true;
 
-    this.recipeService.createRecipe(formData).subscribe(() => {
+    this.recipeService.createRecipe(formData as any).subscribe(() => {
       this.isLoading = false;
       this.router.navigate(['/recipes/catalog']);
     });

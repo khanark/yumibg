@@ -8,13 +8,40 @@
       class="ml-1 inline-block text-orange-300"
       [icon]="iconName"
     />
-    <input
-      [formControl]="control"
-      class="w-full bg-transparent p-1 outline-none"
-      [type]="inputType"
-      [id]="inputId"
-      [placeholder]="placeHolder"
-    />
+    <ng-container *ngIf="inputType !== 'textarea' && inputType !== 'select'">
+      <input
+        [formControl]="control"
+        class="w-full bg-transparent p-1 outline-none"
+        [type]="inputType"
+        [id]="inputId"
+        [placeholder]="placeHolder"
+      />
+    </ng-container>
+    <ng-container *ngIf="inputType === 'textarea'">
+      <textarea
+        [formControl]="control"
+        class="w-full resize-none bg-transparent p-1 outline-none"
+        [placeholder]="placeHolder"
+        [id]="inputId"
+        cols="30"
+        rows="5"
+      ></textarea>
+    </ng-container>
+    <ng-container *ngIf="inputType === 'select'">
+      <select
+        class="w-full bg-transparent p-1 outline-none"
+        [formControl]="control"
+        [id]="inputId"
+      >
+        <option
+          class="inline-block w-full"
+          *ngFor="let option of selectOptions"
+          [value]="option.name"
+        >
+          {{ option.text }}
+        </option>
+      </select>
+    </ng-container>
   </div>
   <ng-container *ngIf="control.invalid && control.dirty && control.touched">
     <div

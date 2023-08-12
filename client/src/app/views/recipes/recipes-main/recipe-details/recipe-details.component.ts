@@ -1,10 +1,10 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, NgForm, Validators } from '@angular/forms';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { IRecipe } from 'src/app/interfaces/Recipe';
-import { NgForm } from '@angular/forms';
 import { RecipeService } from 'src/app/services/recipe/recipe.service';
 import { UserService } from './../../../../services/user/user.service';
 import { UtilityService } from 'src/app/services/util/util.service';
@@ -19,6 +19,22 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
   private _recipe$ = new BehaviorSubject<IRecipe>({} as IRecipe);
   public recipe$ = this._recipe$.asObservable();
   dishes = pageContent.recipes.dishes;
+
+  editRecipeForm = this.fb.group({
+    name: ['', [Validators.required, Validators.minLength(3)]],
+    cookTime: ['', [Validators.required]],
+    dishType: ['', [Validators.required]],
+    image: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern(/^(https?:\/\/).*\.(png|jpe?g)$/),
+      ],
+    ],
+    description: ['', [Validators.required, Validators.minLength(10)]],
+    ingredients: ['', [Validators.required]],
+    steps: ['', [Validators.required]],
+  });
 
   subscription!: Subscription;
 
@@ -36,6 +52,7 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private utilityService: UtilityService,
     private router: Router,
+    private fb: FormBuilder,
   ) {}
 
   ngOnInit() {
@@ -46,6 +63,18 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
       this.isRecipeSaved = !!recipe.savedByUserData.savedUsers.includes(
         this.authService.loggedUser?._id,
       );
+
+      console.log(recipe.ingredients);
+
+      this.editRecipeForm.patchValue({
+        name: recipe.name,
+        cookTime: recipe.cookTime,
+        dishType: recipe.dishType,
+        image: recipe.image,
+        description: recipe.description,
+        ingredients: recipe.ingredients ? recipe.ingredients.join('\n') : '',
+        steps: recipe.steps ? recipe.steps.join('\n') : '',
+      });
     });
   }
 
@@ -69,18 +98,20 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     this.editMode = !this.editMode;
   }
 
-  onSubmit(form: NgForm): void {
-    if (form.invalid || !form.dirty) return;
+  onSubmit(): void {
+    if (this.editRecipeForm.invalid || !this.editRecipeForm.dirty) return;
     const formData = {
-      ...form.value,
+      ...this.editRecipeForm.value,
       ingredients: this.utilityService.trimTextAreaEmptyLines(
-        form.value.ingredients,
+        this.editRecipeForm.value.ingredients as string,
       ),
-      steps: this.utilityService.trimTextAreaEmptyLines(form.value.steps),
+      steps: this.utilityService.trimTextAreaEmptyLines(
+        this.editRecipeForm.value.steps as string,
+      ),
     };
     this.isLoading = true;
     this.recipeService
-      .updateRecipe(this.recipe._id, formData)
+      .updateRecipe(this.recipe._id, formData as any)
       .subscribe((recipe) => {
         this._recipe$.next(recipe);
         this.isLoading = false;

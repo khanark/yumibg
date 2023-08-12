@@ -1,7 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { FormControl } from '@angular/forms';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { pageContent } from 'src/app/constants/constants';
+
+interface Dish {
+  name: string;
+  text: string;
+  isChecked: boolean;
+}
 
 @Component({
   selector: 'app-input',
@@ -15,6 +22,7 @@ export class InputComponent {
   @Input() iconName!: IconProp;
   @Input() placeHolder: string = '';
   @Input() inputType: string = '';
+  selectOptions: Dish[] = pageContent.recipes.dishes;
 
   errorMessages: Record<string, string> = {
     required: 'Required field',
