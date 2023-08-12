@@ -33,6 +33,9 @@ export class RecipesAsideComponent {
   }
 
   onFilterReset(form: NgForm) {
+    if (!form.dirty) {
+      return;
+    }
     form.reset();
     this.recipeService.recipesInit();
   }

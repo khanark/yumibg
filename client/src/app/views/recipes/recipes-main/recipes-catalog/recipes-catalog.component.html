@@ -1,5 +1,8 @@
 <div class="fade-in p-4">
-  <app-loader *ngIf="isLoading" />
+  <div *ngIf="recipesService.isLoading">
+    <app-loader />
+    <p class="-mt-[30px] text-lg text-[#222]">Loading recipes...</p>
+  </div>
   <ng-container *ngIf="recipes | async as recipeList">
     <ul class="responsive-grid grid gap-8">
       <li
@@ -11,7 +14,10 @@
         </a>
       </li>
     </ul>
-    <div *ngIf="recipeList.length === 0 && !isLoading" class="col-span-full">
+    <div
+      *ngIf="recipeList.length === 0 && !recipesService.isLoading"
+      class="col-span-full"
+    >
       <h3 class="mb-4 text-3xl text-red-500">Opps...</h3>
       <p>Seems like there are no recipes meeting your criteria.</p>
       <p>Try again with different criteria.</p>

@@ -52,6 +52,7 @@ export class RecipeService implements OnDestroy {
     }
 
     this.isLoading = true;
+    this._recipes$.next([]);
 
     this.subscription = this.http
       .get<IRecipe[]>(`${environment.API_URL}recipes`, {
