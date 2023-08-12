@@ -56,9 +56,18 @@
       </li>
     </ul>
   </ng-container>
-  <div *ngIf="user?.createdRecipes?.length === 0" class="col-span-full">
+  <div
+    *ngIf="user?.createdRecipes?.length === 0 && activeButton === 'button1'"
+    class="col-span-full"
+  >
     <h3 class="mb-4 text-3xl text-red-500">No recipes yet!</h3>
     <p>You haven't created any recipes yet.</p>
-    <p>Try again with different criteria.</p>
+  </div>
+  <div
+    *ngIf="user?.savedRecipes?.length === 0 && activeButton === 'button2'"
+    class="col-span-full"
+  >
+    <h3 class="mb-4 text-3xl text-red-500">No recipes yet!</h3>
+    <p>You haven't saved any recipes yet.</p>
   </div>
 </div>
