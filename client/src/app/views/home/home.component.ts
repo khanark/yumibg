@@ -1,4 +1,4 @@
-import * as Aos from 'aos';
+import * as AOS from 'aos';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -12,9 +12,10 @@ import { pageContent } from 'src/app/constants/constants';
 export class HomeComponent implements OnInit {
   homeContent = pageContent.home;
   ngOnInit(): void {
-    Aos.init({
+    AOS.init({
       once: true,
-      delay: 50,
+      duration: 1000,
+      offset: 300,
     });
   }
 }
