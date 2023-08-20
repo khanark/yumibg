@@ -104,7 +104,7 @@
     </li>
     <li class="border-b-orange-300">
       <a
-        routerLink=""
+        [routerLink]="['/recipes/users/', authService.loggedUser._id, 'edit']"
         class="block w-full bg-orange-100 px-4 py-2 text-xs font-bold uppercase text-[#222]"
         >edit</a
       >
