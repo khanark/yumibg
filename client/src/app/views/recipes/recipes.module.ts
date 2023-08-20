@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SingleRecipeComponent } from './recipes-main/recipes-catalog/single-recipe/single-recipe.component';
 import { UserDetailsComponent } from './recipes-main/user-details/user-details.component';
+import { UserEditComponent } from './recipes-main/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { UserDetailsComponent } from './recipes-main/user-details/user-details.c
     RecipesCatalogComponent,
     CreateRecipeComponent,
     SingleRecipeComponent,
+    UserEditComponent,
   ],
   imports: [
     CommonModule,

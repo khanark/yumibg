@@ -7,6 +7,7 @@ import { RecipeDetailsComponent } from './recipes-main/recipe-details/recipe-det
 import { RecipesCatalogComponent } from './recipes-main/recipes-catalog/recipes-catalog.component';
 import { RecipesComponent } from './recipes.component';
 import { UserDetailsComponent } from './recipes-main/user-details/user-details.component';
+import { UserEditComponent } from './recipes-main/user-edit/user-edit.component';
 import { recipeResolver } from 'src/app/services/resolvers/recipe-resolver.service';
 import { userResolver } from 'src/app/services/resolvers/user-resolver.service';
 
@@ -25,6 +26,15 @@ const routes: Routes = [
         path: 'users/:id',
         title: 'User',
         component: UserDetailsComponent,
+        resolve: {
+          user: userResolver,
+        },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'users/:id/edit',
+        title: 'Edit User',
+        component: UserEditComponent,
         resolve: {
           user: userResolver,
         },
