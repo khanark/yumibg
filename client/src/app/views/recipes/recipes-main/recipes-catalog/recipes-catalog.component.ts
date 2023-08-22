@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IRecipe, RecipesArray } from 'src/app/interfaces/Recipe';
 
-import { IRecipe } from 'src/app/interfaces/Recipe';
 import { Observable } from 'rxjs';
 import { RecipeService } from 'src/app/services/recipe/recipe.service';
 
@@ -10,7 +10,7 @@ import { RecipeService } from 'src/app/services/recipe/recipe.service';
   styleUrls: ['./recipes-catalog.component.css'],
 })
 export class RecipesCatalogComponent implements OnInit {
-  recipes!: Observable<IRecipe[]>;
+  recipes!: Observable<RecipesArray>;
 
   constructor(public recipesService: RecipeService) {}
 

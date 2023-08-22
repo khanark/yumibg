@@ -26,6 +26,8 @@ const composeOrderQuery = (orderQuery: any) => {
 const getRecipes = async (query: any) => {
   let filter = {};
   const sortOrder: any = {};
+  const limit = query.limit || 5;
+  const page = query.page || 1;
 
   if (query.dishType) {
     filter = { ...filter, dishType: query.dishType };
@@ -53,10 +55,23 @@ const getRecipes = async (query: any) => {
     filter = { ...filter, name: { $regex: new RegExp(query.search, 'i') } };
   }
 
-  return await Recipe.find(filter).sort(sortOrder);
+  const recipes = await Recipe.find(filter)
+    .limit(limit * 1)
+    .skip((page - 1) * limit)
+    .sort(sortOrder)
+    .exec();
+
+  const count = await Recipe.count();
+
+  return {
+    recipes,
+    totalPages: Math.ceil(count / limit),
+    currentPage: Number(page),
+  };
 };
 
-const getRecipesByUserId = async (userId: string) => Recipe.find({ owner: userId });
+const getRecipesByUserId = async (userId: string) =>
+  Recipe.find({ owner: userId });
 
 const getRecipe = async (id: string) => Recipe.findById(id).populate('owner');
 
@@ -78,11 +93,19 @@ const createRecipe = async (recipe: IRecipe) => {
 const updateRecipe = async (id: string, recipe: IRecipe) =>
   Recipe.findByIdAndUpdate(id, recipe, { new: true, runValidators: true });
 
-const deleteRecipe = async (id: string) => Recipe.findByIdAndDelete(id, { new: true });
+const deleteRecipe = async (id: string) =>
+  Recipe.findByIdAndDelete(id, { new: true });
 
 // NOTE: I don't think I need this one.
 
 // const saveUserRecipe = async (recipeId: string, userId: string) =>
 // 	Recipe.findByIdAndUpdate(recipeId, { $push: { savedForLater: userId } }, { new: true, runValidators: true });
 
-export { getRecipes, getRecipe, createRecipe, updateRecipe, deleteRecipe, getRecipesByUserId };
+export {
+  getRecipes,
+  getRecipe,
+  createRecipe,
+  updateRecipe,
+  deleteRecipe,
+  getRecipesByUserId,
+};

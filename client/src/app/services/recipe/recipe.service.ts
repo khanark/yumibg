@@ -1,16 +1,20 @@
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { IRecipe, RecipesArray } from 'src/app/interfaces/Recipe';
 import { Injectable, OnDestroy } from '@angular/core';
 
 import { AuthService } from '../auth/auth.service';
-import { IRecipe } from 'src/app/interfaces/Recipe';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService implements OnDestroy {
-  private _recipes$ = new BehaviorSubject<IRecipe[]>([]);
+  private _recipes$ = new BehaviorSubject<RecipesArray>({
+    recipes: [],
+    totalPages: 1,
+    currentPage: 1,
+  });
   private recipes$ = this._recipes$.asObservable();
   isLoading: boolean = false;
   subscription!: Subscription;
@@ -24,7 +28,7 @@ export class RecipeService implements OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  getAllRecipes(): Observable<IRecipe[]> {
+  getAllRecipes(): Observable<RecipesArray> {
     return this.recipes$;
   }
 
@@ -32,8 +36,15 @@ export class RecipeService implements OnDestroy {
     filterOptions?: string[];
     order?: string;
     search?: string;
+    page?: number;
+    limit?: number;
   }): void {
     let params = new HttpParams();
+    const page = query?.page || 1;
+    const limit = query?.limit || 5;
+
+    params = params.set('page', page);
+    params = params.set('limit', limit);
 
     if (query) {
       if (query.filterOptions) {
@@ -52,15 +63,15 @@ export class RecipeService implements OnDestroy {
     }
 
     this.isLoading = true;
-    this._recipes$.next([]);
+    this._recipes$.next({ ...this._recipes$.getValue(), recipes: [] });
 
     this.subscription = this.http
-      .get<IRecipe[]>(`${environment.API_URL}recipes`, {
+      .get<RecipesArray>(`${environment.API_URL}recipes`, {
         params,
       })
-      .subscribe((recipes) => {
+      .subscribe((recipesData) => {
+        this._recipes$.next(recipesData);
         this.isLoading = false;
-        this._recipes$.next(recipes);
       });
   }
 

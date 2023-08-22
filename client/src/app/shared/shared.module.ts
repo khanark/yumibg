@@ -8,6 +8,7 @@ import { IconsModule } from '../icons/icons.module';
 import { InputComponent } from './input/input.component';
 import { LoaderComponent } from './loader/loader.component';
 import { NgModule } from '@angular/core';
+import { PaginationComponent } from './pagination/pagination.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CustomTitleCasePipe,
     CookTimePipe,
     InputComponent,
+    PaginationComponent,
   ],
   imports: [CommonModule, IconsModule, FontAwesomeModule, ReactiveFormsModule],
   exports: [
@@ -27,6 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CustomTitleCasePipe,
     InputComponent,
     CookTimePipe,
+    PaginationComponent,
   ],
 })
 export class SharedModule {}

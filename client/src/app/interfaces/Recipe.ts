@@ -14,3 +14,9 @@ export interface IRecipe {
     savedUsers: string[];
   };
 }
+
+export interface RecipesArray {
+  recipes: IRecipe[];
+  totalPages: number;
+  currentPage: number;
+}

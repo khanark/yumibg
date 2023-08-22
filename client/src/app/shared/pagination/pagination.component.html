@@ -1,0 +1,67 @@
+<div
+  class="mb-4 flex w-full items-center justify-between rounded-lg p-2 lg:justify-start lg:gap-12"
+>
+  <ng-container *ngIf="totalPages > 1">
+    <div class="flex items-center gap-2">
+      <button
+        *ngIf="activePage !== 1"
+        class="group flex items-center justify-center rounded-sm bg-orange-50 p-2 text-xs font-medium uppercase tracking-wider text-[#666] hover:bg-orange-100"
+        (click)="changePage(1)"
+      >
+        first
+      </button>
+      <button
+        [disabled]="recipeService.isLoading"
+        *ngIf="activePage > 1"
+        class="group flex items-center justify-center rounded-sm bg-orange-50 p-2 text-xs font-medium uppercase tracking-wider text-[#666] hover:bg-orange-100"
+        (click)="changePage(currentPage - 1)"
+      >
+        previous
+      </button>
+      <button
+        [disabled]="recipeService.isLoading"
+        *ngFor="let pageNumber of pageNumbers"
+        [ngClass]="
+          activePage === pageNumber
+            ? 'bg-orange-600 text-white '
+            : 'hover:bg-orange-100'
+        "
+        class="h-8 w-8 rounded-full"
+        (click)="changePage(pageNumber)"
+      >
+        {{ pageNumber }}
+      </button>
+      <button
+        [disabled]="recipeService.isLoading"
+        *ngIf="activePage < totalPages"
+        class="group flex items-center justify-center rounded-sm bg-orange-50 p-2 text-xs font-medium uppercase tracking-wider text-[#666] hover:bg-orange-100"
+        (click)="changePage(currentPage + 1)"
+      >
+        next
+      </button>
+      <button
+        [disabled]="recipeService.isLoading"
+        *ngIf="activePage !== totalPages"
+        class="group flex items-center justify-center rounded-sm bg-orange-50 p-2 text-xs font-medium uppercase tracking-wider text-[#666] hover:bg-orange-100"
+        (click)="changePage(totalPages)"
+      >
+        last
+      </button>
+    </div>
+  </ng-container>
+
+  <div class="gap- flex items-center">
+    <p class="hidden lg:block">Items per page:</p>
+    <p class="block lg:hidden">Items:</p>
+    <select
+      name="limit"
+      id="limit"
+      (change)="onLimitChange($event)"
+      class="outline-none"
+    >
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+    </select>
+  </div>
+</div>
