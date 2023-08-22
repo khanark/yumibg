@@ -60,13 +60,11 @@
           alt="food table"
         />
       </div>
-      <ul
-        data-aos="fade-up"
-        data-aos-delay="300"
-        class="flex-col-1 grid content-center gap-6 md:gap-12 lg:grid-cols-2"
-      >
+      <ul class="flex-col-1 grid content-center gap-6 md:gap-12 lg:grid-cols-2">
         <li
+          data-aos="fade-up"
           class="transition-transform"
+          data-aos-delay="50"
           *ngFor="let feature of homeContent.features"
         >
           <div class="mb-2 flex items-center gap-2 md:mb-4">
@@ -100,12 +98,12 @@
   </div>
   <div class="container">
     <ul
-      data-aos="fade-up"
-      data-aos-delay="300"
       class="flex-col-1 grid content-center gap-6 md:mt-16 md:gap-12 lg:grid-cols-2"
     >
       <li
-        *ngFor="let quality of homeContent.qualities"
+        *ngFor="let quality of homeContent.qualities; let i = index"
+        data-aos="fade-up"
+        data-aos-delay="50"
         class="flex flex-col gap-2 rounded-xl shadow-orange-400 md:flex-row md:items-center md:gap-12"
       >
         <span class="block text-6xl font-bold text-orange-400 md:text-9xl">{{

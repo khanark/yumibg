@@ -11,11 +11,16 @@ import { pageContent } from 'src/app/constants/constants';
 })
 export class HomeComponent implements OnInit {
   homeContent = pageContent.home;
+
+  delayIncrement: number = 50;
+
   ngOnInit(): void {
     AOS.init({
       once: true,
-      duration: 700,
-      offset: 100,
     });
+  }
+
+  calculateDelay(index: number): number {
+    return index * this.delayIncrement;
   }
 }
